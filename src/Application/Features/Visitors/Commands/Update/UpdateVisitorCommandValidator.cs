@@ -20,8 +20,8 @@ public class UpdateVisitorCommandValidator : AbstractValidator<UpdateVisitorComm
                      .When(x => !string.IsNullOrEmpty(x.IdentificationNo));
         RuleFor(v => v.PhoneNumber).NotEmpty().NotNull()
                       .MinimumLength(8)
-                      .MaximumLength(20)
-                      .Matches(new Regex(@"^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$"));
+                      .MaximumLength(16)
+                      .Matches(new Regex(@"^\+[1-9]\d{1,14}$"));
         RuleFor(v => v.Purpose).MaximumLength(256).NotEmpty();
         RuleFor(v => v.EmployeeId).NotNull();
         //RuleFor(v => v.Avatar).NotNull();
