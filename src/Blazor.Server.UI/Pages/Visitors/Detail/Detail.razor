@@ -27,17 +27,17 @@
     [SupplyParameterFromQuery(Name = "id")]
     public int Id { get; set; }
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     private VisitorDto? _visitor = new();
     private List<VisitorDto>? _relatedVisitors = new();
     protected override async Task OnInitializedAsync()
     {
         if (Id > 0)
         {
-            _visitor = await _mediator.Send(new GetByIdVisitorQuery(Id));
+            _visitor = await VisitorService.GetVisitorByIdAsync(Id);
             if (_visitor is not null)
             {
-                _relatedVisitors = await _mediator.Send(new GetRelatedVisitorQuery(_visitor.EmployeeId));
+                _relatedVisitors = await VisitorService.GetRelatedVisitorsAsync(_visitor.EmployeeId ?? 0);
 
             }
         }

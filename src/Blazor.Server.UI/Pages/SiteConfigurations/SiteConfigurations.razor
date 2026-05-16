@@ -154,7 +154,7 @@
     private bool _uploading;
     private bool _downloading;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ISiteConfigurationCrudService SiteConfigurationCrudService { get; set; } = default!;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
 
@@ -188,7 +188,7 @@
             query.SortDirection = (state.SortDirection == SortDirection.None ? SortDirection.Descending.ToString() : state.SortDirection.ToString());
             query.PageNumber = state.Page + 1;
             query.PageSize = state.PageSize;
-            var result = await _mediator.Send(query);
+            var result = await SiteConfigurationCrudService.GetSiteConfigurationsWithPaginationAsync(query);
             return new TableData<SiteConfigurationDto>() { TotalItems = result.TotalItems, Items = result.Items };
         }
         finally
@@ -224,7 +224,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var result = await _mediator.Send(command);
+            var result = await SiteConfigurationCrudService.SaveSiteConfigurationAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Create successfully"]}", MudBlazor.Severity.Info);
         }
@@ -251,7 +251,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var result = await _mediator.Send(command);
+            var result = await SiteConfigurationCrudService.SaveSiteConfigurationAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Save successfully"]}", MudBlazor.Severity.Info);
         }
@@ -271,7 +271,7 @@
         if (!state.Canceled)
         {
             var command = new DeleteSiteConfigurationCommand(new int[] { dto.Id });
-            var result = await _mediator.Send(command);
+            var result = await SiteConfigurationCrudService.DeleteSiteConfigurationsAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
         }
@@ -291,7 +291,7 @@
         if (!state.Canceled)
         {
             var command = new DeleteSiteConfigurationCommand(_selectedItems.Select(x => x.Id).ToArray());
-            var result = await _mediator.Send(command);
+            var result = await SiteConfigurationCrudService.DeleteSiteConfigurationsAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
             _selectedItems = new HashSet<SiteConfigurationDto>

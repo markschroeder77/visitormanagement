@@ -1,6 +1,5 @@
 using CleanArchitecture.Blazor.Application.Features.Sites.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Sites.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
@@ -10,7 +9,7 @@ public class SelectSiteAutocomplete : MudAutocomplete<SiteDto?>
 {
 
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ISiteService SiteService { get; set; } = default!;
     [Parameter]
     public EventCallback<string> SiteChanged { get; set; }
 
@@ -31,7 +30,7 @@ public class SelectSiteAutocomplete : MudAutocomplete<SiteDto?>
     {
         if (firstRender)
         {
-            _sites = (await _mediator.Send(new GetAllSitesQuery())).ToList();
+            _sites = (await SiteService.GetAllSitesAsync()).ToList();
             ForceRender(true);
         }
     }

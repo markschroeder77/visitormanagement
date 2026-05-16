@@ -45,7 +45,7 @@
     public string InputKeyword { get; set; } = string.Empty;
     private string keyword { get; set; }= string.Empty;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     [Parameter]
     [EditorRequired]
     public EventCallback<VisitorDto> Selected { get; set; }
@@ -53,7 +53,7 @@
     protected override async Task OnInitializedAsync()
     {
         keyword = InputKeyword;
-        var result = await _mediator.Send(new SearchVisitorFuzzyQuery(keyword));
+        var result = await VisitorService.SearchVisitorFuzzyAsync(keyword);
         _list = result;
     }
 

@@ -27,7 +27,7 @@
     [SupplyParameterFromQuery(Name = "code")]
     public string? Code { get; set; }
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     private  Task SelectChanged(VisitorDto visitor)
     {
         _visitor = visitor;
@@ -36,7 +36,7 @@
       public async Task SearchVisitor()
     {
         if (string.IsNullOrEmpty(Code)) return;
-        var result = await _mediator.Send(new SearchVisitorQuery(Code));
+        var result = await VisitorService.SearchVisitorAsync(Code);
         if (result is null)
         {
             _visitor = new();

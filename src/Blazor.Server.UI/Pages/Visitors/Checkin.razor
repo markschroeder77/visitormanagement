@@ -5,14 +5,11 @@
 @using Blazor.Server.UI.Pages.CheckinPoints
 @using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Commands.Create
 @using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs
-@using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Queries.GetAll
-@using CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Create
-@using CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Delete
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Constant
 @using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Pagination
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Commands.AddEdit
-@using CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Search
+@using CleanArchitecture.Blazor.Application.Common.Interfaces.Services
 @using HashidsNet
 @using Net.Codecrete.QrCodeGenerator
 @using SkiaSharp
@@ -90,7 +87,9 @@
 
     private VisitorDto? _visitor = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private IVisitorHistoryService VisitorHistoryService { get; set; } = default!;
     private CreateVisitorHistoryCommand request { get; set; } = new CreateVisitorHistoryCommand();
     SKTypeface _typeface;
     SKFont captionFont;
@@ -118,14 +117,14 @@
     public async Task GetResult(string decodedText)
     {
         _decodedText = decodedText;
-        _visitor = await _mediator.Send(new SearchVisitorQuery(decodedText));
+        _visitor = await VisitorService.SearchVisitorAsync(decodedText);
         if (_visitor is null)
         {
             _notfound = true;
         }
         else
         {
-            var visitorHistories = (await _mediator.Send(new GetByVisitorIdVisitorHistoriesQuery(_visitor.Id))).ToList();
+            var visitorHistories = await VisitorHistoryService.GetByVisitorIdAsync(_visitor.Id);
             request = new CreateVisitorHistoryCommand()
                 {
                     CurrentStatus = _visitor.Status,

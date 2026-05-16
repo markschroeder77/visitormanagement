@@ -55,7 +55,7 @@
 
     private string? _keyword { get; set; }
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     private List<VisitorDto> _list { get; set; } = new();
     protected override async Task OnInitializedAsync()
     {
@@ -63,7 +63,7 @@
     }
     public async Task SearchPendingVisitor()
     {
-        _list = await _mediator.Send(new SearchPendingConfirmVisitorsQuery(_keyword));
+        _list = await VisitorService.SearchPendingConfirmVisitorsAsync(_keyword);
         StateHasChanged();
     }
 
@@ -72,7 +72,7 @@
         item._processing = true;
         try
         {
-            var result = await _mediator.Send(new ConfirmVisitorCommand(new int[] { item.Id }));
+            var result = await VisitorService.ConfirmVisitorAsync(new int[] { item.Id });
             Snackbar.Add($"{string.Format(L["{0} confirmed"], item.Name)}", MudBlazor.Severity.Success);
             await SearchPendingVisitor();
         }

@@ -225,7 +225,9 @@
     private bool _submiting;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private ISiteConfigurationService SiteConfigurationService { get; set; } = default!;
     [Inject]
     private Hashids hashids { get; set; } = default!;
     [Inject]
@@ -253,7 +255,7 @@
             _notfound = true;
             return;
         }
-        var dto = await _mediator.Send(new SearchVisitorQuery(Code));
+        var dto = await VisitorService.SearchVisitorAsync(Code);
         if (dto is null)
         {
             _notfound = true;
@@ -308,7 +310,7 @@
             await form.ValidateAsync();
             if (form.IsValid)
             {
-                var siteConfig = await _mediator.Send(new GetBySiteIdConfigurationsQuery(model.SiteId));
+                var siteConfig = await SiteConfigurationService.GetBySiteIdAsync(model.SiteId ?? 0);
                 if (model.Promise != true)
                 {
                     Snackbar.Add(L["You must promise"], MudBlazor.Severity.Error);
@@ -334,7 +336,7 @@
                     Snackbar.Add(L["You must upload nucleic acid test report"], MudBlazor.Severity.Error);
                     return;
                 }
-                var result = await _mediator.Send(model);
+                var result = await VisitorService.CompleteVisitorInfoAsync(model);
                 Snackbar.Add(L["Submit successfully"], MudBlazor.Severity.Info);
                 _navigationManager.NavigateTo("/visitor/mycode?code=" + model.PassCode);
 

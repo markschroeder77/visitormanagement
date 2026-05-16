@@ -6,6 +6,7 @@ using CleanArchitecture.Blazor.Application.Features.Products.DTOs;
 using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs;
 using CleanArchitecture.Blazor.Domain.Entities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using NUnit.Framework;
 using System;
 using System.Runtime.Serialization;
@@ -19,10 +20,11 @@ public class MappingTests
 
     public MappingTests()
     {
+        ILoggerFactory loggerFactory = NullLoggerFactory.Instance;
         _configuration = new MapperConfiguration(cfg =>
         {
             cfg.AddMaps(typeof(MappingProfile).Assembly);
-        }, (ILoggerFactory)null);
+        }, loggerFactory);
 
         _mapper = _configuration.CreateMapper();
     }

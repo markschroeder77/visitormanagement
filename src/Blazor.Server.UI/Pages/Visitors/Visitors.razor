@@ -297,7 +297,7 @@
     private bool _uploading;
     private bool _downloading;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     [Inject]
     private Hashids hashids { get; set; } = default!;
     [Inject]
@@ -341,7 +341,7 @@
             query.SortDirection = (state.SortDirection == SortDirection.None ? SortDirection.Descending.ToString() : state.SortDirection.ToString());
             query.PageNumber = state.Page + 1;
             query.PageSize = state.PageSize;
-            var result = await _mediator.Send(query);
+            var result = await VisitorService.GetVisitorsWithPaginationAsync(query);
             return new TableData<VisitorDto>() { TotalItems = result.TotalItems, Items = result.Items };
         }
         finally
@@ -402,7 +402,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var result = await _mediator.Send(new ApprovalVisitorsCommand(state.Data.ToString(), _selectedItems.Select(x => x.Id).ToArray()));
+            var result = await VisitorService.ApproveVisitorAsync(state.Data.ToString(), _selectedItems.Select(x => x.Id).ToArray());
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Approved successfully"]}", MudBlazor.Severity.Info);
         }
@@ -427,7 +427,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var result = await _mediator.Send(command);
+            var result = await VisitorService.UpdateVisitorAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Create successfully"]}", MudBlazor.Severity.Info);
         }
@@ -481,7 +481,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var result = await _mediator.Send(command);
+            var result = await VisitorService.UpdateVisitorAsync(command);
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Save successfully"]}", MudBlazor.Severity.Info);
         }
@@ -500,8 +500,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var command = new DeleteVisitorCommand(new int[] { dto.Id });
-            var result = await _mediator.Send(command);
+            var result = await VisitorService.DeleteVisitorAsync(new int[] { dto.Id });
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
         }
@@ -520,8 +519,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var command = new DeleteVisitorCommand(_selectedItems.Select(x => x.Id).ToArray());
-            var result = await _mediator.Send(command);
+            var result = await VisitorService.DeleteVisitorAsync(_selectedItems.Select(x => x.Id).ToArray());
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
             _selectedItems = new HashSet<VisitorDto>

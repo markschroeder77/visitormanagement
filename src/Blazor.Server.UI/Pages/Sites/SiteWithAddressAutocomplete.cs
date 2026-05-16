@@ -1,8 +1,5 @@
-using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Queries.GetAll;
 using CleanArchitecture.Blazor.Application.Features.Sites.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Sites.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -13,7 +10,7 @@ public class SiteWithAddressAutocomplete : MudAutocomplete<int?>
 {
 
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ISiteService SiteService { get; set; } = default!;
 
 
     private List<SiteDto> _sites = new();
@@ -35,7 +32,7 @@ public class SiteWithAddressAutocomplete : MudAutocomplete<int?>
     {
         if (firstRender)
         {
-            _sites = (await _mediator.Send(new GetAllSitesQuery())).ToList();
+            _sites = (await SiteService.GetAllSitesAsync()).ToList();
             ForceRender(true);
         }
     }

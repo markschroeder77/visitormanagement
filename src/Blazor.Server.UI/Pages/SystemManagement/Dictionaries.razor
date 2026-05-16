@@ -179,7 +179,7 @@
     [CascadingParameter]
     private Task<AuthenticationState> AuthState { get; set; } = default!;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IKeyValueService KeyValueService { get; set; } = default!;
     private bool _canCreate;
     private bool _canSearch;
     private bool _canEdit;
@@ -227,7 +227,7 @@
             _loading = true;
             _editing = false;
             var cmd = new GetAllKeyValuesQuery();
-            KeyValueList = (await _mediator.Send(cmd).ConfigureAwait(false)).ToList();
+            KeyValueList = (await KeyValueService.GetAllKeyValuesAsync().ConfigureAwait(false)).ToList();
             _selectedItems = new HashSet<KeyValueDto>(); ;
             _selectedItem = null;
         }
@@ -256,8 +256,7 @@
         if (state?.Canceled != true)
         {
             _table.SetEditingItem(null);
-            var command = new DeleteKeyValueCommand(_selectedItems.Select(x => x.Id).ToArray());
-            var result = await _mediator.Send(command);
+            var result = await KeyValueService.DeleteKeyValuesAsync(new DeleteKeyValueCommand(_selectedItems.Select(x => x.Id).ToArray()));
             await LoadData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
         }
@@ -333,7 +332,7 @@
                     Value = ((KeyValueDto)element).Value,
                     Description = ((KeyValueDto)element).Description,
                 };
-            var result = await _mediator.Send(command);
+            var result = await KeyValueService.SaveKeyValueAsync(command);
             ((KeyValueDto)element).Id = result.Data;
             _editing = false;
             StateHasChanged();
@@ -349,7 +348,7 @@
                 OrderBy = string.IsNullOrEmpty(_table.SortLabel) ? "Id" : _table.SortLabel,
                 SortDirection = (_table.TableContext.SortDirection == SortDirection.Descending ? "Descending" : "Ascending"),
             };
-        var result = await _mediator.Send(request);
+        var result = await KeyValueService.ExportKeyValuesAsync(request);
         using var streamRef = new DotNetStreamReference(new MemoryStream(result));
         await JS.InvokeVoidAsync("downloadFileFromStream", $"{L["Dictionaries"]}.xlsx", streamRef);
     }
@@ -357,8 +356,7 @@
     {
         var stream = new MemoryStream();
         await e.File.OpenReadStream().CopyToAsync(stream);
-        var command = new ImportKeyValuesCommand(e.File.Name, stream.ToArray());
-        var result = await _mediator.Send(command);
+        var result = await KeyValueService.ImportKeyValuesAsync(new ImportKeyValuesCommand(e.File.Name, stream.ToArray()));
         if (result.Succeeded)
         {
             await OnRefresh();

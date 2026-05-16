@@ -104,7 +104,9 @@
     public CreateVisitorHistoryCommand TRequest { get; set; } = new();
     private CreateVisitorHistoryCommandValidator modelValidator = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private IVisitorHistoryService VisitorHistoryService { get; set; } = default!;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
 
     private bool _submiting;
@@ -175,9 +177,9 @@
             if (form.IsValid)
             {
                 
-                var result = await _mediator.Send(TRequest);
+                var result = await VisitorService.CreateVisitorHistoryAsync(TRequest);
                 Snackbar.Add(string.Format(L["{0} check-out successfully"], TRequest.Visitor), MudBlazor.Severity.Info);
-                TRequest.Histories = (await _mediator.Send(new GetByVisitorIdVisitorHistoriesQuery(TRequest.VisitorId))).ToList();
+                TRequest.Histories = await VisitorHistoryService.GetByVisitorIdAsync(TRequest.VisitorId);
             }
         }
         finally

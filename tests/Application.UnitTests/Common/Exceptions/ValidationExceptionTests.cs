@@ -40,7 +40,7 @@ public class ValidationExceptionTests
 
         var actual = new ValidationException(failures).ErrorMessages;
 
-        actual.Count.Should().Equals(2);
+        actual.Count.Should().Be(2);
         actual.Should().Contain(r=>r.Equals("'Age' must be 18 or older, 'Age' must be 25 or younger"));
 
     }

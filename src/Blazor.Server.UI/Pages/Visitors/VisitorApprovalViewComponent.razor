@@ -43,7 +43,7 @@
 
 @code {
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     [Parameter]
     public VisitorDto Visitor { get; set; } = new();
 
@@ -78,7 +78,7 @@
             var state = await dialog.Result;
             if (!state.Canceled)
             {
-                await _mediator.Send(new ApprovalVisitorsCommand(ApprovalOutcome.Reject, new int[] { Visitor.Id },state.Data.ToString()));
+                await VisitorService.ApproveVisitorAsync(state.Data.ToString(), new int[] { Visitor.Id });
                 Snackbar.Add(string.Format(L["{0} rejected"], Visitor.Name), MudBlazor.Severity.Normal);
                 await ApproveChanged.InvokeAsync();
                 Visitor = new();
@@ -96,7 +96,7 @@
         _submiting = true;
         try
         {
-            await _mediator.Send(new ApprovalVisitorsCommand(ApprovalOutcome.Approved, new int[] { Visitor.Id }));
+            await VisitorService.ApproveVisitorAsync(ApprovalOutcome.Approved, new int[] { Visitor.Id });
             Snackbar.Add(string.Format(L["{0} approved"], Visitor.Name), MudBlazor.Severity.Info);
             await ApproveChanged.InvokeAsync();
             Visitor = new();

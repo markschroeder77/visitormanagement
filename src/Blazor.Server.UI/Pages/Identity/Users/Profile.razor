@@ -165,7 +165,7 @@
     private PasswordFluentValidator passwordValidator = new PasswordFluentValidator();
     private List<SiteDto> _sites = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ISiteService SiteService { get; set; } = default!;
     bool PasswordVisibility;
     InputType PasswordInput = InputType.Password;
 
@@ -190,7 +190,7 @@
         Title = L["Profile"];
         _userManager = ScopedServices.GetRequiredService<UserManager<ApplicationUser>>();
         model = _profileService.Profile;
-        _sites = (await _mediator.Send(new GetAllSitesQuery())).ToList();
+        _sites = (await SiteService.GetAllSitesAsync()).ToList();
 
     }
 

@@ -12,11 +12,11 @@
     string[] labels = { "Meeting", "Interview", "Conferences", "Working", "Others" };
 
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await _mediator.Send(new GetVisitorCountedPurposeDataQuery());
+        var result = await VisitorService.GetCountedPurposeDataAsync();
         if (result is not null && result.Any())
         {
             data = result.Select(x =>Convert.ToDouble(x.Value)).ToArray();

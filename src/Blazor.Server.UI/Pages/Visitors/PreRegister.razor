@@ -243,7 +243,9 @@
     private bool _submiting;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private ISiteConfigurationService SiteConfigurationService { get; set; } = default!;
     [Inject]
     private Hashids hashids { get; set; } = default!;
     [CascadingParameter]
@@ -258,7 +260,7 @@
     private async Task OnSearch()
     {
         if (string.IsNullOrEmpty(_searchString)) _visitorDto = null;
-        _visitorDto = await _mediator.Send(new SearchVisitorQuery(_searchString));
+        _visitorDto = await VisitorService.SearchVisitorAsync(_searchString);
         if (_visitorDto != null)
         {
             if (_visitorDto.Apppoved != true && _visitorDto.CheckinDate is null)
@@ -343,7 +345,7 @@
             await form.ValidateAsync();
             if (form.IsValid)
             {
-                var siteConfig = await _mediator.Send(new GetBySiteIdConfigurationsQuery(model.SiteId));
+                var siteConfig = await SiteConfigurationService.GetBySiteIdAsync(model.SiteId ?? 0);
                 if (model.Promise != true)
                 {
                     Snackbar.Add(L["You must promise"], MudBlazor.Severity.Error);
@@ -371,7 +373,7 @@
                 }
 
                 await this.generateQrCode();
-                var result = await _mediator.Send(model);
+                var result = await VisitorService.CreateVisitorAsync(model.PassCode, model.Id, model.Name, model.PhoneNumber, model.Email, model.IdentificationNo, model.Purpose, model.SiteId);
                 model.Id = result.Data;
                 _submiting = true;
                 _searchQRcode = model.PassCode;

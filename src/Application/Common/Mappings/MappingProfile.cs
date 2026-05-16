@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-using AutoMapper.Internal;
 
 namespace CleanArchitecture.Blazor.Application.Common.Mappings;
 

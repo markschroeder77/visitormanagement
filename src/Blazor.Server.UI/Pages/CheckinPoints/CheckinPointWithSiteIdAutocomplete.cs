@@ -1,6 +1,5 @@
 using CleanArchitecture.Blazor.Application.Features.CheckinPoints.DTOs;
-using CleanArchitecture.Blazor.Application.Features.CheckinPoints.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -11,7 +10,7 @@ public class CheckinPointWithSiteIdAutocomplete : MudAutocomplete<int?>
 {
 
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ICheckinPointService CheckinPointService { get; set; } = default!;
     [Parameter]
     [EditorRequired]
     public int? SiteId { get; set; }
@@ -37,7 +36,7 @@ public class CheckinPointWithSiteIdAutocomplete : MudAutocomplete<int?>
     {
         if (firstRender)
         {
-            _checkinpoints = (await _mediator.Send(new GetAllCheckinPointsQuery())).ToList();
+            _checkinpoints = (await CheckinPointService.GetAllCheckinPointsAsync()).ToList();
             ForceRender(true);
         }
     }

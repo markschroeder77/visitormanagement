@@ -114,7 +114,7 @@
     private bool _uploading;
     private bool _downloading;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorHistoryCrudService VisitorHistoryCrudService { get; set; } = default!;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
 
@@ -140,7 +140,7 @@
             query.SortDirection = (state.SortDirection == SortDirection.None ? SortDirection.Descending.ToString() : state.SortDirection.ToString());
             query.PageNumber = state.Page + 1;
             query.PageSize = state.PageSize;
-            var result =await  _mediator.Send(query);
+            var result = await VisitorHistoryCrudService.GetVisitorHistoriesWithPaginationAsync(query);
             return new TableData<VisitorHistoryDto>() { TotalItems = result.TotalItems, Items = result.Items };
         }
         finally
@@ -176,8 +176,7 @@
         var state = await dialog.Result;
         if (!state.Canceled)
         {
-            var command = new DeleteVisitorHistoryCommand(_selectedItems.Select(x => x.Id).ToArray());
-            var result = await _mediator.Send(command);
+            var result = await VisitorHistoryCrudService.DeleteVisitorHistoriesAsync(_selectedItems.Select(x => x.Id).ToArray());
             await _table.ReloadServerData();
             Snackbar.Add($"{L["Deleted successfully"]}", MudBlazor.Severity.Info);
             _selectedItems = new HashSet<VisitorHistoryDto>();

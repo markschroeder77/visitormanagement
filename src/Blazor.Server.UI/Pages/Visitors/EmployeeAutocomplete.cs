@@ -1,6 +1,5 @@
 using CleanArchitecture.Blazor.Application.Features.Employees.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Employees.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -11,7 +10,7 @@ public class EmployeeAutocomplete : MudAutocomplete<int?>
 {
  
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IEmployeeService EmployeeService { get; set; } = default!;
 
 
     private List<EmployeeDto> _employees = new();
@@ -35,7 +34,7 @@ public class EmployeeAutocomplete : MudAutocomplete<int?>
     {
         if (firstRender)        
         {
-            _employees = (await _mediator.Send(new GetAllEmployeesQuery())).ToList();
+            _employees = (await EmployeeService.GetAllEmployeesAsync()).ToList();
             ForceRender(true);
         }
     }

@@ -73,7 +73,9 @@
     [Parameter]
     public string? Keyword { get; set; }
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private IVisitorHistoryService VisitorHistoryService { get; set; } = default!;
     protected override async Task OnInitializedAsync()
     {
         if (!string.IsNullOrEmpty(Keyword))
@@ -82,7 +84,7 @@
 
     public async Task SearchQRcode()
     {
-        var visitor = await _mediator.Send(new SearchVisitorQuery(Keyword));
+        var visitor = await VisitorService.SearchVisitorAsync(Keyword);
         if (visitor is null)
         {
             _notfound = true;
@@ -92,14 +94,14 @@
         {
             _notfound = false;
             _visitorDto = visitor;
-            _visitorHistories = (await _mediator.Send(new GetByVisitorIdVisitorHistoriesQuery(_visitorDto.Id))).ToList();
+            _visitorHistories = await VisitorHistoryService.GetByVisitorIdAsync(_visitorDto.Id);
         }
         StateHasChanged();
     }
     private async Task updatedRatingValue(int value)
     {
         _visitorDto.SurveyResponseValue = value;
-        await _mediator.Send(new UpdateVisitorSurveyResponseCommand(_visitorDto.Id, value));
+        await VisitorService.UpdateVisitorSurveyResponseAsync(_visitorDto.Id, value);
         Snackbar.Add($"{L["Thank you for your valuable feedback."]}", MudBlazor.Severity.Success);
     }
 

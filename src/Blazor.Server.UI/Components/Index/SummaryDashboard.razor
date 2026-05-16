@@ -80,13 +80,13 @@
 
 @code {
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     public int TotalVisitors { get; private set; }
     public int TotalCheckinVisitors { get; private set; }
     public int TotalCheckoutVisitors { get; private set; }
     protected override async Task OnInitializedAsync()
     {
-        var result = await _mediator.Send(new GetDashboardDataQuery());
+        var result = await VisitorService.GetDashboardDataAsync();
         if (result is not null)
         {
             TotalVisitors = result.Item1;

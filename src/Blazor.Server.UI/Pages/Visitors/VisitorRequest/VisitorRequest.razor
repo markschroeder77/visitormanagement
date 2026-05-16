@@ -154,9 +154,7 @@
     private VisitorRequestCommandValidator modelValidator = new();
     private VisitorRequestCommand model { get; set; } = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
-    [Inject]
-    private IPublisher _publisher { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     [Inject]
     private Hashids hashids { get; set; } = default!;
     [Inject]
@@ -209,7 +207,10 @@
             if (form.IsValid)
             {
                 await this.generateQrCode();
-                var result = await _mediator.Send(model);
+                var result = await VisitorService.SubmitVisitorRequestAsync(
+                    model.PassCode, model.Name, model.PhoneNumber, model.Email,
+                    model.IdentificationNo, model.Purpose, model.CompanyName,
+                    model.Gender, model.LicensePlateNumber, model.SiteId);
                 model.Id = result.Data;
                 Snackbar.Add(L["Submit successfully"], MudBlazor.Severity.Info);
                 _navigationManager.NavigateTo("/visitor/visitors");

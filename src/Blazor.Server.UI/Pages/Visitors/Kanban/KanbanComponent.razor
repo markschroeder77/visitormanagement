@@ -63,12 +63,12 @@
 @code {
     private List<VisitorStatusSumarryDto> _list = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     [Inject]
     private NavigationManager _navigationManager { get; set; } = default!;
     protected override async Task OnInitializedAsync()
     {
-        _list = await _mediator.Send(new GetKanbanDataQuery());
+        _list = await VisitorService.GetKanbanDataAsync();
 
     }
     private void navigateTo(int id)

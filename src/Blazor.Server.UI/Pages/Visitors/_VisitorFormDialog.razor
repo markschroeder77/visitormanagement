@@ -213,7 +213,9 @@
     [CascadingParameter]
     IMudDialogInstance MudDialog { get; set; } = default!;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
+    [Inject]
+    private ISiteConfigurationService SiteConfigurationService { get; set; } = default!;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
     AddEditVisitorCommandValidator modelValidator = new AddEditVisitorCommandValidator();
     [EditorRequired][Parameter] public AddEditVisitorCommand model { get; set; } = default!;
@@ -249,7 +251,7 @@
         await form.ValidateAsync();
         if (form.IsValid)
         {
-            var siteConfig = await _mediator.Send(new GetBySiteIdConfigurationsQuery(model.SiteId));
+            var siteConfig = await SiteConfigurationService.GetBySiteIdAsync(model.SiteId ?? 0);
                 if (string.IsNullOrEmpty(model.HealthCode) && (siteConfig is not null && siteConfig.MandatoryHealthQrCode))
                 {
                     Snackbar.Add(L["You must upload health code"], MudBlazor.Severity.Error);

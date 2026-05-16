@@ -1,6 +1,5 @@
 using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -11,7 +10,7 @@ public class DepartmentAutocomplete : MudAutocomplete<int?>
 {
 
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IDepartmentService DepartmentService { get; set; } = default!;
 
 
     private List<DepartmentDto> _departments = new();
@@ -35,7 +34,7 @@ public class DepartmentAutocomplete : MudAutocomplete<int?>
     {
         if (firstRender)
         {
-            _departments = (await _mediator.Send(new GetAllDepartmentsQuery())).ToList();
+            _departments = (await DepartmentService.GetAllDepartmentsAsync()).ToList();
             ForceRender(true);
         }
     }

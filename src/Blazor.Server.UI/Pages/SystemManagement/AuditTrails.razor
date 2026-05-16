@@ -116,7 +116,7 @@
     private MudTable<AuditTrailDto> _table = default!;
     private bool _loading;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IAuditTrailService AuditTrailService { get; set; } = default!;
 
     private async Task<TableData<AuditTrailDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
@@ -131,7 +131,7 @@
                     PageNumber = state.Page + 1,
                     PageSize = state.PageSize
                 };
-            var result = await _mediator.Send(request).ConfigureAwait(false);
+            var result = await AuditTrailService.GetAuditTrailsWithPaginationAsync(request).ConfigureAwait(false);
             return new TableData<AuditTrailDto>() { TotalItems = result.TotalItems, Items = result.Items };
         }
         finally

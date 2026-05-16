@@ -151,7 +151,7 @@
     public List<LogTimeLineDto> _data { get; set; } = new();
     private bool _loading;
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ILogService LogService { get; set; } = default!;
 
     protected override void OnInitialized()
     {
@@ -161,7 +161,7 @@
     {
         if (firstRender)
         {
-            _data = await _mediator.Send(new LogsTimeLineChatDataQuery());
+            _data = await LogService.GetLogsTimeLineChatDataAsync();
             StateHasChanged();
             await chartcomponent!.RenderChart();
           
@@ -181,7 +181,7 @@
                     PageNumber = state.Page + 1,
                     PageSize = state.PageSize
                 };
-            var result = await _mediator.Send(request).ConfigureAwait(false);
+            var result = await LogService.GetLogsWithPaginationAsync(request).ConfigureAwait(false);
             return new TableData<LogDto>() { TotalItems = result.TotalItems, Items = result.Items };
         }
         finally

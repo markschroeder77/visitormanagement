@@ -123,7 +123,7 @@
     private List<KeyValue> _roles { get; set; } = new();
     private List<SiteDto> _sites = new();
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private ISiteService SiteService { get; set; } = default!;
 
 
     [Inject] private IUploadService _uploadService { get; set; } = default!;
@@ -137,7 +137,7 @@
     protected override async Task OnInitializedAsync()
     {
         var array = await _roleManager.Roles.Select(x => x.Name).ToListAsync();
-        _sites = (await _mediator.Send(new GetAllSitesQuery())).ToList();
+        _sites = (await SiteService.GetAllSitesAsync()).ToList();
         foreach (var role in array)
         {
             if (model.AssignRoles != null && model.AssignRoles.Contains(role))

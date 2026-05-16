@@ -1,6 +1,5 @@
 using CleanArchitecture.Blazor.Application.Features.Designations.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Designations.Queries.GetAll;
-using MediatR;
+using CleanArchitecture.Blazor.Application.Common.Interfaces.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -11,7 +10,7 @@ public class DesignationAutocomplete : MudAutocomplete<int?>
 {
  
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IDesignationService DesignationService { get; set; } = default!;
 
 
     private List<DesignationDto> _designations = new();
@@ -35,7 +34,7 @@ public class DesignationAutocomplete : MudAutocomplete<int?>
     {
         if (firstRender)        
         {
-            _designations = (await _mediator.Send(new GetAllDesignationsQuery())).ToList();
+            _designations = (await DesignationService.GetAllDesignationsAsync()).ToList();
             ForceRender(true);
         }
     }

@@ -7,10 +7,14 @@
     
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  <ItemGroup>
+    <Using Include="CleanArchitecture.Blazor.Application.Common.Messaging" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
+    
 
   <ItemGroup>
     <Content Include="appsettings.json">

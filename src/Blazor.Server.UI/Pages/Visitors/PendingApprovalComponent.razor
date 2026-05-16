@@ -43,7 +43,7 @@
 @code {
     private string? _keyword { get; set; }
     [Inject]
-    private ISender _mediator { get; set; } = default!;
+    private IVisitorService VisitorService { get; set; } = default!;
     private List<VisitorDto> _list { get; set; } = new();
     [Parameter]
     [EditorRequired]
@@ -54,7 +54,7 @@
     }
     public async Task SearchPendingVisitor()
     {
-        _list = await _mediator.Send(new SearchPendingApprovalVisitorsQuery(_keyword));
+        _list = await VisitorService.SearchPendingApprovalVisitorsAsync(_keyword);
         StateHasChanged();
     }
     private async Task Click(VisitorDto visitor)
