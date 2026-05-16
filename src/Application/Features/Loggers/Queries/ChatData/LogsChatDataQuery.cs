@@ -1,16 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.Logs.Caching;
 using CleanArchitecture.Blazor.Application.Features.Logs.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.Logs.Queries.ChatData;
 
-public class LogsTimeLineChatDataQuery : IRequest<List<LogTimeLineDto>>, ICacheable
+public class LogsTimeLineChatDataQuery : IRequest<List<LogTimeLineDto>>
 {
     public DateTime LastDateTime { get; set; } = DateTime.Now.AddDays(-60);
-    public string CacheKey => LogsCacheKey.GetChartDataCacheKey(LastDateTime.ToString());
-    public MemoryCacheEntryOptions? Options => LogsCacheKey.MemoryCacheEntryOptions;
 }
 
 public class LogsChatDataQueryHandler :

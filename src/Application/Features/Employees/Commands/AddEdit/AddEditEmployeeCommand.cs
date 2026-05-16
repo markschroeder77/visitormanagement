@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Employees.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Employees.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Employees.Commands.AddEdit;
 
-public class AddEditEmployeeCommand : EmployeeDto, IRequest<Result<int>>, IMapFrom<Employee>, ICacheInvalidator
+public class AddEditEmployeeCommand : EmployeeDto, IRequest<Result<int>>, IMapFrom<Employee>
 {
-    public string CacheKey => EmployeeCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => EmployeeCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditEmployeeCommandHandler : IRequestHandler<AddEditEmployeeCommand, Result<int>>

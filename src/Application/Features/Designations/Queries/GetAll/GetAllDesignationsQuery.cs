@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Designations.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Designations.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Designations.Queries.GetAll;
 
-    public class GetAllDesignationsQuery : IRequest<IEnumerable<DesignationDto>>, ICacheable
+    public class GetAllDesignationsQuery : IRequest<IEnumerable<DesignationDto>>
     {
-       public string CacheKey => DesignationCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => DesignationCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllDesignationsQueryHandler :

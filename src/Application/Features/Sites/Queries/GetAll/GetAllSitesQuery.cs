@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Sites.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Sites.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Sites.Queries.GetAll;
 
-    public class GetAllSitesQuery : IRequest<IEnumerable<SiteDto>>, ICacheable
+    public class GetAllSitesQuery : IRequest<IEnumerable<SiteDto>>
     {
-       public string CacheKey => SiteCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => SiteCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllSitesQueryHandler :

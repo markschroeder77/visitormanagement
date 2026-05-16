@@ -2,17 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.DocumentTypes.DTOs;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Primitives;
-using CleanArchitecture.Blazor.Application.Features.DocumentTypes.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.DocumentTypes.Queries.PaginationQuery;
 
-public class DocumentTypesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DocumentTypeDto>>, ICacheable
+public class DocumentTypesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DocumentTypeDto>>
 {
-    public string CacheKey => $"{nameof(DocumentTypesWithPaginationQuery)},{this}";
-
-    public MemoryCacheEntryOptions? Options => DocumentTypeCacheKey.MemoryCacheEntryOptions;
 }
 public class DocumentTypesQueryHandler : IRequestHandler<DocumentTypesWithPaginationQuery, PaginatedData<DocumentTypeDto>>
 {

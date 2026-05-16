@@ -2,29 +2,24 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Search;
 
-public class SearchVisitorQuery : IRequest<VisitorDto?>, ICacheable
+public class SearchVisitorQuery : IRequest<VisitorDto?>
 {
     public string Keyword { get; private set; }
     public SearchVisitorQuery(string keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.Search(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
-public class SearchVisitorFuzzyQuery : IRequest<List<VisitorDto>>, ICacheable
+public class SearchVisitorFuzzyQuery : IRequest<List<VisitorDto>>
 {
     public string Keyword { get; private set; }
     public SearchVisitorFuzzyQuery(string keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.SearchFuzzy(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 
 

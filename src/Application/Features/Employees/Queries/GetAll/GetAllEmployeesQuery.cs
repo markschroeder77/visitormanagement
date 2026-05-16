@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Employees.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Employees.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Employees.Queries.GetAll;
 
-    public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>, ICacheable
+    public class GetAllEmployeesQuery : IRequest<IEnumerable<EmployeeDto>>
     {
-       public string CacheKey => EmployeeCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => EmployeeCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllEmployeesQueryHandler :

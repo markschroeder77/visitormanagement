@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Departments.Commands.AddEdit;
 
-public class AddEditDepartmentCommand : DepartmentDto, IRequest<Result<int>>, IMapFrom<Department>, ICacheInvalidator
+public class AddEditDepartmentCommand : DepartmentDto, IRequest<Result<int>>, IMapFrom<Department>
 {
-    public string CacheKey => DepartmentCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => DepartmentCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditDepartmentCommandHandler : IRequestHandler<AddEditDepartmentCommand, Result<int>>

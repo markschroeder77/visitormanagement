@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Checking;
 
-public class CheckingVisitorsCommand : IRequest<Result<int>>, ICacheInvalidator
+public class CheckingVisitorsCommand : IRequest<Result<int>>
 {
     public int[] VisitorId { get; private set; }
     public string Outcome { get; private set; }
@@ -18,8 +17,6 @@ public class CheckingVisitorsCommand : IRequest<Result<int>>, ICacheInvalidator
         VisitorId = visitorId;
         Comment = comment;
     }
-    public string CacheKey => VisitorCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => VisitorCacheKey.SharedExpiryTokenSource();
 }
 
 public class CheckingVisitorsCommandHandler : IRequestHandler<CheckingVisitorsCommand, Result<int>>

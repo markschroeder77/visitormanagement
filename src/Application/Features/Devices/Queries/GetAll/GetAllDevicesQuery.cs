@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Devices.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Devices.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Devices.Queries.GetAll;
 
-    public class GetAllDevicesQuery : IRequest<IEnumerable<DeviceDto>>, ICacheable
+    public class GetAllDevicesQuery : IRequest<IEnumerable<DeviceDto>>
     {
-       public string CacheKey => DeviceCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => DeviceCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllDevicesQueryHandler :

@@ -1,14 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.DocumentTypes.Caching;
 using CleanArchitecture.Blazor.Application.Features.DocumentTypes.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.DocumentTypes.Commands.AddEdit;
 
-public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>, ICacheInvalidator
+public class AddEditDocumentTypeCommand : DocumentTypeDto, IRequest<Result<int>>
 {
-    public CancellationTokenSource? SharedExpiryTokenSource => DocumentTypeCacheKey.SharedExpiryTokenSource;
 }
 
 public class AddEditDocumentTypeCommandHandler : IRequestHandler<AddEditDocumentTypeCommand, Result<int>>

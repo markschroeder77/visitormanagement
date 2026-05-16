@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Designations.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Designations.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Designations.Commands.AddEdit;
 
-public class AddEditDesignationCommand : DesignationDto, IRequest<Result<int>>, IMapFrom<Designation>, ICacheInvalidator
+public class AddEditDesignationCommand : DesignationDto, IRequest<Result<int>>, IMapFrom<Designation>
 {
-    public string CacheKey => DesignationCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => DesignationCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditDesignationCommandHandler : IRequestHandler<AddEditDesignationCommand, Result<int>>

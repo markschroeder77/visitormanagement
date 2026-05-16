@@ -1,7 +1,6 @@
 @page "/visitor/sites"
 
 
-@using CleanArchitecture.Blazor.Application.Features.Sites.Caching;
 @using CleanArchitecture.Blazor.Application.Features.Sites.Commands.Delete
 @using CleanArchitecture.Blazor.Application.Features.Sites.DTOs
 @using CleanArchitecture.Blazor.Application.Features.Sites.Queries.Pagination
@@ -255,7 +254,6 @@
     {
         _selectedItems = new();
         _searchString = string.Empty;
-        SiteCacheKey.Refresh();
         await _table.ReloadServerData();
     }
     private async Task OnCreate()

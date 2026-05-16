@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.MessageTemplates.DTOs;
-using CleanArchitecture.Blazor.Application.Features.MessageTemplates.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.MessageTemplates.Queries.GetAll;
 
-    public class GetAllMessageTemplatesQuery : IRequest<IEnumerable<MessageTemplateDto>>, ICacheable
+    public class GetAllMessageTemplatesQuery : IRequest<IEnumerable<MessageTemplateDto>>
     {
-       public string CacheKey => MessageTemplateCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => MessageTemplateCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllMessageTemplatesQueryHandler :

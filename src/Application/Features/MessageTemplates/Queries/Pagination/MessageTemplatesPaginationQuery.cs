@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.MessageTemplates.DTOs;
-using CleanArchitecture.Blazor.Application.Features.MessageTemplates.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.MessageTemplates.Queries.Pagination;
 
-    public class MessageTemplatesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<MessageTemplateDto>>, ICacheable
+    public class MessageTemplatesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<MessageTemplateDto>>
     {
-        public string CacheKey => MessageTemplateCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => MessageTemplateCacheKey.MemoryCacheEntryOptions;
     }
     
     public class MessageTemplatesWithPaginationQueryHandler :

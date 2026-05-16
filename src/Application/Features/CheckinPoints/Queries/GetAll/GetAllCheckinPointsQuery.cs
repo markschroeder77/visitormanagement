@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.CheckinPoints.DTOs;
-using CleanArchitecture.Blazor.Application.Features.CheckinPoints.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.CheckinPoints.Queries.GetAll;
 
-    public class GetAllCheckinPointsQuery : IRequest<IEnumerable<CheckinPointDto>>, ICacheable
+    public class GetAllCheckinPointsQuery : IRequest<IEnumerable<CheckinPointDto>>
     {
-       public string CacheKey => CheckinPointCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => CheckinPointCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllCheckinPointsQueryHandler :

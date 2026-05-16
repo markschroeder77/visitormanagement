@@ -1,18 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.KeyValues.Caching;
 using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.KeyValues.Queries.ByName;
 
-public class KeyValuesQueryByName : IRequest<IEnumerable<KeyValueDto>>, ICacheable
+public class KeyValuesQueryByName : IRequest<IEnumerable<KeyValueDto>>
 {
     public string Name { get; set; }
 
-    public string CacheKey => KeyValueCacheKey.GetCacheKey(Name);
-
-    public MemoryCacheEntryOptions? Options => KeyValueCacheKey.MemoryCacheEntryOptions;
     public KeyValuesQueryByName(string name)
     {
         Name = name;

@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Sites.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Sites.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Sites.Commands.Delete;
 
-    public class DeleteSiteCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteSiteCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => SiteCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => SiteCacheKey.SharedExpiryTokenSource();
       public DeleteSiteCommand(int[] id)
       {
         Id = id;

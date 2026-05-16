@@ -2,15 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.VisitorHistories.Queries.GetAll;
 
-public class GetByVisitorIdVisitorHistoriesQuery : IRequest<IEnumerable<VisitorHistoryDto>>, ICacheable
+public class GetByVisitorIdVisitorHistoriesQuery : IRequest<IEnumerable<VisitorHistoryDto>>
 {
     public int? VisitorId { get; private set; }
-    public string CacheKey => VisitorHistoryCacheKey.GetByVisitorIdCacheKey(VisitorId);
-    public MemoryCacheEntryOptions? Options => VisitorHistoryCacheKey.MemoryCacheEntryOptions;
     public GetByVisitorIdVisitorHistoriesQuery(int? visitorId)
     {
         VisitorId = visitorId;

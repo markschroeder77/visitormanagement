@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Devices.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Devices.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Devices.Commands.Delete;
 
-    public class DeleteDeviceCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteDeviceCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => DeviceCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => DeviceCacheKey.SharedExpiryTokenSource();
       public DeleteDeviceCommand(int[] id)
       {
         Id = id;

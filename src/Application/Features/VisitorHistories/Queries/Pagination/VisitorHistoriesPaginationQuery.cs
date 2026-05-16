@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.VisitorHistories.Queries.Pagination;
 
-    public class VisitorHistoriesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<VisitorHistoryDto>>, ICacheable
+    public class VisitorHistoriesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<VisitorHistoryDto>>
     {
-        public string CacheKey => VisitorHistoryCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => VisitorHistoryCacheKey.MemoryCacheEntryOptions;
     }
     
     public class VisitorHistoriesWithPaginationQueryHandler :

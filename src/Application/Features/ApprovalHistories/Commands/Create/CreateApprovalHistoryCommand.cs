@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Commands.Create;
 
-public class CreateApprovalHistoryCommand : ApprovalHistoryDto, IRequest<Result<int>>,  ICacheInvalidator
+public class CreateApprovalHistoryCommand : ApprovalHistoryDto, IRequest<Result<int>>
 {
-    public string CacheKey => ApprovalHistoryCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => ApprovalHistoryCacheKey.SharedExpiryTokenSource();
 }
 
 public class CreateApprovalHistoryCommandHandler : IRequestHandler<CreateApprovalHistoryCommand, Result<int>>

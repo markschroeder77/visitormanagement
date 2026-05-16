@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Employees.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Employees.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Employees.Commands.Delete;
 
-    public class DeleteEmployeeCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteEmployeeCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => EmployeeCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => EmployeeCacheKey.SharedExpiryTokenSource();
       public DeleteEmployeeCommand(int[] id)
       {
         Id = id;

@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Related;
 
-public class GetRelatedVisitorQuery : IRequest<List<VisitorDto>?>, ICacheable
+public class GetRelatedVisitorQuery : IRequest<List<VisitorDto>?>
 {
     public int? EmployeeId { get; private set; }
     public GetRelatedVisitorQuery(int? employeeId)
@@ -16,8 +15,6 @@ public class GetRelatedVisitorQuery : IRequest<List<VisitorDto>?>, ICacheable
     }
 
 
-    public string CacheKey => VisitorCacheKey.GetRelatedCacheKey(EmployeeId);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetRelatedVisitorQueryHandler :

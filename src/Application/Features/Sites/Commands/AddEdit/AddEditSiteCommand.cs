@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Sites.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Sites.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Sites.Commands.AddEdit;
 
-public class AddEditSiteCommand : SiteDto, IRequest<Result<int>>, IMapFrom<Site>, ICacheInvalidator
+public class AddEditSiteCommand : SiteDto, IRequest<Result<int>>, IMapFrom<Site>
 {
-    public string CacheKey => SiteCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => SiteCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditSiteCommandHandler : IRequestHandler<AddEditSiteCommand, Result<int>>

@@ -3,16 +3,13 @@
 
 
 
-using CleanArchitecture.Blazor.Application.Features.Products.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Products.Commands.Delete;
 
-public class DeleteProductCommand : IRequest<Result>, ICacheInvalidator
+public class DeleteProductCommand : IRequest<Result>
 
 {
     public int[] Id { get; }
-    public string CacheKey => ProductCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => ProductCacheKey.SharedExpiryTokenSource();
     public DeleteProductCommand(int[] id)
     {
         Id = id;

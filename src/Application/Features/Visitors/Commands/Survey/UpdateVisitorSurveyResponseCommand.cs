@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Update;
 
-public class UpdateVisitorSurveyResponseCommand : IRequest<Result>, ICacheInvalidator
+public class UpdateVisitorSurveyResponseCommand : IRequest<Result>
 {
     public int Id { get; set; }
     public int? ResponseValue { get; set; }
@@ -17,8 +16,6 @@ public class UpdateVisitorSurveyResponseCommand : IRequest<Result>, ICacheInvali
         ResponseValue = responseValue;
     }
 
-    public string CacheKey => VisitorCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => VisitorCacheKey.SharedExpiryTokenSource();
 }
 
 public class UpdateVisitorSurveyResponseCommandHandler : IRequestHandler<UpdateVisitorSurveyResponseCommand, Result>

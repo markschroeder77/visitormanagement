@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Devices.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Devices.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Devices.Commands.AddEdit;
 
-public class AddEditDeviceCommand : DeviceDto, IRequest<Result<int>>, IMapFrom<Device>, ICacheInvalidator
+public class AddEditDeviceCommand : DeviceDto, IRequest<Result<int>>, IMapFrom<Device>
 {
-    public string CacheKey => DeviceCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => DeviceCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditDeviceCommandHandler : IRequestHandler<AddEditDeviceCommand, Result<int>>

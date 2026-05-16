@@ -35,7 +35,6 @@ public static class DependencyInjection
             }
         }
 
-        services.AddLazyCache();
         services.AddScoped<SMSMessageService>();
         services.AddScoped<MailMessageService>();
         services.AddScoped<IPicklistService, PicklistService>();
@@ -71,8 +70,6 @@ public static class DependencyInjection
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehaviour<,>));
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheInvalidationBehaviour<,>));
         services.AddTransient(typeof(IRequestPostProcessor<,>), typeof(DomainEventPublishingBehaviour<,>));
         services.AddTransient(typeof(IRequestPreProcessor<>), typeof(LoggingBehaviour<>));
     }

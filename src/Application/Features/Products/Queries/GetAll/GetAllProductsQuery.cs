@@ -1,15 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.Products.Caching;
 using CleanArchitecture.Blazor.Application.Features.Products.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.Products.Queries.GetAll;
 
-public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>, ICacheable
+public class GetAllProductsQuery : IRequest<IEnumerable<ProductDto>>
 {
-    public string CacheKey => ProductCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => ProductCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetAllProductsQueryHandler :

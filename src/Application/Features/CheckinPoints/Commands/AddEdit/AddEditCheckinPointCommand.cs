@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.CheckinPoints.DTOs;
-using CleanArchitecture.Blazor.Application.Features.CheckinPoints.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.CheckinPoints.Commands.AddEdit;
 
-    public class AddEditCheckinPointCommand: CheckinPointDto,IRequest<Result<int>>, IMapFrom<CheckinPoint>, ICacheInvalidator
+    public class AddEditCheckinPointCommand: CheckinPointDto,IRequest<Result<int>>, IMapFrom<CheckinPoint>
     {
-      public string CacheKey => CheckinPointCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => CheckinPointCacheKey.SharedExpiryTokenSource();
     }
 
     public class AddEditCheckinPointCommandHandler : IRequestHandler<AddEditCheckinPointCommand, Result<int>>

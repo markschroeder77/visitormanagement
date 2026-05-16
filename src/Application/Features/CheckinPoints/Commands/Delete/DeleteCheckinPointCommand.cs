@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.CheckinPoints.DTOs;
-using CleanArchitecture.Blazor.Application.Features.CheckinPoints.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.CheckinPoints.Commands.Delete;
 
-    public class DeleteCheckinPointCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteCheckinPointCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => CheckinPointCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => CheckinPointCacheKey.SharedExpiryTokenSource();
       public DeleteCheckinPointCommand(int[] id)
       {
         Id = id;

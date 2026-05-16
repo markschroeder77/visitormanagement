@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.MessageTemplates.DTOs;
-using CleanArchitecture.Blazor.Application.Features.MessageTemplates.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.MessageTemplates.Commands.Delete;
 
-    public class DeleteMessageTemplateCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteMessageTemplateCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => MessageTemplateCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => MessageTemplateCacheKey.SharedExpiryTokenSource();
       public DeleteMessageTemplateCommand(int[] id)
       {
         Id = id;

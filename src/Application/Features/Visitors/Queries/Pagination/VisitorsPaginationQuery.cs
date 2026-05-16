@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Pagination;
 
-public class VisitorsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<VisitorDto>>, ICacheable
+public class VisitorsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<VisitorDto>>
 {
     public string? PassCode { get; set; }
     public string? Name { get; set; }
@@ -23,8 +22,6 @@ public class VisitorsWithPaginationQuery : PaginationFilter, IRequest<PaginatedD
     {
         return $"{base.ToString()},Name:{Name},LicensePlateNumber:{LicensePlateNumber},CompanyName:{CompanyName},Purpose:{Purpose},Employee:{Employee},ExpectedDate1:{ExpectedDate1?.ToString()},ExpectedDate2:{ExpectedDate2?.ToString()},Outcome:{Outcome},Status:{Status}";
     }
-    public string CacheKey => VisitorCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 
 public class VisitorsWithPaginationQueryHandler :

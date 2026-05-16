@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Employees.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Employees.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Employees.Queries.Pagination;
 
-public class EmployeesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<EmployeeDto>>, ICacheable
+public class EmployeesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<EmployeeDto>>
 {
     public string? Name { get; set; }
     public string? Email { get; set; }
@@ -17,8 +16,6 @@ public class EmployeesWithPaginationQuery : PaginationFilter, IRequest<Paginated
     {
         return $"{base.ToString()},Name:{Name},Email:{Email},DepartmentId:{DepartmentId},SiteId:{SiteId}";
     }
-    public string CacheKey => EmployeeCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => EmployeeCacheKey.MemoryCacheEntryOptions;
 }
 
 public class EmployeesWithPaginationQueryHandler :

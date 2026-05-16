@@ -3,14 +3,12 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.AddEdit;
 
-public class AddEditVisitorCommand : VisitorDto, IRequest<Result<int>>,  ICacheInvalidator
+public class AddEditVisitorCommand : VisitorDto, IRequest<Result<int>>
 {
-    public CancellationTokenSource? SharedExpiryTokenSource => VisitorCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditVisitorCommandHandler : IRequestHandler<AddEditVisitorCommand, Result<int>>

@@ -3,13 +3,10 @@
 
 
 using CleanArchitecture.Blazor.Application.Features.MessageTemplates.DTOs;
-using CleanArchitecture.Blazor.Application.Features.MessageTemplates.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.MessageTemplates.Commands.AddEdit;
 
-public class AddEditMessageTemplateCommand : MessageTemplateDto, IRequest<Result<int>>, IMapFrom<MessageTemplate>, ICacheInvalidator
+public class AddEditMessageTemplateCommand : MessageTemplateDto, IRequest<Result<int>>, IMapFrom<MessageTemplate>
 {
-    public string CacheKey => MessageTemplateCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => MessageTemplateCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditMessageTemplateCommandHandler : IRequestHandler<AddEditMessageTemplateCommand, Result<int>>

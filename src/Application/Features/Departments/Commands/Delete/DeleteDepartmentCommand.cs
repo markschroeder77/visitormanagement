@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Departments.Commands.Delete;
 
-public class DeleteDepartmentCommand : IRequest<Result>, ICacheInvalidator
+public class DeleteDepartmentCommand : IRequest<Result>
 {
     public int[] Id { get; }
-    public string CacheKey => DepartmentCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => DepartmentCacheKey.SharedExpiryTokenSource();
     public DeleteDepartmentCommand(int[] id)
     {
         Id = id;

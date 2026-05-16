@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.GetById;
 
-public class GetByIdVisitorQuery : IRequest<VisitorDto?>, ICacheable
+public class GetByIdVisitorQuery : IRequest<VisitorDto?>
 {
     public int Id { get; private set; }
     public GetByIdVisitorQuery(int id)
@@ -15,8 +14,6 @@ public class GetByIdVisitorQuery : IRequest<VisitorDto?>, ICacheable
     }
 
 
-    public string CacheKey => VisitorCacheKey.GetByIdCacheKey(Id);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetByIdVisitorQueryQueryHandler :

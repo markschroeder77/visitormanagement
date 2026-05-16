@@ -2,15 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Kanban;
 
-public class GetKanbanDataQuery : IRequest<List<VisitorStatusSumarryDto>>, ICacheable
+public class GetKanbanDataQuery : IRequest<List<VisitorStatusSumarryDto>>
 {
-    public string CacheKey => VisitorCacheKey.GetKanbanCacheKey;
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetKanbanDataQueryHandler :

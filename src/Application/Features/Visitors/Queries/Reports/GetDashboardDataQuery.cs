@@ -2,24 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Reports;
 
-public class GetDashboardDataQuery : IRequest<Tuple<int, int, int>>, ICacheable
+public class GetDashboardDataQuery : IRequest<Tuple<int, int, int>>
 {
-    public string CacheKey => VisitorCacheKey.GetSummaryCacheKey;
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
-public class GetVisitorCountedMonthlyDataQuery: IRequest<List<VisitorCountedMonth>?>, ICacheable
+public class GetVisitorCountedMonthlyDataQuery: IRequest<List<VisitorCountedMonth>?>
 {
-    public string CacheKey => VisitorCacheKey.GetCountedMonthlyCacheKey;
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 
 }
-public class GetVisitorCountedPurposeDataQuery : IRequest<Dictionary<string,int>?>, ICacheable
+public class GetVisitorCountedPurposeDataQuery : IRequest<Dictionary<string,int>?>
 {
-    public string CacheKey => VisitorCacheKey.GetCountedPurposeCacheKey;
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 
 }
 public class GetDashboardDataQueryHandler :

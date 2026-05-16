@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Departments.Queries.GetAll;
 
-    public class GetAllDepartmentsQuery : IRequest<IEnumerable<DepartmentDto>>, ICacheable
+    public class GetAllDepartmentsQuery : IRequest<IEnumerable<DepartmentDto>>
     {
-       public string CacheKey => DepartmentCacheKey.GetAllCacheKey;
-       public MemoryCacheEntryOptions? Options => DepartmentCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllDepartmentsQueryHandler :

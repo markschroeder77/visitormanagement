@@ -2,16 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using CleanArchitecture.Blazor.Application.Features.Products.Caching;
 using CleanArchitecture.Blazor.Application.Features.Products.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.Products.Commands.Import;
 
-public class ImportProductsCommand : IRequest<Result>, ICacheInvalidator
+public class ImportProductsCommand : IRequest<Result>
 {
-    public string CacheKey => ProductCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => ProductCacheKey.SharedExpiryTokenSource();
-
     public string FileName { get;  }
     public byte[] Data { get;  }
     public ImportProductsCommand(string fileName,byte[] data)

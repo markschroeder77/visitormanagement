@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Queries.GetAll;
 
-    public class GetAllApprovalHistoriesQuery : IRequest<IEnumerable<ApprovalHistoryDto>>, ICacheable
+    public class GetAllApprovalHistoriesQuery : IRequest<IEnumerable<ApprovalHistoryDto>>
     {
-       public string CacheKey => ApprovalHistoryCacheKey.GetAllCacheKey;
-       public MemoryCacheEntryOptions? Options => ApprovalHistoryCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllApprovalHistoriesQueryHandler :

@@ -1,15 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.KeyValues.Caching;
 using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs;
 
 namespace CleanArchitecture.Blazor.Application.Features.KeyValues.Commands.AddEdit;
 
-public class AddEditKeyValueCommand : KeyValueDto, IRequest<Result<int>>, ICacheInvalidator
+public class AddEditKeyValueCommand : KeyValueDto, IRequest<Result<int>>
 {
-    public string CacheKey => KeyValueCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => KeyValueCacheKey.SharedExpiryTokenSource();
 }
 
 public class AddEditKeyValueCommandHandler : IRequestHandler<AddEditKeyValueCommand, Result<int>>

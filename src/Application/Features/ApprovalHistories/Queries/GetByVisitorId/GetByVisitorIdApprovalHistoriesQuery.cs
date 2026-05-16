@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Queries.GetByVisitorId;
 
-public class GetByVisitorIdApprovalHistoriesQuery : IRequest<List<ApprovalHistoryDto>>, ICacheable
+public class GetByVisitorIdApprovalHistoriesQuery : IRequest<List<ApprovalHistoryDto>>
 {
     public int Id { get; set; }
     public GetByVisitorIdApprovalHistoriesQuery(int id)
@@ -14,8 +13,6 @@ public class GetByVisitorIdApprovalHistoriesQuery : IRequest<List<ApprovalHistor
         Id = id;
     }
 
-    public string CacheKey => ApprovalHistoryCacheKey.GetByVisitorIdCacheKey(Id);
-    public MemoryCacheEntryOptions? Options => ApprovalHistoryCacheKey.MemoryCacheEntryOptions;
 }
 
 public class GetByVisitorIdApprovalHistoriesQueryHandler :

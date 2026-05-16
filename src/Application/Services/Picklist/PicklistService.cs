@@ -1,17 +1,13 @@
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using CleanArchitecture.Blazor.Application.Features.KeyValues.Caching;
 using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs;
 using Microsoft.EntityFrameworkCore;
-using LazyCache;
 
 namespace CleanArchitecture.Blazor.Application.Services.Picklist;
 
 public class PicklistService: IPicklistService
 {
-    private const string PicklistCacheKey = "PicklistCache";
     private readonly SemaphoreSlim _semaphore = new(1, 1);
-    private readonly IAppCache _cache;
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
    
@@ -19,10 +15,8 @@ public class PicklistService: IPicklistService
     public List<KeyValueDto> DataSource { get; private set; } = new();
 
     public PicklistService(
-      IAppCache  cache,  
     IApplicationDbContext context, IMapper mapper)
     {
-        _cache = cache;
         _context = context;
         _mapper = mapper;
     }
@@ -32,11 +26,9 @@ public class PicklistService: IPicklistService
         await _semaphore.WaitAsync();
         try
         {
-            DataSource = await _cache.GetOrAddAsync(PicklistCacheKey,
-                () => _context.KeyValues.OrderBy(x => x.Name).ThenBy(x => x.Value)
+            DataSource = await _context.KeyValues.OrderBy(x => x.Name).ThenBy(x => x.Value)
                     .ProjectTo<KeyValueDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync(),
-                  KeyValueCacheKey.MemoryCacheEntryOptions);
+                    .ToListAsync();
 
         }
         finally
@@ -50,13 +42,9 @@ public class PicklistService: IPicklistService
         await _semaphore.WaitAsync();
         try
         {
-            _cache.Remove(PicklistCacheKey);
-            DataSource = await _cache.GetOrAddAsync(PicklistCacheKey,
-                () => _context.KeyValues.OrderBy(x => x.Name).ThenBy(x => x.Value)
+            DataSource = await _context.KeyValues.OrderBy(x => x.Name).ThenBy(x => x.Value)
                     .ProjectTo<KeyValueDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync(),
-                KeyValueCacheKey.MemoryCacheEntryOptions
-                  );
+                    .ToListAsync();
             OnChange?.Invoke();
         }
         finally

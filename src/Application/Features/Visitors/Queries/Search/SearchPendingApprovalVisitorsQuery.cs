@@ -2,50 +2,41 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Search;
 
-public class SearchPendingApprovalVisitorsQuery : IRequest<List<VisitorDto>>, ICacheable
+public class SearchPendingApprovalVisitorsQuery : IRequest<List<VisitorDto>>
 {
     public string? Keyword { get; private set; }
     public SearchPendingApprovalVisitorsQuery(string? keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.SearchPendingApproval(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
-public class SearchPendingCheckingVisitorsQuery : IRequest<List<VisitorDto>>, ICacheable
+public class SearchPendingCheckingVisitorsQuery : IRequest<List<VisitorDto>>
 {
     public string? Keyword { get; private set; }
     public SearchPendingCheckingVisitorsQuery(string? keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.SearchPendingChecking(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
-public class SearchPendingConfirmVisitorsQuery : IRequest<List<VisitorDto>>, ICacheable
+public class SearchPendingConfirmVisitorsQuery : IRequest<List<VisitorDto>>
 {
     public string? Keyword { get; private set; }
     public SearchPendingConfirmVisitorsQuery(string? keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.SearchPendingConfirm(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
-public class SearchPendingCheckinVisitorsQuery : IRequest<List<VisitorDto>>, ICacheable
+public class SearchPendingCheckinVisitorsQuery : IRequest<List<VisitorDto>>
 {
     public string? Keyword { get; private set; }
     public SearchPendingCheckinVisitorsQuery(string? keyword)
     {
         Keyword = keyword;
     }
-    public string CacheKey => VisitorCacheKey.SearchPendingCheckin(Keyword);
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
 }
 public class SearchPendingApprovalVisitorsQueryHandler :
      IRequestHandler<SearchPendingConfirmVisitorsQuery, List<VisitorDto>>,

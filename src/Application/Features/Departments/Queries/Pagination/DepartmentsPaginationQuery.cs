@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Departments.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Departments.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Departments.Queries.Pagination;
 
-public class DepartmentsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DepartmentDto>>, ICacheable
+public class DepartmentsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DepartmentDto>>
 {
-    public string CacheKey => DepartmentCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => DepartmentCacheKey.MemoryCacheEntryOptions;
 }
 
 public class DepartmentsWithPaginationQueryHandler :

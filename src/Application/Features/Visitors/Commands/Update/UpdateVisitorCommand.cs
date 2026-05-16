@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Update;
 
-    public class UpdateVisitorCommand: VisitorDto,IRequest<Result>, IMapFrom<Visitor>, ICacheInvalidator
+    public class UpdateVisitorCommand: VisitorDto,IRequest<Result>, IMapFrom<Visitor>
     {
-        public string CacheKey => VisitorCacheKey.GetAllCacheKey;
-        public CancellationTokenSource? SharedExpiryTokenSource => VisitorCacheKey.SharedExpiryTokenSource();
     }
 
     public class UpdateVisitorCommandHandler : IRequestHandler<UpdateVisitorCommand, Result>

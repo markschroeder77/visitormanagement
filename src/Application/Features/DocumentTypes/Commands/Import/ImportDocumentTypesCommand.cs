@@ -1,16 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.DocumentTypes.Caching;
 using CleanArchitecture.Blazor.Application.Features.DocumentTypes.Commands.AddEdit;
 
 namespace CleanArchitecture.Blazor.Application.Features.DocumentTypes.Commands.Import;
 
-public class ImportDocumentTypesCommand : IRequest<Result>, ICacheInvalidator
+public class ImportDocumentTypesCommand : IRequest<Result>
 {
     public string FileName { get; set; } = default!;
     public byte[] Data { get; set; } = default!;
-    public CancellationTokenSource? SharedExpiryTokenSource => DocumentTypeCacheKey.SharedExpiryTokenSource;
     public ImportDocumentTypesCommand(string fileName,byte[] data)
     {
         FileName=fileName;

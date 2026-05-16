@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Designations.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Designations.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Designations.Commands.Delete;
 
-public class DeleteDesignationCommand : IRequest<Result>, ICacheInvalidator
+public class DeleteDesignationCommand : IRequest<Result>
 {
     public int[] Id { get; }
-    public string CacheKey => DesignationCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => DesignationCacheKey.SharedExpiryTokenSource();
     public DeleteDesignationCommand(int[] id)
     {
         Id = id;

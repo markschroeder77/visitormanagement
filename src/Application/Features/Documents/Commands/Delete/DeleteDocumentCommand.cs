@@ -1,13 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CleanArchitecture.Blazor.Application.Features.Documents.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Documents.Commands.Delete;
 
-public class DeleteDocumentCommand : IRequest<Result>, ICacheInvalidator
+public class DeleteDocumentCommand : IRequest<Result>
 {
-    public CancellationTokenSource? SharedExpiryTokenSource => DocumentCacheKey.SharedExpiryTokenSource;
     public int[] Id { get; set; }
     public DeleteDocumentCommand(int[] id)
     {

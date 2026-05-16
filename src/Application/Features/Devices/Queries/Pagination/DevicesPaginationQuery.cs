@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Devices.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Devices.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Devices.Queries.Pagination;
 
-    public class DevicesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DeviceDto>>, ICacheable
+    public class DevicesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<DeviceDto>>
     {
-        public string CacheKey => DeviceCacheKey.GetPagtionCacheKey($"{this}");
-        public MemoryCacheEntryOptions? Options => DeviceCacheKey.MemoryCacheEntryOptions;
 }
     
     public class DevicesWithPaginationQueryHandler :

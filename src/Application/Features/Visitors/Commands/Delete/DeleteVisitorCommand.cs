@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Delete;
 
-public class DeleteVisitorCommand : IRequest<Result>, ICacheInvalidator
+public class DeleteVisitorCommand : IRequest<Result>
 {
     public int[] Id { get; }
-    public string CacheKey => VisitorCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => VisitorCacheKey.SharedExpiryTokenSource();
     public DeleteVisitorCommand(int[] id)
     {
         Id = id;

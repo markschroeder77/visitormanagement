@@ -2,14 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Caching;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Constants;
 
 namespace CleanArchitecture.Blazor.Application.Features.VisitorHistories.Commands.Create;
 
-public class CreateVisitorHistoryCommand : VisitorHistoryDto, IRequest<Result<int>>, ICacheInvalidator
+public class CreateVisitorHistoryCommand : VisitorHistoryDto, IRequest<Result<int>>
 {
     public int? CompanionCount { get; set; }
     public int[]? CheckinCompanion { get; set; }
@@ -17,8 +15,6 @@ public class CreateVisitorHistoryCommand : VisitorHistoryDto, IRequest<Result<in
     public int? SiteId { get; set; }
     public string? CurrentStatus { get; set; }
     public List<VisitorHistoryDto> Histories { get; set; } = new();
-    public string CacheKey => VisitorHistoryCacheKey.GetAllCacheKey;
-    public CancellationTokenSource? SharedExpiryTokenSource => VisitorHistoryCacheKey.SharedExpiryTokenSource();
 }
 
 public class CreateVisitorHistoryCommandHandler : IRequestHandler<CreateVisitorHistoryCommand, Result<int>>
@@ -106,7 +102,6 @@ public class CreateVisitorHistoryCommandHandler : IRequestHandler<CreateVisitorH
                 _context.Companions.Update(comp);
             }
         }
-        VisitorCacheKey.SharedExpiryTokenSource().Cancel();
         await _context.SaveChangesAsync(cancellationToken);
         _logger.LogInformation("{handler}: {Stage}: {TransitDateTime}",nameof(CreateVisitorHistoryCommandHandler), item.Stage, item.TransitDateTime);
         return Result<int>.Success(item.Id);

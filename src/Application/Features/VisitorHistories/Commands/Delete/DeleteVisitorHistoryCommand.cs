@@ -2,16 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Caching;
 
 
 namespace CleanArchitecture.Blazor.Application.Features.VisitorHistories.Commands.Delete;
 
-    public class DeleteVisitorHistoryCommand: IRequest<Result>, ICacheInvalidator
+    public class DeleteVisitorHistoryCommand: IRequest<Result>
     {
       public int[] Id {  get; }
-      public string CacheKey => VisitorHistoryCacheKey.GetAllCacheKey;
-      public CancellationTokenSource? SharedExpiryTokenSource => VisitorHistoryCacheKey.SharedExpiryTokenSource();
       public DeleteVisitorHistoryCommand(int[] id)
       {
         Id = id;

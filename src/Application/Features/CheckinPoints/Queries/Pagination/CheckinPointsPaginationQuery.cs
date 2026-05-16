@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.CheckinPoints.DTOs;
-using CleanArchitecture.Blazor.Application.Features.CheckinPoints.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.CheckinPoints.Queries.Pagination;
 
-    public class CheckinPointsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<CheckinPointDto>>, ICacheable
+    public class CheckinPointsWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<CheckinPointDto>>
     {
-        public string CacheKey => CheckinPointCacheKey.GetPagtionCacheKey($"{this}");
-        public MemoryCacheEntryOptions? Options => CheckinPointCacheKey.MemoryCacheEntryOptions;
 }
     
     public class CheckinPointsWithPaginationQueryHandler :

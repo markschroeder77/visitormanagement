@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.DTOs;
-using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.ApprovalHistories.Queries.Pagination;
 
-public class ApprovalHistoriesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<ApprovalHistoryDto>>, ICacheable
+public class ApprovalHistoriesWithPaginationQuery : PaginationFilter, IRequest<PaginatedData<ApprovalHistoryDto>>
 {
-    public string CacheKey => ApprovalHistoryCacheKey.GetPagtionCacheKey($"{this}");
-    public MemoryCacheEntryOptions? Options => ApprovalHistoryCacheKey.MemoryCacheEntryOptions;
 }
 
 public class ApprovalHistoriesWithPaginationQueryHandler :

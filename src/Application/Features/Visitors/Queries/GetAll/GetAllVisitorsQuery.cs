@@ -2,14 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
-using CleanArchitecture.Blazor.Application.Features.Visitors.Caching;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.Queries.GetAll;
 
-    public class GetAllVisitorsQuery : IRequest<IEnumerable<VisitorDto>>, ICacheable
+    public class GetAllVisitorsQuery : IRequest<IEnumerable<VisitorDto>>
     {
-       public string CacheKey => VisitorCacheKey.GetAllCacheKey;
-    public MemoryCacheEntryOptions? Options => VisitorCacheKey.MemoryCacheEntryOptions;
     }
     
     public class GetAllVisitorsQueryHandler :
