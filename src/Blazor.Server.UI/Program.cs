@@ -13,6 +13,7 @@ using Serilog;
 using Serilog.Events;
 using MudBlazor;
 using Blazor.Analytics;
+using ApexCharts;
 using Blazor.Server.UI.Services.Notifications;
 using Blazor.Server.UI.Services.Navigation;
 
@@ -58,6 +59,7 @@ builder.Services.AddServerSideBlazor(
 });
 builder.Services.AddHotKeys2();
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddApexCharts();
 builder.Services.AddMudServices(config =>
 {
     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
