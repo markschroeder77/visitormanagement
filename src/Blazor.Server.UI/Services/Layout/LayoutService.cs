@@ -13,7 +13,7 @@ public class LayoutService
     public string SecondaryColor { get; set; } = "#ff4081ff";
     public double BorderRadius { get; set; } = 4;
 
-    public MudTheme CurrentTheme { get; private set; }
+    public MudTheme CurrentTheme { get; private set; } = new();
 
 
     public LayoutService(IUserPreferencesService userPreferencesService)
@@ -36,9 +36,9 @@ public class LayoutService
             PrimaryColor = _userPreferences.PrimaryColor;
             SecondaryColor = _userPreferences.SecondaryColor;
             BorderRadius = _userPreferences.BorderRadius;
-            CurrentTheme.Palette.Primary = PrimaryColor;
+            CurrentTheme.PaletteLight.Primary = PrimaryColor;
             CurrentTheme.PaletteDark.Primary = PrimaryColor;
-            CurrentTheme.Palette.Secondary = SecondaryColor;
+            CurrentTheme.PaletteLight.Secondary = SecondaryColor;
             CurrentTheme.PaletteDark.Secondary = SecondaryColor;
             CurrentTheme.LayoutProperties.DefaultBorderRadius = BorderRadius + "px";
         }
@@ -51,7 +51,7 @@ public class LayoutService
         return _userPreferences;
     }
 
-    public event EventHandler MajorUpdateOccured;
+    public event EventHandler? MajorUpdateOccured;
 
     private void OnMajorUpdateOccured() => MajorUpdateOccured?.Invoke(this, EventArgs.Empty);
 
@@ -75,7 +75,7 @@ public class LayoutService
     public void SetBaseTheme(MudTheme theme)
     {
         CurrentTheme = theme;
-        CurrentTheme.Palette.Primary = PrimaryColor;
+        CurrentTheme.PaletteLight.Primary = PrimaryColor;
         CurrentTheme.PaletteDark.Primary = PrimaryColor;
         CurrentTheme.LayoutProperties.DefaultBorderRadius = BorderRadius + "px";
         OnMajorUpdateOccured();
@@ -84,7 +84,7 @@ public class LayoutService
     public async Task SetPrimaryColor(string color)
     {
         PrimaryColor = color;
-        CurrentTheme.Palette.Primary = PrimaryColor;
+        CurrentTheme.PaletteLight.Primary = PrimaryColor;
         _userPreferences.PrimaryColor = PrimaryColor;
         await _userPreferencesService.SaveUserPreferences(_userPreferences);
         OnMajorUpdateOccured();
@@ -92,7 +92,7 @@ public class LayoutService
     public async Task SetSecondaryColor(string color)
     {
         SecondaryColor = color;
-        CurrentTheme.Palette.Secondary = SecondaryColor;
+        CurrentTheme.PaletteLight.Secondary = SecondaryColor;
         _userPreferences.SecondaryColor = SecondaryColor;
         await _userPreferencesService.SaveUserPreferences(_userPreferences);
         OnMajorUpdateOccured();
@@ -113,9 +113,9 @@ public class LayoutService
         PrimaryColor = _userPreferences.PrimaryColor;
         SecondaryColor = _userPreferences.SecondaryColor;
         BorderRadius = _userPreferences.BorderRadius;
-        CurrentTheme.Palette.Primary = PrimaryColor;
+        CurrentTheme.PaletteLight.Primary = PrimaryColor;
         CurrentTheme.PaletteDark.Primary = PrimaryColor;
-        CurrentTheme.Palette.Secondary = SecondaryColor;
+        CurrentTheme.PaletteLight.Secondary = SecondaryColor;
         CurrentTheme.PaletteDark.Secondary = SecondaryColor;
         CurrentTheme.LayoutProperties.DefaultBorderRadius = BorderRadius + "px";
         await _userPreferencesService.SaveUserPreferences(_userPreferences);

@@ -1,0 +1,90 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <!-- Microsoft -->
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.8" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
+  </ItemGroup>
+  <!-- Duende IdentityServer -->
+  <ItemGroup>
+    <PackageVersion Include="Duende.IdentityServer" Version="8.0.0-alpha.1" />
+    <PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="8.0.0-alpha.1" />
+    <PackageVersion Include="Duende.IdentityServer.EntityFramework" Version="8.0.0-alpha.1" />
+    <PackageVersion Include="Duende.IdentityServer.EntityFramework.Storage" Version="8.0.0-alpha.1" />
+    <PackageVersion Include="Duende.IdentityServer.Storage" Version="8.0.0-alpha.1" />
+  </ItemGroup>
+  <!-- AutoMapper -->
+  <ItemGroup>
+    <PackageVersion Include="AutoMapper" Version="16.1.1" />
+  </ItemGroup>
+  <!-- Blazor / UI -->
+  <ItemGroup>
+    <PackageVersion Include="Blazor-Analytics" Version="4.0.0" />
+    <PackageVersion Include="Blazor-ApexCharts" Version="0.9.21-beta" />
+    <PackageVersion Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageVersion Include="MudBlazor" Version="9.4.0" />
+    <PackageVersion Include="Toolbelt.Blazor.HotKeys2" Version="6.2.1" />
+  </ItemGroup>
+  <!-- FluentEmail -->
+  <ItemGroup>
+    <PackageVersion Include="FluentEmail.Core" Version="3.0.2" />
+    <PackageVersion Include="FluentEmail.Razor" Version="3.0.2" />
+    <PackageVersion Include="FluentEmail.Smtp" Version="3.0.2" />
+    <PackageVersion Include="FluentEmail.MailKit" Version="3.0.2" />
+  </ItemGroup>
+  <!-- FluentValidation -->
+  <ItemGroup>
+    <PackageVersion Include="FluentValidation" Version="12.1.1" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+  </ItemGroup>
+  <!-- Serilog -->
+  <ItemGroup>
+    <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
+    <PackageVersion Include="Serilog.Enrichers.ClientInfo" Version="2.9.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
+    <PackageVersion Include="Serilog.Sinks.MSSqlServer" Version="9.0.3" />
+  </ItemGroup>
+  <!-- MailKit / MimeKit -->
+  <ItemGroup>
+    <PackageVersion Include="MailKit" Version="4.16.0" />
+    <PackageVersion Include="MimeKit" Version="4.16.0" />
+  </ItemGroup>
+  <!-- Image processing -->
+  <ItemGroup>
+    <PackageVersion Include="SkiaSharp" Version="3.119.2" />
+  </ItemGroup>
+  <!-- Other -->
+  <ItemGroup>
+    <PackageVersion Include="ClosedXML" Version="0.105.0" />
+    <PackageVersion Include="Hangfire.Core" Version="1.8.23" />
+    <PackageVersion Include="hashids.net" Version="1.7.0" />
+    <PackageVersion Include="LazyCache" Version="2.4.0" />
+    <PackageVersion Include="LazyCache.AspNetCore" Version="2.4.0" />
+    <PackageVersion Include="MediatR" Version="14.1.0" />
+    <PackageVersion Include="Net.Codecrete.QrCodeGenerator" Version="2.1.0" />
+    <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.7.2" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <!-- Test packages -->
+  <ItemGroup>
+    <PackageVersion Include="FluentAssertions" Version="8.10.0" />
+    <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="nunit" Version="4.6.0" />
+    <PackageVersion Include="NUnit3TestAdapter" Version="6.2.0" />
+    <PackageVersion Include="Respawn" Version="7.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="System.IO.Packaging" Version="10.0.8" />
+  </ItemGroup>
+</Project>

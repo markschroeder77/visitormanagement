@@ -23,7 +23,7 @@
    </MudForm>
 @code{
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     public string? ContentText { get; set; }
     private MudForm form;
     private bool success;

@@ -4,13 +4,13 @@
 @inject IStringLocalizer<OnlineUsersComponent> L
 <div class="my-6 d-flex gap-6 flex-wrap">
         <MudPaper Width="400px">
-            <MudList Clickable="true">
+            <MudList T="string" Clickable="true">
                 <MudListSubheader>
                     @L["Online sessions"] (@(_usersStateContainer.UsersByConnectionId.Count))
                 </MudListSubheader>
                 @foreach(var user in _usersStateContainer.UsersByConnectionId)
                 {
-                    <MudListItem Icon="@Icons.Material.Filled.Person">
+                    <MudListItem T="string" Icon="@Icons.Material.Filled.Person">
                         <MudText Typo="Typo.subtitle1">@user.Value</MudText>
                         <MudText Typo="Typo.body2">@user.Key</MudText>
                    </MudListItem>

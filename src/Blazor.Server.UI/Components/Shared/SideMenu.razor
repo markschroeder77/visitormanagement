@@ -57,19 +57,19 @@
                 <div class="ml-6 my-3">
                     <MudText Typo="Typo.caption">
                         <b>
-                            @(L[section.Title])
+                            @(L[section.Title!])
                         </b>
                     </MudText>
                 </div>
             }
 
-            @foreach (var sectionItem in section.SectionItems)
+            @foreach (var sectionItem in section.SectionItems!)
             {
                 @if (sectionItem.IsParent)
                 {
                     <MudNavGroup Icon="@sectionItem.Icon"
-                                 Title="@L[sectionItem.Title]">
-                        @foreach (var menuItem in sectionItem.MenuItems)
+                                 Title="@L[sectionItem.Title!]">
+                        @foreach (var menuItem in sectionItem.MenuItems!)
                         {
                             @if (SideMenuDrawerOpen)
                             {
@@ -77,11 +77,11 @@
                                             Href="@(menuItem.Href)"
                                             Match="NavLinkMatch.All">
                                     <div class="d-flex">
-                                        @(L[menuItem.Title])
+                                        @(L[menuItem.Title!])
                                         @if (menuItem.PageStatus != PageStatus.Completed)
                                         {
                                             <MudSpacer />
-                                            <MudChip Class="mr-4"
+                                            <MudChip T="string" Class="mr-4"
                                                      Color="@Color.Primary"
                                                      Size="Size.Small"
                                                      Variant="Variant.Text">
@@ -101,11 +101,11 @@
                                 Icon="@(sectionItem.Icon)"
                                 Match="NavLinkMatch.All">
                         <div class="d-flex">
-                            @(L[sectionItem.Title])
+                            @(L[sectionItem.Title!])
                             @if (sectionItem.PageStatus != PageStatus.Completed)
                             {
                                 <MudSpacer />
-                                <MudChip Class="mr-4"
+                                <MudChip T="string" Class="mr-4"
                                          Color="@Color.Primary"
                                          Size="Size.Small"
                                          Variant="Variant.Text">

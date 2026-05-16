@@ -15,13 +15,7 @@
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Queries.Search
 @using HashidsNet
 @using Net.Codecrete.QrCodeGenerator
-@using SixLabors.Fonts;
-@using SixLabors.ImageSharp;
-@using SixLabors.ImageSharp.Drawing;
-@using SixLabors.ImageSharp.Drawing.Processing;
-@using SixLabors.ImageSharp.Formats.Jpeg
-@using SixLabors.ImageSharp.PixelFormats;
-@using SixLabors.ImageSharp.Processing;
+@using SkiaSharp
 @inject IJSRuntime JS
 @inject IStringLocalizer<Visitors> L
 @attribute [Authorize(Policy = Permissions.Visitors.Checkin)]
@@ -98,13 +92,13 @@
     [Inject]
     private ISender _mediator { get; set; } = default!;
     private CreateVisitorHistoryCommand request { get; set; } = new CreateVisitorHistoryCommand();
-    FontCollection collection = new FontCollection();
-    FontFamily sansFamily;
-    Font captionFont;
+    SKTypeface _typeface;
+    SKFont captionFont;
 
     protected override Task OnInitializedAsync()
     {
-        captionFont = SystemFonts.CreateFont("Arial", 23, FontStyle.Bold);
+        _typeface = SKTypeface.FromFamilyName("Arial", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+        captionFont = new SKFont(_typeface, 23);
         Title = L["Check-in"];
         return base.OnInitializedAsync();
     }
@@ -166,45 +160,46 @@
     {
         byte[] imageData = Convert.FromBase64String(imageString.Split(',')[1]);
         _captionText = "adGaLOJWKjjb";
-        //Do image processing here
 
-        var drawingOptions = new DrawingOptions()
-            {
-                GraphicsOptions = new GraphicsOptions()
-                {
+        using var source = SKBitmap.Decode(imageData);
+        int width = source.Width;
+        int height = source.Height + 50;
 
-                }
-            };
-        var textOptions = new TextOptions(captionFont)
-            {
-                TextAlignment = TextAlignment.Center,
-                HorizontalAlignment = SixLabors.Fonts.HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Bottom,
-            };
+        using var surface = SKSurface.Create(new SKImageInfo(width, height));
+        var canvas = surface.Canvas;
+        canvas.Clear(SKColors.Black);
 
-        using (var image = Image.Load(imageData))
+        // Flip horizontally and draw the original image
+        canvas.Save();
+        canvas.Scale(-1, 1, width / 2f, height / 2f - 25);
+        canvas.DrawBitmap(source, 0, 0);
+        canvas.Restore();
+
+        // Draw footer bar for caption (semi-transparent black)
+        using var footerPaint = new SKPaint { Color = new SKColor(0, 0, 0, 136) }; // ~#0008
+        canvas.DrawRect(0, height - 50, width, 50, footerPaint);
+
+        // Draw caption text centered in footer bar
+        using var textPaint = new SKPaint
         {
-            var width = image.Width;
-            var height = image.Height + 50;
-            var resizeOptions = new ResizeOptions()
-                {
-                    Mode = SixLabors.ImageSharp.Processing.ResizeMode.Pad,
-                    PadColor = SixLabors.ImageSharp.Color.Black,
-                    Size = new SixLabors.ImageSharp.Size(width, height),
-                    Position = AnchorPositionMode.TopLeft
+            Color = SKColors.White,
+            IsAntialias = true,
+            TextAlign = SKTextAlign.Center
+        };
+        canvas.DrawText(_captionText, width / 2f, height - 14, SKTextAlign.Center, captionFont, textPaint);
 
-                };
-            image.Mutate(x => x
-                .Flip(FlipMode.Horizontal) //To match mirrored webcam image
-                .Resize(resizeOptions)
-                .Fill(SixLabors.ImageSharp.Color.ParseHex("0008"), new RectangularPolygon(0, 240, 320, 50)) //Set footer bar for caption
-                .DrawText(drawingOptions, _captionText, captionFont, SixLabors.ImageSharp.Color.White, new PointF(75, 252)) //center in footer bar)
-            );
-            _imgUri = image.ToBase64String(JpegFormat.Instance);
-        }
+        using var skImage = surface.Snapshot();
+        using var data = skImage.Encode(SKEncodedImageFormat.Jpeg, 100);
+        _imgUri = "data:image/jpeg;base64," + Convert.ToBase64String(data.ToArray());
+
         return Task.CompletedTask;
     }
 
+    public void Dispose()
+    {
+        _typeface?.Dispose();
+        captionFont?.Dispose();
+    }
 
 
 }

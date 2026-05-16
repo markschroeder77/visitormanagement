@@ -4,9 +4,7 @@
 @using CleanArchitecture.Blazor.Application.Features.VisitorHistories.Queries.GetAll
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Constant
 @using CleanArchitecture.Blazor.Application.Features.Visitors.DTOs
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 @inject IStringLocalizer<Visitors> L
 @inherits MudComponentBase
 <MudCard Class="align-self-center" Elevation="10">
@@ -34,11 +32,11 @@
                         <div class="checkbox">
                             @if (companion.CheckoutDateTime is null && companion.CheckinDateTime is not null)
                             {
-                                <MudCheckBox For="@(()=>companion.Checked)"  @bind-Checked="companion.Checked"></MudCheckBox>
+                                <MudCheckBox T="bool" For="@(()=>companion.Checked)"  @bind-Checked="companion.Checked"></MudCheckBox>
                             }
                             else
                             {
-                                <MudCheckBox Checked="true" Disabled="true"></MudCheckBox>
+                                <MudCheckBox T="bool" Checked="true" Disabled="true"></MudCheckBox>
                             }
                         </div>
                         <div class="flex-grow-1 align-self-center">
@@ -128,14 +126,14 @@
             imgstream.Position = 0;
             using (var outStream = new MemoryStream())
             {
-                using (var image = Image.Load(imgstream))
+                using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
                 {
                     var scale = 0m;
-                    if (image.Width > 1200)
+                    if (bitmap.Width > 1200)
                     {
                         scale = 0.3m;
                     }
-                    else if (image.Width <= 1200 && image.Width > 300)
+                    else if (bitmap.Width <= 1200 && bitmap.Width > 300)
                     {
                         scale = 0.5m;
                     }
@@ -143,9 +141,10 @@
                     {
                         scale = 1m;
                     }
-                    image.Mutate(
-                       i => i.AutoOrient().Resize(Convert.ToInt32((image.Width * scale)), 0));
-                    image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                    int newWidth = Convert.ToInt32(bitmap.Width * scale);
+                    int newHeight = Convert.ToInt32(bitmap.Height * scale);
+                    using var resized = bitmap.Resize(new SKSizeI(newWidth, newHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
+                    resized.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                     var filename = file.Name;
                     var fi = new FileInfo(filename);
                     var ext = fi.Extension;
@@ -172,7 +171,7 @@
         _submiting = true;
         try
         {
-            await form.Validate();
+            await form.ValidateAsync();
             if (form.IsValid)
             {
                 

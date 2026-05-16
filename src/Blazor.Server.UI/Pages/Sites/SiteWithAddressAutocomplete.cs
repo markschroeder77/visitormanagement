@@ -40,7 +40,7 @@ public class SiteWithAddressAutocomplete : MudAutocomplete<int?>
         }
     }
 
-    private Task<IEnumerable<int?>> Search(string value)
+    private Task<IEnumerable<int?>> Search(string? value, CancellationToken token)
     {
         var list = new List<int?>();
         if (string.IsNullOrEmpty(value))
@@ -51,7 +51,7 @@ public class SiteWithAddressAutocomplete : MudAutocomplete<int?>
         }
         else
         {
-            var result = _sites.Where(x => value.Contains(x.Name)).Select(x =>new int?(x.Id)).AsEnumerable();
+            var result = _sites.Where(x => x.Name.Contains(value ?? string.Empty)).Select(x =>new int?(x.Id)).AsEnumerable();
             return Task.FromResult(result);
         }
     }

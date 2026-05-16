@@ -32,13 +32,13 @@
                 <MudTimePicker For="@(() => _visitorDto.ExpectedTime)" AmPm="true"  Time="@_visitorDto.ExpectedTime" Label="@L["Expected Time"]" ReadOnly="true" />
                 @if (_visitorDto.CompanionCount > 0)
                 {
-                    <MudList Clickable="true" Dense="true">
+                    <MudList T="string" Clickable="true" Dense="true">
                         <MudListSubheader Class="px-0">
                             @L["Companion Count"] (@_visitorDto.CompanionCount)
                         </MudListSubheader>
                         @foreach (var companion in _visitorDto.Companions)
                         {
-                            <MudListItem Class="px-0">
+                            <MudListItem T="string" Class="px-0">
                                 <MudText>@companion.Name</MudText>
                                 <MudText Typo="Typo.body2">@companion.IdentificationNo</MudText>
                             </MudListItem>

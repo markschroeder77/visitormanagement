@@ -28,7 +28,7 @@
                                 Size="Size.Small"
                                 Checked="@Permissions[x].Assigned"
                                 Label="@Permissions[x].ClaimValue"
-                                CheckedChanged="@(s=>OnAssignChanged.InvokeAsync(Permissions[x]))"
+                                CheckedChanged="@(EventCallback.Factory.Create<bool>(this, s => { OnAssignChanged.InvokeAsync(Permissions[x]); }))"
                                 Color="Color.Primary"></MudCheckBox>
                     }
                 }

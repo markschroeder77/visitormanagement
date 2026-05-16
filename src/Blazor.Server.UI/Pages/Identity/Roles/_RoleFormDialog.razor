@@ -32,10 +32,10 @@
     RoleFormModelValidator modelValidator = new RoleFormModelValidator();
     [EditorRequired] [Parameter] public RoleFormModel model { get; set; } = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
 
     async Task Submit() {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

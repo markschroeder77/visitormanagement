@@ -44,7 +44,7 @@
                 <div class="justify-start pt-3">
                     <MudText Typo="Typo.h6">@L["Picklist"]</MudText>
                     <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                        <MudButton DisableElevation Variant="Variant.Outlined"
+                        <MudButton Variant="Variant.Outlined"
                                    Size="Size.Small"
                                    OnClick="OnRefresh"
                                    Disabled="@_loading"
@@ -52,7 +52,7 @@
                                    Style="margin-right: 4px; margin-bottom:4px">@L["Refresh"]</MudButton>
                         @if (_canCreate)
                         {
-                            <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Primary"
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary"
                                    Disabled="@_editing"
                                    StartIcon="@Icons.Material.Filled.Add"
                                    Size="Size.Small"
@@ -62,7 +62,7 @@
                         }
                         @if (_canDelete)
                         {
-                            <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Secondary"
+                            <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
                                    StartIcon="@Icons.Material.Filled.Delete"
                                    Disabled="@(!(_selectedItems.Count>0) || _editing)"
                                    OnClick="OnDeleteChecked"
@@ -73,7 +73,7 @@
                         @if (_canImport)
                         {
                             <InputFile id="importdataInput" OnChange="OnImportData" hidden accept=".xlsx" />
-                            <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Primary"
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary"
                                    StartIcon="@Icons.Material.Filled.Upload"
                                    Size="Size.Small"
                                    Style="margin-right: 4px; margin-bottom:4px"
@@ -83,7 +83,7 @@
                         }
                         @if (_canExport)
                         {
-                            <MudButton DisableElevation Variant="Variant.Outlined" Color="Color.Primary"
+                            <MudButton Variant="Variant.Outlined" Color="Color.Primary"
                                    StartIcon="@Icons.Material.Filled.Download"
                                    Size="Size.Small"
                                    Style="margin-right: 4px; margin-bottom:4px"
@@ -128,10 +128,10 @@
                 <col style="width:50px;" />
             </ColGroup>
             <HeaderContent>
-                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>x.Name)">@L["Name"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>x.Value)">@L["Value"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>x.Text)">@L["Text"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>x.Description)">@L["Description"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>(object)x.Name!)">@L["Name"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>(object)x.Value!)">@L["Value"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>(object)x.Text!)">@L["Text"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<KeyValueDto, object>(x=>(object)x.Description!)">@L["Description"]</MudTableSortLabel></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="@L["Name"]">@context.Name</MudTd>
@@ -173,6 +173,7 @@
     private KeyValueDto _elementBeforeEdit { get; set; } = new();
     private bool _canCancelEdit = true;
     private string _searchString = string.Empty;
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "May be used in future")]
     private bool _sortNameByLength;
     private bool _editing;
     [CascadingParameter]
@@ -204,19 +205,19 @@
     {
         if (string.IsNullOrWhiteSpace(searchString))
             return true;
-        if (dto.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (dto.Name!.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
-        if (dto.Description.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+        if (dto.Description!.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             return true;
         if ($"{dto.Value} {dto.Text}".Contains(searchString))
             return true;
         return false;
     }
-    private Task<IEnumerable<string>> searchName(string value)
+    private Task<IEnumerable<string?>> searchName(string? value, CancellationToken token)
     {
         if (string.IsNullOrEmpty(value))
             return Task.FromResult(KeyValueList.Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name).OrderBy(x => x).Distinct());
-        return Task.FromResult(KeyValueList.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name.Contains(value, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Name).OrderBy(x => x).Distinct());
+        return Task.FromResult(KeyValueList.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name!.Contains(value, StringComparison.InvariantCultureIgnoreCase)).Select(x => x.Name).OrderBy(x => x).Distinct());
     }
     private async Task LoadData()
     {
@@ -249,10 +250,10 @@
         {
             { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>(L["Delete"], parameters, options);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>(L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (state?.Canceled != true)
         {
             _table.SetEditingItem(null);
             var command = new DeleteKeyValueCommand(_selectedItems.Select(x => x.Id).ToArray());
@@ -345,8 +346,8 @@
         var request = new ExportKeyValuesQuery()
             {
                 Keyword = _searchString,
-                OrderBy = string.IsNullOrEmpty(_table.TableContext.SortFieldLabel) ? "Id" : _table.TableContext.SortFieldLabel,
-                SortDirection = (_table.TableContext.SortDirection == SortDirection.None ? SortDirection.Descending.ToString() : _table.TableContext.SortDirection.ToString()),
+                OrderBy = string.IsNullOrEmpty(_table.SortLabel) ? "Id" : _table.SortLabel,
+                SortDirection = (_table.TableContext.SortDirection == SortDirection.Descending ? "Descending" : "Ascending"),
             };
         var result = await _mediator.Send(request);
         using var streamRef = new DotNetStreamReference(new MemoryStream(result));

@@ -1,7 +1,5 @@
 @using CleanArchitecture.Blazor.Application.Features.Employees.Commands.AddEdit
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 @inherits MudComponentBase
 @inject IStringLocalizer<Employees> L
 <MudDialog>
@@ -106,7 +104,7 @@
 @code {
     MudForm form = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
     AddEditEmployeeCommandValidator modelValidator = new AddEditEmployeeCommandValidator();
     [EditorRequired][Parameter] public AddEditEmployeeCommand model { get; set; } = default!;
@@ -120,11 +118,16 @@
         imgstream.Position = 0;
         using (var outStream = new MemoryStream())
         {
-            using (var image = Image.Load(imgstream))
+            using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
             {
-                image.Mutate(
-                   i => i.Resize(new ResizeOptions() { Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop, Size = new SixLabors.ImageSharp.Size(128, 128) }));
-                image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                var cropRect = new SKRectI(0, 0, Math.Min(128, bitmap.Width), Math.Min(128, bitmap.Height));
+                // Center crop to 128x128
+                int left = Math.Max(0, (bitmap.Width - 128) / 2);
+                int top = Math.Max(0, (bitmap.Height - 128) / 2);
+                cropRect = new SKRectI(left, top, left + Math.Min(128, bitmap.Width - left), top + Math.Min(128, bitmap.Height - top));
+                using var cropped = new SKBitmap(128, 128);
+                bitmap.ExtractSubset(cropped, cropRect);
+                cropped.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                 var filename = e.File.Name;
                 var fi = new FileInfo(filename);
                 var ext = fi.Extension;
@@ -143,7 +146,7 @@
     }
     async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

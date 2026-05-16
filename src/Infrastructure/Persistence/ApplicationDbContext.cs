@@ -192,6 +192,7 @@ public class ApplicationDbContext : IdentityDbContext<
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseSqlServer("Server=sqldb;Database=visitormanagementdb;User=sa;Password=Password@123;MultipleActiveResultSets=true");
+            optionsBuilder.ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
         }
     }
 }

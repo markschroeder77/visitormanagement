@@ -4,19 +4,19 @@ using Toolbelt.Blazor.HotKeys2;
 
 namespace Blazor.Server.UI.Components.Shared;
 
-public partial class CommandPalette : IDisposable
+public partial class CommandPalette : IAsyncDisposable
 {
     private readonly Dictionary<string, string> _pages = new();
     private HotKeysContext? _hotKeysContext;
     private Dictionary<string, string> _pagesFiltered = new();
-    private string _search;
-    [Inject] private HotKeys HotKeys { get; set; }
-    [Inject] private NavigationManager Navigation { get; set; }
-    [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+    private string _search = string.Empty;
+    [Inject] private HotKeys HotKeys { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = default!;
 
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
-        _hotKeysContext?.Dispose();
+        if (_hotKeysContext is not null) await _hotKeysContext.DisposeAsync();
     }
 
     protected override void OnInitialized()

@@ -33,13 +33,13 @@
 @code {
     MudForm form = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     AddEditDesignationCommandValidator modelValidator = new AddEditDesignationCommandValidator();
     [EditorRequired] [Parameter] public AddEditDesignationCommand model { get; set; } = default!;
 
     async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

@@ -12,7 +12,7 @@ public partial class NotificationMenu : MudComponentBase
 {
 
     private bool _newNotificationsAvailable = false;
-    private IDictionary<NotificationMessage, bool> _messages = null;
+    private IDictionary<NotificationMessage, bool> _messages = new Dictionary<NotificationMessage, bool>();
     [Inject] private INotificationService NotificationService { get; set; } = default!;
     private async Task MarkNotificationAsRead()
     {

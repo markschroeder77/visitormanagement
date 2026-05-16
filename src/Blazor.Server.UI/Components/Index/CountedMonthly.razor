@@ -12,16 +12,16 @@
                         <MudSelectItem Value="2024" />
                     </MudSelect>
                 </div>
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="month" XAxisLabels="@XAxisLabels" Width="100%" Height="300px"></MudChart>
+                <MudChart T="double" ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="month" Width="100%" Height="300px"></MudChart>
             </div>
         </MudPaper>
 
 @code {
     public int month = DateTime.Now.Month;
-    public List<ChartSeries> Series = new List<ChartSeries>()
+    public List<ChartSeries<double>> Series = new List<ChartSeries<double>>()
     {
     };
-    public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+    // XAxisLabels removed in MudBlazor v9
     [Inject]
     private ISender _mediator { get; set; } = default!;
     private List<VisitorCountedMonth>? _result = new();
@@ -34,9 +34,9 @@
     private Task filter(int year)
     {
         this.year = year;
-        var data = _result.Where(x=>x.Year==year).Select(x => Convert.ToDouble(x.Count)).ToArray();
-        Series=new List<ChartSeries>(){ new() { Name = "The number of visitors", Data = data } };
-        XAxisLabels = _result.Where(x=>x.Year==year).Select(x => $"{GetMonthName(x.Month)}").ToArray();
+        var data = _result!.Where(x=>x.Year==year).Select(x => Convert.ToDouble(x.Count)).ToArray();
+        Series=new List<ChartSeries<double>>(){ new() { Name = "The number of visitors", Data = data } };
+        // XAxisLabels removed in MudBlazor v9
         return Task.CompletedTask;
     }
 

@@ -1,8 +1,5 @@
 @using CleanArchitecture.Blazor.Application.Features.MessageTemplates.Commands.AddEdit
 @using CleanArchitecture.Blazor.Application.Features.Visitors.Constant;
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
 @using System.Reflection
 @inherits MudComponentBase
 @inject IStringLocalizer<MessageTemplates> L
@@ -73,13 +70,13 @@
 @code {
     MudForm form = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     AddEditMessageTemplateCommandValidator modelValidator = new();
     [EditorRequired][Parameter] public AddEditMessageTemplateCommand model { get; set; } = default!;
 
     async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

@@ -25,7 +25,7 @@
 <ErrorBoundary>
     <ChildContent>
         <AdvancedSearchVisitorsComponent TRequest="query" OnFilterChanged="OnFilterChanged"></AdvancedSearchVisitorsComponent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<VisitorDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<VisitorDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Virtualize="true"
@@ -303,7 +303,7 @@
     [Inject]
     private NavigationManager _navigationManager { get; set; } = default!;
     [Inject]
-    private IFluentEmail _fluentEmail { get; set; }
+    private IFluentEmail _fluentEmail { get; set; } = null!;
     [CascadingParameter]
     protected Task<AuthenticationState> AuthState { get; set; } = default!;
 
@@ -331,7 +331,7 @@
         _canExport = false;
 
     }
-    private async Task<TableData<VisitorDto>> ServerReload(TableState state)
+    private async Task<TableData<VisitorDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {
@@ -384,9 +384,9 @@
                  { nameof(_PreviewDialog.TripCode),dto.TripCode },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_PreviewDialog>(L["Preview attachments"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_PreviewDialog>(L["Preview attachments"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
         }
     }
@@ -398,9 +398,9 @@
         { nameof(_ApprovalDialog.Selected),_selectedItems.ToList() },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_ApprovalDialog>(L["Approval visitor request"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_ApprovalDialog>(L["Approval visitor request"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(new ApprovalVisitorsCommand(state.Data.ToString(), _selectedItems.Select(x => x.Id).ToArray()));
             await _table.ReloadServerData();
@@ -422,10 +422,10 @@
         { nameof(_VisitorFormDialog.model),command },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<_VisitorFormDialog>
+        var dialog = await DialogService.ShowAsync<_VisitorFormDialog>
         (L["Create a new visitor"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -476,10 +476,10 @@
             { nameof(_VisitorFormDialog.model),command },
                 };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<_VisitorFormDialog>
+        var dialog = await DialogService.ShowAsync<_VisitorFormDialog>
         (L["Edit the visitor"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -494,11 +494,11 @@
                     {
                 { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, dto.Name) }
                     };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteVisitorCommand(new int[] { dto.Id });
             var result = await _mediator.Send(command);
@@ -514,11 +514,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteVisitorCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);

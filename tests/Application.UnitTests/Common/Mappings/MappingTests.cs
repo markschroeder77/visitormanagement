@@ -5,7 +5,7 @@ using CleanArchitecture.Blazor.Application.Features.DocumentTypes.DTOs;
 using CleanArchitecture.Blazor.Application.Features.Products.DTOs;
 using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs;
 using CleanArchitecture.Blazor.Domain.Entities;
-
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using System;
 using System.Runtime.Serialization;
@@ -21,9 +21,8 @@ public class MappingTests
     {
         _configuration = new MapperConfiguration(cfg =>
         {
-                //cfg.Advanced.AllowAdditiveTypeMapCreation = true;
-                cfg.AddProfile<MappingProfile>();
-        });
+            cfg.AddMaps(typeof(MappingProfile).Assembly);
+        }, (ILoggerFactory)null);
 
         _mapper = _configuration.CreateMapper();
     }
@@ -51,8 +50,7 @@ public class MappingTests
         if (type.GetConstructor(Type.EmptyTypes) != null)
             return Activator.CreateInstance(type);
 
-        // Type without parameterless constructor
+        // Type with no parameterless constructor
         return FormatterServices.GetUninitializedObject(type);
     }
 }
-

@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -216,13 +216,14 @@ public class IdentityService : IIdentityService
     }
     private string GenerateEncryptedToken(SigningCredentials signingCredentials, IEnumerable<Claim> claims)
     {
-        var token = new JwtSecurityToken(
-           claims: claims,
-           expires: DateTime.UtcNow.AddDays(2),
-           signingCredentials: signingCredentials);
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var encryptedToken = tokenHandler.WriteToken(token);
-        return encryptedToken;
+        var tokenHandler = new JsonWebTokenHandler();
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Claims = claims.ToDictionary(c => c.Type, c => (object)c.Value),
+            Expires = DateTime.UtcNow.AddDays(2),
+            SigningCredentials = signingCredentials
+        };
+        return tokenHandler.CreateToken(tokenDescriptor);
     }
     private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
     {
@@ -236,15 +237,23 @@ public class IdentityService : IIdentityService
             ClockSkew = TimeSpan.Zero,
             ValidateLifetime = false
         };
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
-            StringComparison.InvariantCultureIgnoreCase))
+        var tokenHandler = new JsonWebTokenHandler();
+        var result = tokenHandler.ValidateTokenAsync(token, tokenValidationParameters).GetAwaiter().GetResult();
+        if (!result.IsValid)
         {
             throw new SecurityTokenException(_localizer["Invalid token"]);
         }
-
-        return principal;
+        if (!result.SecurityToken.GetType().Name.Equals("JsonWebToken", StringComparison.Ordinal))
+        {
+            throw new SecurityTokenException(_localizer["Invalid token"]);
+        }
+        // Verify the signing algorithm matches
+        var jwt = result.SecurityToken as Microsoft.IdentityModel.JsonWebTokens.JsonWebToken;
+        if (jwt is null || !SecurityAlgorithms.HmacSha256.Equals(jwt.GetHeaderValue<string>("alg"), StringComparison.OrdinalIgnoreCase))
+        {
+            throw new SecurityTokenException(_localizer["Invalid token"]);
+        }
+        return new ClaimsPrincipal(result.ClaimsIdentity);
     }
 
     private SigningCredentials GetSigningCredentials()

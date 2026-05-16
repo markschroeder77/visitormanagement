@@ -1,9 +1,7 @@
 @using CleanArchitecture.Blazor.Application.Features.Sites.DTOs
 @using CleanArchitecture.Blazor.Application.Features.Sites.Queries.GetAll
 @using Microsoft.AspNetCore.Identity
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 
 @inherits MudComponentBase
 @inject IStringLocalizer<Users> L
@@ -108,7 +106,7 @@
                 @for (int i = 0; i < _roles.Count; i++)
                 {
                     var x = i;
-                    <MudCheckBox For="@(() =>model.Checked)" T="bool" Checked="@_roles[x].value" Label="@_roles[i].key" CheckedChanged="@(s=>_roles[x].value=s)"></MudCheckBox>
+                    <MudCheckBox For="@(() =>model.Checked)" T="bool" @bind-Checked="_roles[x].value" Label="@_roles[i].key"></MudCheckBox>
                 }
             </div>
         </MudItem>
@@ -116,13 +114,13 @@
 </MudForm>
 
 @code {
-    public class keyvalue
+    public class KeyValue
     {
-        public string key { get; set; }
+        public string key { get; set; } = string.Empty;
         public bool value { get; set; }
     }
     MudForm form = default!;
-    private List<keyvalue> _roles { get; set; } = new();
+    private List<KeyValue> _roles { get; set; } = new();
     private List<SiteDto> _sites = new();
     [Inject]
     private ISender _mediator { get; set; } = default!;
@@ -144,11 +142,11 @@
         {
             if (model.AssignRoles != null && model.AssignRoles.Contains(role))
             {
-                _roles.Add(new() { key = role, value = true });
+                _roles.Add(new() { key = role!, value = true });
             }
             else
             {
-                _roles.Add(new() { key = role, value = false });
+                _roles.Add(new() { key = role!, value = false });
             }
         }
 
@@ -182,11 +180,16 @@
         imgstream.Position = 0;
         using (var outStream = new MemoryStream())
         {
-            using (var image = Image.Load(imgstream))
+            using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
             {
-                image.Mutate(
-                   i => i.Resize(new ResizeOptions() { Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop, Size = new SixLabors.ImageSharp.Size(128, 128) }));
-                image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                var cropRect = new SKRectI(0, 0, Math.Min(128, bitmap.Width), Math.Min(128, bitmap.Height));
+                // Center crop to 128x128
+                int left = Math.Max(0, (bitmap.Width - 128) / 2);
+                int top = Math.Max(0, (bitmap.Height - 128) / 2);
+                cropRect = new SKRectI(left, top, left + Math.Min(128, bitmap.Width - left), top + Math.Min(128, bitmap.Height - top));
+                using var cropped = new SKBitmap(128, 128);
+                bitmap.ExtractSubset(cropped, cropRect);
+                cropped.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                 var filename = e.File.Name;
                 var fi = new FileInfo(filename);
                 var ext = fi.Extension;
@@ -205,7 +208,7 @@
     }
     public async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             model.AssignRoles = _roles.Where(x => x.value).Select(x => x.key).ToArray();

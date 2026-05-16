@@ -62,11 +62,6 @@
         </MudItem>
         <MudItem xs="12" sm="6"  md="4">
            <MudDateRangePicker @ref="_picker1" Label="@L["Search for expected date"]" Clearable="true" DateRangeChanged="OnDateRangeChanged1">
-                <PickerActions>
-                    <MudButton Class="mr-auto align-self-start" OnClick="@(() => _picker1.Clear())">@L["Clear"]</MudButton>
-                    <MudButton OnClick="@(() => _picker1.Close(false))">@L["Cancel"]</MudButton>
-                    <MudButton Color="Color.Primary" OnClick="@(() => _picker1.Close())">@L["Ok"]</MudButton>
-                </PickerActions>
             </MudDateRangePicker>
         </MudItem>
         

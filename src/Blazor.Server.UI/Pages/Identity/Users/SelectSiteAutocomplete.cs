@@ -14,7 +14,7 @@ public class SelectSiteAutocomplete : MudAutocomplete<SiteDto?>
     [Parameter]
     public EventCallback<string> SiteChanged { get; set; }
 
-    private List<SiteDto?> _sites = new();
+    private List<SiteDto> _sites = new();
 
     // supply default parameters, but leave the possibility to override them
     public override Task SetParametersAsync(ParameterView parameters)
@@ -36,7 +36,7 @@ public class SelectSiteAutocomplete : MudAutocomplete<SiteDto?>
         }
     }
     
-    private Task<IEnumerable<SiteDto?>> Search(string value)
+    private Task<IEnumerable<SiteDto?>> Search(string? value, CancellationToken token)
     {
         List<SiteDto?> list = new();
         foreach(var item in _sites)
@@ -49,6 +49,6 @@ public class SelectSiteAutocomplete : MudAutocomplete<SiteDto?>
 
     private string GetName(SiteDto? item)
     {
-        return item?.Name;
+        return item?.Name ?? string.Empty;
     }
 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
+using AutoMapper.Internal;
 
 namespace CleanArchitecture.Blazor.Application.Common.Mappings;
 
@@ -15,19 +16,18 @@ public class MappingProfile : Profile
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
         var types = assembly.GetExportedTypes()
-        .Where(t => t.GetInterfaces().Any(i =>
-            i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
-        .ToList();
+            .Where(t => t.GetInterfaces().Any(i =>
+                i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+            .ToList();
 
         foreach (var type in types)
         {
             var instance = Activator.CreateInstance(type);
 
             var methodInfo = type.GetMethod("Mapping")
-                ?? type.GetInterface("IMapFrom`1")!.GetMethod("Mapping");
+                ?? type.GetInterface("IMapFrom`1")!.GetMethod("Mapping")!;
 
-            methodInfo?.Invoke(instance, new object[] { this });
-
+            methodInfo.Invoke(instance, new [] { this });
         }
     }
 }

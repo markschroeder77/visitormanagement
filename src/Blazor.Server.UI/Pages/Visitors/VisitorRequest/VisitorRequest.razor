@@ -175,10 +175,10 @@
                  { nameof(_QuickSearchDialog.keyword),model.Name },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<_QuickSearchDialog>
+        var dialog = await DialogService.ShowAsync<_QuickSearchDialog>
         (L["Quick Search Visitors"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var dto = state.Data as VisitorDto;
             if (dto is not null)
@@ -205,7 +205,7 @@
         _submiting = true;
         try
         {
-            await form.Validate();
+            await form.ValidateAsync();
             if (form.IsValid)
             {
                 await this.generateQrCode();

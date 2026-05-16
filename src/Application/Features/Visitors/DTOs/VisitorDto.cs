@@ -3,6 +3,9 @@
 
 using CleanArchitecture.Blazor.Application.Features.ApprovalHistories.DTOs;
 using CleanArchitecture.Blazor.Application.Features.VisitorHistories.DTOs;
+using CleanArchitecture.Blazor.Application.Common.Mappings;
+using CleanArchitecture.Blazor.Domain.Entities;
+using AutoMapper.Internal;
 
 namespace CleanArchitecture.Blazor.Application.Features.Visitors.DTOs;
 
@@ -15,7 +18,7 @@ public class VisitorDto : IMapFrom<Visitor>
         profile.CreateMap<Visitor, VisitorDto>()
            .ForMember(x => x.Designation, s => s.MapFrom(y => y.Designation.Name))
            .ForMember(x => x.Employee, s => s.MapFrom(y => y.Employee.Name))
-           .ForMember(x => x.Address, s => s.MapFrom(y => $"{y.Site.Name} - {y.Site.Address}"))
+           .ForMember(x => x.Address, s => s.MapFrom(y => y.Site.Name + " - " + y.Site.Address))
            .ForMember(x => x.EmployeeDesignation, s => s.MapFrom(y => y.Employee.Designation.Name))
            .ForMember(x => x.Companions, s => s.MapFrom(y => y.Companions.Select(x => new CompanionDto()
            {
@@ -44,7 +47,7 @@ public class VisitorDto : IMapFrom<Visitor>
            {
                Id = x.Id,
                CheckinPointId = x.CheckinPointId,
-               CheckinPoint=$"{x.CheckinPoint.Site.Name} - {x.CheckinPoint.Name}",
+               CheckinPoint=x.CheckinPoint.Site.Name + " - " + x.CheckinPoint.Name,
                Comment = x.Comment,
                Attachments = x.Attachments,
                Stage = x.Stage,
@@ -102,4 +105,3 @@ public class VisitorDto : IMapFrom<Visitor>
 
     public bool _processing { get; set; }
 }
-

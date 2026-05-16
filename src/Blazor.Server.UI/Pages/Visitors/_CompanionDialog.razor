@@ -75,13 +75,13 @@
     [Parameter]
     public string? PassCode { get; set; }
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     private CreateVisitorCompanionDtoValidator modelValidator = new CreateVisitorCompanionDtoValidator();
 
 
     private async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             

@@ -6,12 +6,12 @@
 
 <div class="d-flex gap-4">
     <MudPaper Class="flex-grow-1">
-        <MudList Clickable="true" Class="mud-height-full">
+        <MudList T="string" Clickable="true" Class="mud-height-full">
             <MudListSubheader>@L["Pending Visitor"]</MudListSubheader>
 
             @foreach (var item in _list.Where(x => x.Status == VisitorStatus.PendingVisitor).Take(5))
             {
-                <MudListItem OnClick="@(()=>navigateTo(item.Id))">
+                <MudListItem T="string" OnClick="@(()=>navigateTo(item.Id))">
                     <MudText Typo="Typo.body2">@item.Name - @item.PhoneNumber</MudText>
                     <MudText Typo="Typo.body2">@item.CompanyName</MudText>
                 </MudListItem>
@@ -19,12 +19,12 @@
         </MudList>
     </MudPaper>
     <MudPaper Class="flex-grow-1">
-        <MudList Clickable="true" Class="mud-height-full">
+        <MudList T="string" Clickable="true" Class="mud-height-full">
             <MudListSubheader>@L["Pending Approval"]</MudListSubheader>
 
             @foreach (var item in _list.Where(x => x.Status == VisitorStatus.PendingApproval).Take(5))
             {
-                <MudListItem OnClick="@(()=>navigateTo(item.Id))">
+                <MudListItem T="string" OnClick="@(()=>navigateTo(item.Id))">
                     <MudText Typo="Typo.body2">@item.Name - @item.PhoneNumber</MudText>
                     <MudText Typo="Typo.body2">@item.CompanyName</MudText>
                 </MudListItem>
@@ -32,12 +32,12 @@
         </MudList>
     </MudPaper>
     <MudPaper Class="flex-grow-1">
-        <MudList Clickable="true" Class="mud-height-full">
+        <MudList T="string" Clickable="true" Class="mud-height-full">
             <MudListSubheader>@L["Pending Check-in"]</MudListSubheader>
 
             @foreach (var item in _list.Where(x => x.Status == VisitorStatus.PendingCheckin).Take(5))
             {
-                <MudListItem OnClick="@(()=>navigateTo(item.Id))">
+                <MudListItem T="string" OnClick="@(()=>navigateTo(item.Id))">
                     <MudText Typo="Typo.body2">@item.Name - @item.PhoneNumber</MudText>
                     <MudText Typo="Typo.body2">@item.CompanyName</MudText>
                 </MudListItem>
@@ -45,12 +45,12 @@
         </MudList>
     </MudPaper>
     <MudPaper Class="flex-grow-1">
-        <MudList Clickable="true" Class="mud-height-full">
+        <MudList T="string" Clickable="true" Class="mud-height-full">
             <MudListSubheader>@L["Pending Check-out"]</MudListSubheader>
 
             @foreach (var item in _list.Where(x => x.Status == VisitorStatus.PendingCheckout).Take(5))
             {
-                <MudListItem OnClick="@(()=>navigateTo(item.Id))">
+                <MudListItem T="string" OnClick="@(()=>navigateTo(item.Id))">
                     <MudText Typo="Typo.body2">@item.Name - @item.PhoneNumber</MudText>
                     <MudText Typo="Typo.body2">@item.CompanyName</MudText>
                 </MudListItem>

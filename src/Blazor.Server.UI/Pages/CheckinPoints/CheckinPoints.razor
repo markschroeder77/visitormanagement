@@ -18,7 +18,7 @@
 </style>
 <ErrorBoundary>
     <ChildContent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<CheckinPointDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<CheckinPointDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Height="calc(100vh - 265px)"
@@ -244,7 +244,7 @@
         _canExport = false;
 
     }
-    private async Task<TableData<CheckinPointDto>> ServerReload(TableState state)
+    private async Task<TableData<CheckinPointDto>> ServerReload(TableState state, CancellationToken token)
     {
         try
         {
@@ -285,10 +285,10 @@
         { nameof(_CheckinPointFormDialog.model),command },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_CheckinPointFormDialog>
+        var dialog = await DialogService.ShowAsync<_CheckinPointFormDialog>
         (L["Create a new check-in point"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -309,10 +309,10 @@
             { nameof(_CheckinPointFormDialog.model),command },
                 };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_CheckinPointFormDialog>
+        var dialog = await DialogService.ShowAsync<_CheckinPointFormDialog>
         (L["Edit the check-in point"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -327,11 +327,11 @@
                     {
                 { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, dto.Name) }
                     };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteCheckinPointCommand(new int[] { dto.Id });
             var result = await _mediator.Send(command);
@@ -347,11 +347,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteCheckinPointCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);

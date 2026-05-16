@@ -7,6 +7,7 @@ using CleanArchitecture.Blazor.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -66,7 +67,9 @@ public class Testing
 
         _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
 
-        _checkpoint = await Respawner.CreateAsync(_configuration.GetConnectionString("DefaultConnection"), new RespawnerOptions
+        await using var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        await connection.OpenAsync();
+        _checkpoint = await Respawner.CreateAsync(connection, new RespawnerOptions
         {
             TablesToIgnore = new Table[] { "__EFMigrationsHistory" }
         });
@@ -138,7 +141,9 @@ public class Testing
 
     public static async Task ResetState()
     {
-        await _checkpoint.ResetAsync(_configuration.GetConnectionString("DefaultConnection"));
+        await using var connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        await connection.OpenAsync();
+        await _checkpoint.ResetAsync(connection);
         _currentUserId = null;
         _currentTenantId = null;
     }

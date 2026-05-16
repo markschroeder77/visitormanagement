@@ -15,7 +15,7 @@
 </style>
 <ErrorBoundary>
     <ChildContent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<VisitorHistoryDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<VisitorHistoryDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Virtualize="true"
@@ -130,7 +130,7 @@
         _canSearch = (await AuthService.AuthorizeAsync(state.User, Permissions.VisitorHistories.Search)).Succeeded;
         _canDelete = (await AuthService.AuthorizeAsync(state.User, Permissions.VisitorHistories.Delete)).Succeeded;
     }
-    private async Task<TableData<VisitorHistoryDto>> ServerReload(TableState state)
+    private async Task<TableData<VisitorHistoryDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {
@@ -170,11 +170,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteVisitorHistoryCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);

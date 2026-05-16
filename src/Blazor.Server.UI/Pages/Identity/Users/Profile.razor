@@ -5,9 +5,7 @@
 @using CleanArchitecture.Blazor.Infrastructure.Constants.LocalStorage
 @using CleanArchitecture.Blazor.Infrastructure.Services.Authentication
 @using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 
 
 @inject IStringLocalizer<Profile> L
@@ -16,7 +14,7 @@
     <ErrorBoundary>
         <ChildContent>
             <MudTabs Outlined="true" Position="Position.Top" Rounded="true" Border="true" Elevation="6"
-                     ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6">
+                     Class="mt-8" PanelClass="pa-6">
                 <MudTabPanel Text="@L["Profile"]">
                     <MudForm Model="@model" @ref="@form" Validation="@(userValidator.ValidateValue)" Style="display: flex; align-content: center;  align-items: center; flex-direction: column;">
                         <MudGrid Justify="Justify.Center" Style="max-width:600px;display:flex;">
@@ -28,7 +26,7 @@
                                         <MudElement Class="d-flex flex-column  align-center">
                                             <MudAvatar Style="height:128px; width:128px; font-size:2rem;">@model.DisplayName</MudAvatar>
                                             <div class="d-flex">
-                                                <MudChip Size="MudBlazor.Size.Small">@model.Role</MudChip>
+                                                <MudChip T="string" Size="MudBlazor.Size.Small">@model.Role</MudChip>
 
                                             </div>
 
@@ -39,7 +37,7 @@
                                         <MudElement Class="d-flex flex-column  align-center">
                                             <MudAvatar Image="@model.Avatar" Style="height:128px; width:128px; font-size:2rem;" />
                                             <div class="d-flex">
-                                                <MudChip Size="MudBlazor.Size.Small">@model.Role</MudChip>
+                                                <MudChip T="string" Size="MudBlazor.Size.Small">@model.Role</MudChip>
                                             </div>
                                         </MudElement>
                                     }
@@ -216,11 +214,16 @@
         imgstream.Position = 0;
         using (var outStream = new MemoryStream())
         {
-            using (var image = Image.Load(imgstream))
+            using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
             {
-                image.Mutate(
-                   i => i.Resize(new ResizeOptions() { Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop, Size = new SixLabors.ImageSharp.Size(128, 128) }));
-                image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                var cropRect = new SKRectI(0, 0, Math.Min(128, bitmap.Width), Math.Min(128, bitmap.Height));
+                // Center crop to 128x128
+                int left = Math.Max(0, (bitmap.Width - 128) / 2);
+                int top = Math.Max(0, (bitmap.Height - 128) / 2);
+                cropRect = new SKRectI(left, top, left + Math.Min(128, bitmap.Width - left), top + Math.Min(128, bitmap.Height - top));
+                using var cropped = new SKBitmap(128, 128);
+                bitmap.ExtractSubset(cropped, cropRect);
+                cropped.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                 var filename = e.File.Name;
                 var fi = new FileInfo(filename);
                 var ext = fi.Extension;
@@ -239,7 +242,7 @@
     }
     private async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             var state = await AuthState;
@@ -276,7 +279,7 @@
     }
     private async Task ChangePassword()
     {
-        await passwordform.Validate();
+        await passwordform.ValidateAsync();
         if (passwordform.IsValid)
         {
             var user = await _userManager.FindByIdAsync(model.UserId);

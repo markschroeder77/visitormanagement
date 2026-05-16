@@ -19,7 +19,7 @@
 <ErrorBoundary>
     <ChildContent>
         <AdvancedSearchProductsComponent TRequest="query" OnFilterChanged="OnFilterChanged"></AdvancedSearchProductsComponent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<ProductDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<ProductDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Height="calc(100vh - 265px)"
@@ -219,7 +219,7 @@
         _canImport = (await AuthService.AuthorizeAsync(state.User, Permissions.Products.Import)).Succeeded;
         _canExport = (await AuthService.AuthorizeAsync(state.User, Permissions.Products.Export)).Succeeded;
     }
-    private async Task<TableData<ProductDto>> ServerReload(TableState state)
+    private async Task<TableData<ProductDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {
@@ -270,10 +270,10 @@
          { nameof(_ProductFormDialog.model),command },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<_ProductFormDialog>
+        var dialog = await DialogService.ShowAsync<_ProductFormDialog>
         (L["Create a new product"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -297,10 +297,10 @@
             { nameof(_ProductFormDialog.model),command },
                 };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-        var dialog = DialogService.Show<_ProductFormDialog>
+        var dialog = await DialogService.ShowAsync<_ProductFormDialog>
         (L["Edit the product"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -315,11 +315,11 @@
                     {
                 { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, dto.Name) }
                     };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteProductCommand(new int[] { dto.Id });
             var result = await _mediator.Send(command);
@@ -335,11 +335,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteProductCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);
@@ -355,8 +355,8 @@
         var request = new ExportProductsQuery()
             {
                 Keyword = _searchString,
-                OrderBy = string.IsNullOrEmpty(_table.TableContext.SortFieldLabel) ? "Id" : _table.TableContext.SortFieldLabel,
-                SortDirection = (_table.TableContext.SortDirection == SortDirection.None ? SortDirection.Descending.ToString() : _table.TableContext.SortDirection.ToString()),
+                OrderBy = string.IsNullOrEmpty(_table.SortLabel) ? "Id" : _table.SortLabel,
+                SortDirection = (_table.TableContext.SortDirection == SortDirection.Descending ? "Descending" : "Ascending"),
             };
         var result = await _mediator.Send(request);
         using var streamRef = new DotNetStreamReference(new MemoryStream(result));

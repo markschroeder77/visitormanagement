@@ -10,11 +10,12 @@ using CleanArchitecture.Blazor.Application.Common.Interfaces.Identity;
 using CleanArchitecture.Blazor.Infrastructure.Hubs;
 using CleanArchitecture.Blazor.Infrastructure.Extensions;
 using Blazor.Server.UI.Services;
+using Microsoft.JSInterop;
 using Toolbelt.Blazor.HotKeys2;
 
 namespace Blazor.Server.UI.Shared;
 
-public partial class MainLayout: IDisposable
+public partial class MainLayout: IAsyncDisposable
 {
     private bool _commandPaletteOpen;
     private HotKeysContext? _hotKeysContext;
@@ -31,12 +32,23 @@ public partial class MainLayout: IDisposable
     private ProfileService _profileService { get; set; } = default!;
     [Inject]
     private AuthenticationStateProvider _authenticationStateProvider { get; set; } = default!;
-    public void Dispose()
+    public async ValueTask DisposeAsync()
     {
         _profileService.OnChange -= _profileService_OnChange;
         LayoutService.MajorUpdateOccured -= LayoutServiceOnMajorUpdateOccured;
         _authenticationStateProvider.AuthenticationStateChanged -= _authenticationStateProvider_AuthenticationStateChanged;
-        _hotKeysContext?.Dispose();
+        if (_hotKeysContext is not null)
+        {
+            try
+            {
+                await _hotKeysContext.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+                // The circuit is already disconnected, JS interop is unavailable.
+                // This is expected during disposal and can be safely ignored.
+            }
+        }
         GC.SuppressFinalize(this);
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -51,7 +63,7 @@ public partial class MainLayout: IDisposable
     }
     private async Task ApplyUserPreferences()
     {
-        var defaultDarkMode = await _mudThemeProvider.GetSystemPreference();
+        var defaultDarkMode = LayoutService.IsDarkMode;
         UserPreferences= await LayoutService.ApplyUserPreferences(defaultDarkMode);
     }
     protected override async Task OnInitializedAsync()
@@ -60,7 +72,7 @@ public partial class MainLayout: IDisposable
         LayoutService.MajorUpdateOccured += LayoutServiceOnMajorUpdateOccured;
         _profileService.OnChange += _profileService_OnChange;
         _hotKeysContext = _hotKeys.CreateContext()
-            .Add(ModCode.Ctrl, Code.K, async ()=>await OpenCommandPalette(), "Open command palette.");
+            .Add(ModCode.Ctrl, Code.K, OpenCommandPalette, "Open command palette.");
         _authenticationStateProvider.AuthenticationStateChanged += _authenticationStateProvider_AuthenticationStateChanged;
         var state = await _authState;
         if (state.User.Identity != null && state.User.Identity.IsAuthenticated)
@@ -113,7 +125,7 @@ public partial class MainLayout: IDisposable
                 FullWidth = true
             };
 
-            var commandPalette = _dialogService.Show<CommandPalette>("", options);
+            var commandPalette = await _dialogService.ShowAsync<CommandPalette>("", options);
             _commandPaletteOpen = true;
 
             await commandPalette.Result;

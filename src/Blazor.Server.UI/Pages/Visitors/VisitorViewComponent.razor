@@ -42,10 +42,10 @@
                  { nameof(_PreviewDialog.TripCode),item.TripCode },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_PreviewDialog>
+        var dialog = await DialogService.ShowAsync<_PreviewDialog>
         (L["Preview attachments"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
         }
 

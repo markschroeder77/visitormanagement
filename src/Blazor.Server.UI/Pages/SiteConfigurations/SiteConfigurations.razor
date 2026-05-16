@@ -18,7 +18,7 @@
 </style>
 <ErrorBoundary>
     <ChildContent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<SiteConfigurationDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<SiteConfigurationDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Height="calc(100vh - 265px)"
@@ -120,13 +120,13 @@
                     <MudText Typo="Typo.body2">@context.CompanyName</MudText>
                 </MudTd>
                 <MudTd DataLabel="@L["Mandatory Health QrCode"]">
-                  <MudCheckBox Checked="@context.MandatoryHealthQrCode" Disabled="true"></MudCheckBox>
+                  <MudCheckBox T="bool" Checked="@context.MandatoryHealthQrCode" Disabled="true"></MudCheckBox>
                 </MudTd>
                 <MudTd DataLabel="@L["Mandatory Trip Code"]">
-                  <MudCheckBox Checked="@context.MandatoryTripCode" Disabled="true"></MudCheckBox>
+                  <MudCheckBox T="bool" Checked="@context.MandatoryTripCode" Disabled="true"></MudCheckBox>
                 </MudTd>
                 <MudTd DataLabel="@L["Mandatory Nucleic Aacid Test Report"]">
-                  <MudCheckBox Checked="@context.MandatoryNucleicAcidTestReport" Disabled="true"></MudCheckBox>
+                  <MudCheckBox T="bool" Checked="@context.MandatoryNucleicAcidTestReport" Disabled="true"></MudCheckBox>
                 </MudTd>
             </RowTemplate>
             <NoRecordsContent>
@@ -178,7 +178,7 @@
         _canExport = false;
 
     }
-    private async Task<TableData<SiteConfigurationDto>> ServerReload(TableState state)
+    private async Task<TableData<SiteConfigurationDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {
@@ -219,10 +219,10 @@
         { nameof(_SiteConfigurationFormDialog.model),command },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_SiteConfigurationFormDialog>
+        var dialog = await DialogService.ShowAsync<_SiteConfigurationFormDialog>
         (L["Create a new configuration"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -246,10 +246,10 @@
             { nameof(_SiteConfigurationFormDialog.model),command },
                 };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_SiteConfigurationFormDialog>
+        var dialog = await DialogService.ShowAsync<_SiteConfigurationFormDialog>
         (L["Edit the configuration"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -264,11 +264,11 @@
                     {
                 { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, dto.SiteName) }
                     };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteSiteConfigurationCommand(new int[] { dto.Id });
             var result = await _mediator.Send(command);
@@ -284,11 +284,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteSiteConfigurationCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);

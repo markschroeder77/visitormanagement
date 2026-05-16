@@ -13,7 +13,7 @@
 </style>
 <ErrorBoundary>
     <ChildContent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<AuditTrailDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<AuditTrailDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Virtualize="true"
@@ -118,7 +118,7 @@
     [Inject]
     private ISender _mediator { get; set; } = default!;
 
-    private async Task<TableData<AuditTrailDto>> ServerReload(TableState state)
+    private async Task<TableData<AuditTrailDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {

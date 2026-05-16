@@ -42,21 +42,20 @@ builder.Services.AddServerSideBlazor(
     {
         options.DetailedErrors = true;
         options.DisconnectedCircuitMaxRetained = 100;
-        options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
-        options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+        options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3.0);
+        options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1.0);
         options.MaxBufferedUnacknowledgedRenderBatches = 10;
     }
     ).AddHubOptions(options =>
 {
-    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30.0);
     options.EnableDetailedErrors = false;
-    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
-    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(15.0);
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15.0);
     options.MaximumParallelInvocationsPerClient = 1;
     options.MaximumReceiveMessageSize = 32 * 1024;
     options.StreamBufferCapacity = 10;
 });
-builder.Services.AddMudBlazorDialog();
 builder.Services.AddHotKeys2();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMudServices(config =>

@@ -9,13 +9,13 @@
         <MudTextField @bind-Value="_keyword" Label="@L["Search for visitor's email or phone number."]" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="MudBlazor.Color.Primary" OnAdornmentClick="SearchPendingVisitor" />
     </MudPaper>
     <MudPaper Class="mt-4">
-        <MudList Clickable="true">
+        <MudList T="string" Clickable="true">
             <MudListSubheader>
                 @L["Pending Check-in"] (@_list.Count)
             </MudListSubheader>
             @foreach (var item in _list)
             {
-                <MudListItem OnClick="@(()=>ClickChanged(item))">
+                <MudListItem T="string" OnClick="@(()=>ClickChanged(item))">
                     <div class="d-flex flex-row flex-grow-1 gap-4">
                         <div class="d-flex flex-column flex-grow-1">
                             <MudText Typo="Typo.body1">@item.Name</MudText>

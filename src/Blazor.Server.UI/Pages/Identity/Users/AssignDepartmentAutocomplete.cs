@@ -35,7 +35,7 @@ public class AssignDepartmentAutocomplete : MudAutocomplete<string?>
         }
     }
 
-    private Task<IEnumerable<string?>> Search(string value)
+    private Task<IEnumerable<string?>> Search(string? value, CancellationToken token)
     {
         if (string.IsNullOrEmpty(value))
         {
@@ -43,7 +43,7 @@ public class AssignDepartmentAutocomplete : MudAutocomplete<string?>
         }
         else
         {
-            var result = _list.Where(x => x.Name.StartsWith(value)).Select(x => x.Name).ToList();
+            var result = _list.Where(x => x.Name!.StartsWith(value ?? string.Empty)).Select(x => x.Name).ToList();
             return Task.FromResult(result.AsEnumerable());
         }
     }
@@ -56,7 +56,7 @@ public class AssignDepartmentAutocomplete : MudAutocomplete<string?>
         }
         else
         {
-            return _list.Find(b => b.Name == txt)?.Name;
+            return _list.Find(b => b.Name == txt)?.Name ?? string.Empty;
         }
     }
 }

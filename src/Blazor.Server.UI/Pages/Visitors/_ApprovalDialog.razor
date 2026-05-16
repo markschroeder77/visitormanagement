@@ -29,7 +29,7 @@
     [Parameter]
     public List<VisitorDto> Selected { get; set; } = new();
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     private void Reject()
     {
         ApproveOutcome = "Reject";

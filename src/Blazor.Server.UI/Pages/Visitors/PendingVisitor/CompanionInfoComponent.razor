@@ -71,10 +71,10 @@
                   { nameof(_CompanionDialog.PassCode),TRequest.PassCode }
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_CompanionDialog>
+        var dialog = await DialogService.ShowAsync<_CompanionDialog>
         (L["Add a new companion"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             TRequest.Companions.Add(companionDto);
         }
@@ -99,10 +99,10 @@
                  { nameof(_CompanionDialog.PassCode),TRequest.PassCode }
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_CompanionDialog>
+        var dialog = await DialogService.ShowAsync<_CompanionDialog>
         (L["Edit the companion"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             if(item.TrackingState!= TrackingState.Added)
                item.TrackingState = TrackingState.Modified;
@@ -142,10 +142,10 @@
                  { nameof(_PreviewDialog.TripCode),item.TripCode },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_PreviewDialog>
+        var dialog = await DialogService.ShowAsync<_PreviewDialog>
         (L["Preview upload attachments"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
         }
 

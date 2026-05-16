@@ -1,8 +1,5 @@
 using Net.Codecrete.QrCodeGenerator;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
+using SkiaSharp;
 using System;
 using System.IO;
 
@@ -14,7 +11,7 @@ public static class QrCodeBitmapExtensions
     /// <inheritdoc cref="ToBitmap(QrCode, int, int)"/>
     /// <param name="background">The background color.</param>
     /// <param name="foreground">The foreground color.</param>
-    public static Image ToBitmap(this QrCode qrCode, int scale, int border, Color foreground, Color background)
+    public static SKBitmap ToBitmap(this QrCode qrCode, int scale, int border, SKColor foreground, SKColor background)
     {
         // check arguments
         if (scale <= 0)
@@ -35,27 +32,26 @@ public static class QrCodeBitmapExtensions
         }
 
         // create bitmap
-        Image<Rgb24> image = new Image<Rgb24>(dim, dim);
+        var bitmap = new SKBitmap(dim, dim);
+        using var canvas = new SKCanvas(bitmap);
 
-        image.Mutate(img =>
+        // draw background
+        canvas.Clear(background);
+
+        // draw modules
+        using var paint = new SKPaint { Color = foreground, Style = SKPaintStyle.Fill };
+        for (int y = 0; y < size; y++)
         {
-            // draw background
-            img.Fill(background);
-
-            // draw modules
-            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
             {
-                for (int x = 0; x < size; x++)
+                if (qrCode.GetModule(x, y))
                 {
-                    if (qrCode.GetModule(x, y))
-                    {
-                        img.Fill(foreground, new Rectangle((x + border) * scale, (y + border) * scale, scale, scale));
-                    }
+                    canvas.DrawRect((x + border) * scale, (y + border) * scale, scale, scale, paint);
                 }
             }
-        });
+        }
 
-        return image;
+        return bitmap;
     }
 
     /// <summary>
@@ -79,20 +75,20 @@ public static class QrCodeBitmapExtensions
     /// <returns>The created bitmap representing this QR code.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="scale"/> is 0 or negative, <paramref name="border"/> is negative
     /// or the resulting image is wider than 32,768 pixels.</exception>
-    public static Image ToBitmap(this QrCode qrCode, int scale, int border)
+    public static SKBitmap ToBitmap(this QrCode qrCode, int scale, int border)
     {
-        return qrCode.ToBitmap(scale, border, Color.Black, Color.White);
+        return qrCode.ToBitmap(scale, border, SKColors.Black, SKColors.White);
     }
 
     /// <inheritdoc cref="ToPng(QrCode, int, int)"/>
     /// <param name="background">The background color.</param>
     /// <param name="foreground">The foreground color.</param>
-    public static byte[] ToPng(this QrCode qrCode, int scale, int border, Color foreground, Color background)
+    public static byte[] ToPng(this QrCode qrCode, int scale, int border, SKColor foreground, SKColor background)
     {
-        using Image image = qrCode.ToBitmap(scale, border, foreground, background);
-        using MemoryStream ms = new MemoryStream();
-        image.SaveAsPng(ms);
-        return ms.ToArray();
+        using SKBitmap bitmap = qrCode.ToBitmap(scale, border, foreground, background);
+        using SKImage image = SKImage.FromBitmap(bitmap);
+        using SKData data = image.Encode(SKEncodedImageFormat.Png, 100);
+        return data.ToArray();
     }
 
     /// <summary>
@@ -117,16 +113,18 @@ public static class QrCodeBitmapExtensions
     /// or the resulting image is wider than 32,768 pixels.</exception>
     public static byte[] ToPng(this QrCode qrCode, int scale, int border)
     {
-        return qrCode.ToPng(scale, border, Color.Black, Color.White);
+        return qrCode.ToPng(scale, border, SKColors.Black, SKColors.White);
     }
 
     /// <inheritdoc cref="SaveAsPng(QrCode, string, int, int)"/>
     /// <param name="background">The background color.</param>
     /// <param name="foreground">The foreground color.</param>
-    public static void SaveAsPng(this QrCode qrCode, string filename, int scale, int border, Color foreground, Color background)
+    public static void SaveAsPng(this QrCode qrCode, string filename, int scale, int border, SKColor foreground, SKColor background)
     {
-        using Image image = qrCode.ToBitmap(scale, border, foreground, background);
-        image.SaveAsPng(filename);
+        using SKBitmap bitmap = qrCode.ToBitmap(scale, border, foreground, background);
+        using SKImage image = SKImage.FromBitmap(bitmap);
+        using SKData data = image.Encode(SKEncodedImageFormat.Png, 100);
+        data.SaveTo(File.OpenWrite(filename));
     }
 
     /// <summary>
@@ -150,6 +148,6 @@ public static class QrCodeBitmapExtensions
     /// or the resulting image is wider than 32,768 pixels.</exception>
     public static void SaveAsPng(this QrCode qrCode, string filename, int scale, int border)
     {
-        qrCode.SaveAsPng(filename, scale, border, Color.Black, Color.White);
+        qrCode.SaveAsPng(filename, scale, border, SKColors.Black, SKColors.White);
     }
 }

@@ -1,0 +1,1874 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-05-16T09:51:20.2948924Z",
+  "analysisEndTime": "2026-05-16T09:51:49.7029269Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 8,
+      "issues": 8,
+      "incidents": 63,
+      "effort": 63
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 24,
+        "Optional": 7,
+        "Potential": 32,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 19,
+        "Project": 7,
+        "Api": 37
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "src\\Application\\Application.csproj",
+      "startingProject": true,
+      "issues": 7,
+      "storyPoints": 15,
+      "properties": {
+        "appName": "Application",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 398,
+        "numberOfCodeFiles": 293,
+        "linesTotal": 28797,
+        "linesOfCode": 12732,
+        "totalApiScanned": 24544,
+        "minLinesOfCodeToChange": 7,
+        "maxLinesOfCodeToChange": 7
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "7785b387-22f5-46b2-8754-9a9c420b1c8f",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+              "protected": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+            "protectedSnippet": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+            "label": "Microsoft.AspNetCore.SignalR.Client 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.SignalR.Client",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "3663a164-cc1d-4a95-bae7-2682ad2b0e0f",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "88d39f2f-f503-4a1b-923a-db48f64464f7",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Configuration.Binder, 7.0.4\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.8",
+              "protected": "Microsoft.Extensions.Configuration.Binder, 7.0.4\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "Microsoft.Extensions.Configuration.Binder, 7.0.4\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.8",
+            "protectedSnippet": "Microsoft.Extensions.Configuration.Binder, 7.0.4\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.8",
+            "label": "Microsoft.Extensions.Configuration.Binder 7.0.4",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Configuration.Binder",
+              "PackageVersion": "7.0.4",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "5aadb8ca-d9a1-41d5-9057-61538b6e76d5",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Localization.Abstractions, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.Extensions.Localization.Abstractions, and replace with new package Microsoft.Extensions.Localization.Abstractions 10.0.8",
+              "protected": "Microsoft.Extensions.Localization.Abstractions, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.Extensions.Localization.Abstractions, and replace with new package Microsoft.Extensions.Localization.Abstractions 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "Microsoft.Extensions.Localization.Abstractions, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.Extensions.Localization.Abstractions, and replace with new package Microsoft.Extensions.Localization.Abstractions 10.0.8",
+            "protectedSnippet": "Microsoft.Extensions.Localization.Abstractions, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.Extensions.Localization.Abstractions, and replace with new package Microsoft.Extensions.Localization.Abstractions 10.0.8",
+            "label": "Microsoft.Extensions.Localization.Abstractions 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Localization.Abstractions",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "22a71bda-e5dd-4cab-a80c-e7e10d08b68b",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+              "protected": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+            "protectedSnippet": "AutoMapper, 12.0.1\n\nRecommendation:\n\nAutoMapper, 16.1.1",
+            "label": "AutoMapper 12.0.1",
+            "properties": {
+              "PackageId": "AutoMapper",
+              "PackageVersion": "12.0.1",
+              "PackageNewVersion": "16.1.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "19b28207-8d12-4eca-bdc7-5074ad6c49d7",
+          "ruleId": "NuGet.0005",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1\n\nRecommendation:\n\nThe functionality of this package is now included directly in AutoMapper.\nRemove AutoMapper.Extensions.Microsoft.DependencyInjection, and replace with new package AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1",
+              "protected": "AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1\n\nRecommendation:\n\nThe functionality of this package is now included directly in AutoMapper.\nRemove AutoMapper.Extensions.Microsoft.DependencyInjection, and replace with new package AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1\n\nRecommendation:\n\nThe functionality of this package is now included directly in AutoMapper.\nRemove AutoMapper.Extensions.Microsoft.DependencyInjection, and replace with new package AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1",
+            "protectedSnippet": "AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1\n\nRecommendation:\n\nThe functionality of this package is now included directly in AutoMapper.\nRemove AutoMapper.Extensions.Microsoft.DependencyInjection, and replace with new package AutoMapper.Extensions.Microsoft.DependencyInjection, 12.0.1",
+            "label": "AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1",
+            "properties": {
+              "PackageId": "AutoMapper.Extensions.Microsoft.DependencyInjection",
+              "PackageVersion": "12.0.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "c9560b7c-3b8b-439f-96bb-27a765bc1ab5",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Linq.Dynamic.Core, 1.3.4\n\nRecommendation:\n\nSystem.Linq.Dynamic.Core, 1.7.2",
+              "protected": "System.Linq.Dynamic.Core, 1.3.4\n\nRecommendation:\n\nSystem.Linq.Dynamic.Core, 1.7.2"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "System.Linq.Dynamic.Core, 1.3.4\n\nRecommendation:\n\nSystem.Linq.Dynamic.Core, 1.7.2",
+            "protectedSnippet": "System.Linq.Dynamic.Core, 1.3.4\n\nRecommendation:\n\nSystem.Linq.Dynamic.Core, 1.7.2",
+            "label": "System.Linq.Dynamic.Core 1.3.4",
+            "properties": {
+              "PackageId": "System.Linq.Dynamic.Core",
+              "PackageVersion": "1.3.4",
+              "PackageNewVersion": "1.7.2",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "3f95e1d8-0a53-4b62-980b-db8167c537d0",
+          "ruleId": "Project.0002",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Application.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "4685b9a2-3781-4235-bfcf-62fb80db0d22",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var content = await res.Content.ReadAsStringAsync();",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Services\\Message\\SMSMessageService.cs",
+            "snippet": "var content = await res.Content.ReadAsStringAsync();",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 39,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "0dad32fd-1a3e-43fc-a23b-a5d571aedef5",
+          "ruleId": "Api.0003",
+          "description": "Breaking change - Streaming HTTP responses enabled by default in browser HTTP clients ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(nvc) };",
+              "protected": "T:System.Net.Http.HttpContent"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Services\\Message\\SMSMessageService.cs",
+            "snippet": "var req = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(nvc) };",
+            "protectedSnippet": "T:System.Net.Http.HttpContent",
+            "label": "T:System.Net.Http.HttpContent",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/default-http-streaming.md",
+                "isCustom": false
+              }
+            ],
+            "line": 37,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "b9798bb5-7961-41d8-81b9-bafa8b5a5b17",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: .NET 9 obsoletions with custom IDs ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };",
+              "protected": "T:System.Net.ServicePointManager"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Services\\Message\\SMSMessageService.cs",
+            "snippet": "ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };",
+            "protectedSnippet": "T:System.Net.ServicePointManager",
+            "label": "T:System.Net.ServicePointManager",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/obsolete-apis-with-custom-diagnostics.md",
+                "isCustom": false
+              }
+            ],
+            "line": 28,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "e746057b-7a94-4e50-99a6-5ae76db15fad",
+          "ruleId": "Api.0003",
+          "description": "Nullable JsonDocument properties deserialize to JsonValueKind.Null ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using (JsonDocument document = JsonDocument.ParseValue(ref reader))\r\n        {\r\n            return document.RootElement.Clone().ToString();\r\n        }",
+              "protected": "T:System.Text.Json.JsonDocument"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Common\\Extensions\\ExpressionExtensions.cs",
+            "snippet": "using (JsonDocument document = JsonDocument.ParseValue(ref reader))\r\n        {\r\n            return document.RootElement.Clone().ToString();\r\n        }",
+            "protectedSnippet": "T:System.Text.Json.JsonDocument",
+            "label": "T:System.Text.Json.JsonDocument",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/serialization/9.0/jsondocument-props.md",
+                "isCustom": false
+              }
+            ],
+            "line": 372,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "090fdaab-b868-4623-ab6f-c4f10b9a9412",
+          "ruleId": "Api.0003",
+          "description": "Nullable JsonDocument properties deserialize to JsonValueKind.Null ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using (JsonDocument document = JsonDocument.ParseValue(ref reader))\r\n        {\r\n            return document.RootElement.Clone().ToString();\r\n        }",
+              "protected": "T:System.Text.Json.JsonDocument"
+            },
+            "kind": "File",
+            "path": "src\\Application\\Common\\Extensions\\ExpressionExtensions.cs",
+            "snippet": "using (JsonDocument document = JsonDocument.ParseValue(ref reader))\r\n        {\r\n            return document.RootElement.Clone().ToString();\r\n        }",
+            "protectedSnippet": "T:System.Text.Json.JsonDocument",
+            "label": "T:System.Text.Json.JsonDocument",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/serialization/9.0/jsondocument-props.md",
+                "isCustom": false
+              }
+            ],
+            "line": 372,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "ae693254-f954-4576-839e-387f60192d47",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddMediatR(config =\u003E {\r\n            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());\r\n            config.NotificationPublisher = new ParallelNoWaitPublisher();\r\n            config.AddOpenBehavior(typeof(RequestExceptionProcessorBehavior\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(ValidationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(AuthorizationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(CachingBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(CacheInvalidationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(PerformanceBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour\u003C,\u003E));\r\n\r\n        });",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions"
+            },
+            "kind": "File",
+            "path": "src\\Application\\DependencyInjection.cs",
+            "snippet": "services.AddMediatR(config =\u003E {\r\n            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());\r\n            config.NotificationPublisher = new ParallelNoWaitPublisher();\r\n            config.AddOpenBehavior(typeof(RequestExceptionProcessorBehavior\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(ValidationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(AuthorizationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(CachingBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(CacheInvalidationBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(PerformanceBehaviour\u003C,\u003E));\r\n            config.AddOpenBehavior(typeof(UnhandledExceptionBehaviour\u003C,\u003E));\r\n\r\n        });",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "line": 20,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "867682d2-154e-4294-800d-f81ba31c5960",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Application\\Application.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddAutoMapper(Assembly.GetExecutingAssembly());",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions"
+            },
+            "kind": "File",
+            "path": "src\\Application\\DependencyInjection.cs",
+            "snippet": "services.AddAutoMapper(Assembly.GetExecutingAssembly());",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions",
+            "line": 18,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "tests\\Application.IntegrationTests\\Application.IntegrationTests.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Application.IntegrationTests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 9,
+        "numberOfCodeFiles": 6,
+        "linesTotal": 2278,
+        "linesOfCode": 360,
+        "totalApiScanned": 506,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "96c806e3-8f57-4e9b-86ad-149c05c4763b",
+          "ruleId": "Project.0002",
+          "projectPath": "tests\\Application.IntegrationTests\\Application.IntegrationTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "tests\\Application.IntegrationTests\\Application.IntegrationTests.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "tests\\Application.UnitTests\\Application.UnitTests.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Application.UnitTests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 5,
+        "numberOfCodeFiles": 3,
+        "linesTotal": 1943,
+        "linesOfCode": 149,
+        "totalApiScanned": 214,
+        "minLinesOfCodeToChange": 1,
+        "maxLinesOfCodeToChange": 1
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "75818176-d0bd-428b-aaf8-66847a6b0fac",
+          "ruleId": "Project.0002",
+          "projectPath": "tests\\Application.UnitTests\\Application.UnitTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "tests\\Application.UnitTests\\Application.UnitTests.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "8ef36588-753a-4133-b004-454600551a55",
+          "ruleId": "Api.0002",
+          "description": "Formatter-based serialization is obsolete and should not be used. ",
+          "projectPath": "tests\\Application.UnitTests\\Application.UnitTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return FormatterServices.GetUninitializedObject(type);",
+              "protected": "T:System.Runtime.Serialization.FormatterServices"
+            },
+            "kind": "File",
+            "path": "tests\\Application.UnitTests\\Common\\Mappings\\MappingTests.cs",
+            "snippet": "return FormatterServices.GetUninitializedObject(type);",
+            "protectedSnippet": "T:System.Runtime.Serialization.FormatterServices",
+            "label": "T:System.Runtime.Serialization.FormatterServices",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://aka.ms/dotnet-warnings/SYSLIB0050",
+                "isCustom": false
+              }
+            ],
+            "line": 54,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+      "startingProject": true,
+      "issues": 5,
+      "storyPoints": 12,
+      "properties": {
+        "appName": "Blazor.Server.UI",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 238,
+        "numberOfCodeFiles": 54,
+        "linesTotal": 29458,
+        "linesOfCode": 3123,
+        "totalApiScanned": 81600,
+        "minLinesOfCodeToChange": 9,
+        "maxLinesOfCodeToChange": 9
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "dbd6a63d-beda-4aa0-a65c-f27720285e3a",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Tools, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore.Tools, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Tools, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Tools, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Tools, and replace with new package Microsoft.EntityFrameworkCore.Tools 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore.Tools 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Tools",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "ca107f8f-bf36-42cf-956d-eadb819cadb9",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "SixLabors.ImageSharp, 3.0.1\n\nRecommendation:\n\nSixLabors.ImageSharp, 4.0.0",
+              "protected": "SixLabors.ImageSharp, 3.0.1\n\nRecommendation:\n\nSixLabors.ImageSharp, 4.0.0"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+            "snippet": "SixLabors.ImageSharp, 3.0.1\n\nRecommendation:\n\nSixLabors.ImageSharp, 4.0.0",
+            "protectedSnippet": "SixLabors.ImageSharp, 3.0.1\n\nRecommendation:\n\nSixLabors.ImageSharp, 4.0.0",
+            "label": "SixLabors.ImageSharp 3.0.1",
+            "properties": {
+              "PackageId": "SixLabors.ImageSharp",
+              "PackageVersion": "3.0.1",
+              "PackageNewVersion": "4.0.0",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "8b9257ef-e551-45a1-9c73-e9ac823de8fb",
+          "ruleId": "Project.0002",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "392531e7-742f-4fa9-9087-b83094fa2d9c",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\u0022/Error\u0022);",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "app.UseExceptionHandler(\u0022/Error\u0022);",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 118,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "67498548-aedd-4edf-824d-ecbc769df79b",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 75,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "0467e80c-bde0-4738-baa9-017934369982",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 75,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "c51c532f-2791-48ef-806c-e011d8d0adeb",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(\u0022https://localhost:7226/\u0022) });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 75,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "c75b018c-aca2-45cf-a112-d7356ceb5a6c",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.KeepAliveInterval = TimeSpan.FromSeconds(15);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "options.KeepAliveInterval = TimeSpan.FromSeconds(15);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 53,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "db4e5f25-b006-4b99-8837-f2d44caca591",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.HandshakeTimeout = TimeSpan.FromSeconds(15);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "options.HandshakeTimeout = TimeSpan.FromSeconds(15);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 52,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "a93b919f-57fb-4652-b858-2adc7660ec65",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 50,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "3f84961d-d9e8-4d16-b10c-6ba3561851f5",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 45,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "d6f99e58-7872-409f-a0bd-9adbbabe91aa",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Blazor.Server.UI\\Blazor.Server.UI.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Blazor.Server.UI\\Program.cs",
+            "snippet": "options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 44,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "docker-compose.dcproj",
+      "startingProject": true,
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "docker-compose",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [],
+        "languages": [
+          ""
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 0,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [],
+      "features": []
+    },
+    {
+      "path": "src\\Domain\\Domain.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "Domain",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 68,
+        "numberOfCodeFiles": 68,
+        "linesTotal": 1257,
+        "linesOfCode": 1257,
+        "totalApiScanned": 2295,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "cb5efb8c-a20a-463b-ae77-a391331bbc36",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Domain\\Domain.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Domain\\Domain.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore, and replace with new package Microsoft.EntityFrameworkCore 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "f3c9236f-41f0-405f-97d1-547b956ce7f3",
+          "ruleId": "Project.0002",
+          "projectPath": "src\\Domain\\Domain.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "src\\Domain\\Domain.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Domain.UnitTests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 3,
+        "numberOfCodeFiles": 1,
+        "linesTotal": 1848,
+        "linesOfCode": 54,
+        "totalApiScanned": 73,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "f8e4efe4-b71c-4c34-9d0c-a3dfd01d6d8d",
+          "ruleId": "Project.0002",
+          "projectPath": "tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "tests\\Domain.UnitTests\\Domain.UnitTests.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "src\\Infrastructure\\Infrastructure.csproj",
+      "startingProject": true,
+      "issues": 5,
+      "storyPoints": 30,
+      "properties": {
+        "appName": "Infrastructure",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 99,
+        "numberOfCodeFiles": 99,
+        "linesTotal": 28612,
+        "linesOfCode": 28612,
+        "totalApiScanned": 43976,
+        "minLinesOfCodeToChange": 20,
+        "maxLinesOfCodeToChange": 20
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "6467e8b1-f15b-4dde-9e40-e0827eb9bce4",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+              "protected": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+            "protectedSnippet": "Microsoft.AspNetCore.SignalR.Client, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.SignalR.Client, and replace with new package Microsoft.AspNetCore.SignalR.Client 10.0.8",
+            "label": "Microsoft.AspNetCore.SignalR.Client 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.SignalR.Client",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "89018073-514b-4903-8fbe-ef419f0a76dc",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.8",
+              "protected": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.8",
+            "protectedSnippet": "Microsoft.AspNetCore.Identity.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Identity.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Identity.EntityFrameworkCore 10.0.8",
+            "label": "Microsoft.AspNetCore.Identity.EntityFrameworkCore 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "7b2ac2b5-d9fb-480f-be48-632d66285090",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.8",
+              "protected": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.8",
+            "protectedSnippet": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, and replace with new package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 10.0.8",
+            "label": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "d4749312-344c-4037-98d6-1c3394283eac",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.Design, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Design, and replace with new package Microsoft.EntityFrameworkCore.Design 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore.Design, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Design, and replace with new package Microsoft.EntityFrameworkCore.Design 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.Design, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Design, and replace with new package Microsoft.EntityFrameworkCore.Design 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.Design, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.Design, and replace with new package Microsoft.EntityFrameworkCore.Design 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore.Design 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.Design",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "7d08715f-755a-4bf9-9e64-2ed7379d1682",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.InMemory, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore.InMemory, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.InMemory, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.InMemory, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.InMemory, and replace with new package Microsoft.EntityFrameworkCore.InMemory 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore.InMemory 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.InMemory",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "5ebf2e4f-4b6e-4b97-8d6c-05f520aa1e35",
+          "ruleId": "NuGet.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.8",
+              "protected": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.8"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.8",
+            "protectedSnippet": "Microsoft.EntityFrameworkCore.SqlServer, 7.0.10\n\nRecommendation:\n\nRemove Microsoft.EntityFrameworkCore.SqlServer, and replace with new package Microsoft.EntityFrameworkCore.SqlServer 10.0.8",
+            "label": "Microsoft.EntityFrameworkCore.SqlServer 7.0.10",
+            "properties": {
+              "PackageId": "Microsoft.EntityFrameworkCore.SqlServer",
+              "PackageVersion": "7.0.10",
+              "PackageNewVersion": "10.0.8",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "127dbe28-b721-4f1e-a8bb-584d78f0dfe6",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MailKit, 4.1.0\n\nRecommendation:\n\nMailKit, 4.16.0",
+              "protected": "MailKit, 4.1.0\n\nRecommendation:\n\nMailKit, 4.16.0"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "MailKit, 4.1.0\n\nRecommendation:\n\nMailKit, 4.16.0",
+            "protectedSnippet": "MailKit, 4.1.0\n\nRecommendation:\n\nMailKit, 4.16.0",
+            "label": "MailKit 4.1.0",
+            "properties": {
+              "PackageId": "MailKit",
+              "PackageVersion": "4.1.0",
+              "PackageNewVersion": "4.16.0",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "086e691b-6012-4247-86f3-452e94e78ae7",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Serilog.Enrichers.ClientInfo, 2.0.0\n\nRecommendation:\n\nSerilog.Enrichers.ClientInfo, 2.9.0",
+              "protected": "Serilog.Enrichers.ClientInfo, 2.0.0\n\nRecommendation:\n\nSerilog.Enrichers.ClientInfo, 2.9.0"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Serilog.Enrichers.ClientInfo, 2.0.0\n\nRecommendation:\n\nSerilog.Enrichers.ClientInfo, 2.9.0",
+            "protectedSnippet": "Serilog.Enrichers.ClientInfo, 2.0.0\n\nRecommendation:\n\nSerilog.Enrichers.ClientInfo, 2.9.0",
+            "label": "Serilog.Enrichers.ClientInfo 2.0.0",
+            "properties": {
+              "PackageId": "Serilog.Enrichers.ClientInfo",
+              "PackageVersion": "2.0.0",
+              "PackageNewVersion": "2.9.0",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "9b970b6b-d248-42a4-8997-ee8845c22861",
+          "ruleId": "NuGet.0004",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MimeKit, 4.1.0\n\nRecommendation:\n\nMimeKit, 4.16.0",
+              "protected": "MimeKit, 4.1.0\n\nRecommendation:\n\nMimeKit, 4.16.0"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "MimeKit, 4.1.0\n\nRecommendation:\n\nMimeKit, 4.16.0",
+            "protectedSnippet": "MimeKit, 4.1.0\n\nRecommendation:\n\nMimeKit, 4.16.0",
+            "label": "MimeKit 4.1.0",
+            "properties": {
+              "PackageId": "MimeKit",
+              "PackageVersion": "4.1.0",
+              "PackageNewVersion": "4.16.0",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "02032919-9bc8-4f83-9be2-7f26f5260e94",
+          "ruleId": "Project.0002",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net7.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net7.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Infrastructure.csproj",
+            "snippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net7.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net7.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "66dbdd5a-be60-41d0-9f9e-817c16ea2214",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtHeader"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtHeader",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtHeader",
+            "line": 240,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "f116828d-280c-42cd-a0c2-c4983e78c542",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+              "protected": "P:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.Header"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+            "protectedSnippet": "P:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.Header",
+            "label": "P:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.Header",
+            "line": 240,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "7be204ec-c906-4fd7-bd70-dbb5cff83e92",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+              "protected": "P:System.IdentityModel.Tokens.Jwt.JwtHeader.Alg"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,\r\n            StringComparison.InvariantCultureIgnoreCase))\r\n        {\r\n            throw new SecurityTokenException(_localizer[\u0022Invalid token\u0022]);\r\n        }",
+            "protectedSnippet": "P:System.IdentityModel.Tokens.Jwt.JwtHeader.Alg",
+            "label": "P:System.IdentityModel.Tokens.Jwt.JwtHeader.Alg",
+            "line": 240,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "8327408a-9b3a-4d14-9f99-62075a3ff471",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(System.String,Microsoft.IdentityModel.Tokens.TokenValidationParameters,Microsoft.IdentityModel.Tokens.SecurityToken@)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(System.String,Microsoft.IdentityModel.Tokens.TokenValidationParameters,Microsoft.IdentityModel.Tokens.SecurityToken@)",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(System.String,Microsoft.IdentityModel.Tokens.TokenValidationParameters,Microsoft.IdentityModel.Tokens.SecurityToken@)",
+            "line": 239,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "e75a32c6-0f2b-48c3-b57a-68e0fa9c2f02",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var tokenHandler = new JwtSecurityTokenHandler();",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var tokenHandler = new JwtSecurityTokenHandler();",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "line": 238,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "8fa5e64e-8b5c-4d19-9b05-c61be7026e59",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var tokenHandler = new JwtSecurityTokenHandler();",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var tokenHandler = new JwtSecurityTokenHandler();",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "line": 238,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "11b24b1a-228e-4a34-a211-5d36bf9dda2d",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var encryptedToken = tokenHandler.WriteToken(token);",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var encryptedToken = tokenHandler.WriteToken(token);",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)",
+            "line": 223,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "6c37b983-a812-414f-a1e9-4353553d9018",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var tokenHandler = new JwtSecurityTokenHandler();",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var tokenHandler = new JwtSecurityTokenHandler();",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "line": 222,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "d6b129b8-f93f-4cc9-bfb6-27a0b23f5cb1",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var tokenHandler = new JwtSecurityTokenHandler();",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var tokenHandler = new JwtSecurityTokenHandler();",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "line": 222,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "2f29d10b-af47-4320-b43a-921c986b1d8f",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var token = new JwtSecurityToken(\r\n           claims: claims,\r\n           expires: DateTime.UtcNow.AddDays(2),\r\n           signingCredentials: signingCredentials);",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var token = new JwtSecurityToken(\r\n           claims: claims,\r\n           expires: DateTime.UtcNow.AddDays(2),\r\n           signingCredentials: signingCredentials);",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken",
+            "line": 218,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "af027566-497b-4703-a873-6b065fea00c3",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var token = new JwtSecurityToken(\r\n           claims: claims,\r\n           expires: DateTime.UtcNow.AddDays(2),\r\n           signingCredentials: signingCredentials);",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\Services\\Identity\\IdentityService.cs",
+            "snippet": "var token = new JwtSecurityToken(\r\n           claims: claims,\r\n           expires: DateTime.UtcNow.AddDays(2),\r\n           signingCredentials: signingCredentials);",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)",
+            "line": 218,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "c6d6f49e-ec0e-4b24-8aad-2871bc4483bd",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);",
+              "protected": "M:System.TimeSpan.FromMinutes(System.Double)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(3);",
+            "protectedSnippet": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "label": "M:System.TimeSpan.FromMinutes(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 73,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "097de5f0-f7cc-493c-9092-07ebe1dc75db",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CMailSettings\u003E(configuration.GetSection(MailSettings.SectionName));",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services.Configure\u003CMailSettings\u003E(configuration.GetSection(MailSettings.SectionName));",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 63,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "60e50fac-d149-4bd4-899f-3fbda8c787dc",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CAppConfigurationSettings\u003E(configuration.GetSection(AppConfigurationSettings.SectionName));",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services.Configure\u003CAppConfigurationSettings\u003E(configuration.GetSection(AppConfigurationSettings.SectionName));",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 58,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "4c2b2e5e-ff94-4b3f-a7d6-7e7457024417",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services\r\n            .AddIdentity\u003CApplicationUser, ApplicationRole\u003E()\r\n            .AddEntityFrameworkStores\u003CApplicationDbContext\u003E()\r\n            .AddDefaultTokenProviders();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services\r\n            .AddIdentity\u003CApplicationUser, ApplicationRole\u003E()\r\n            .AddEntityFrameworkStores\u003CApplicationDbContext\u003E()\r\n            .AddDefaultTokenProviders();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 43,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "c89bc205-0c32-4a6f-9062-e7a9e5e538d4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Identity.EntityFrameworkCore, 8.0.6",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services\r\n            .AddIdentity\u003CApplicationUser, ApplicationRole\u003E()\r\n            .AddEntityFrameworkStores\u003CApplicationDbContext\u003E()\r\n            .AddDefaultTokenProviders();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services\r\n            .AddIdentity\u003CApplicationUser, ApplicationRole\u003E()\r\n            .AddEntityFrameworkStores\u003CApplicationDbContext\u003E()\r\n            .AddDefaultTokenProviders();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores\u0060\u00601(Microsoft.AspNetCore.Identity.IdentityBuilder)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Identity.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 43,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "2cbd2731-31a9-465d-b689-c6c9388d87ec",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CDashbordSettings\u003E(configuration.GetSection(DashbordSettings.SectionName));",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services.Configure\u003CDashbordSettings\u003E(configuration.GetSection(DashbordSettings.SectionName));",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 37,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "7016d14e-5b8c-4576-bb51-fe1d9e2ef57c",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddDatabaseDeveloperPageExceptionFilter();",
+              "protected": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services.AddDatabaseDeveloperPageExceptionFilter();",
+            "protectedSnippet": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions",
+            "label": "T:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 34,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "8863df5e-17dc-4df8-a7f8-7cb2bc5e0713",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6. Add package reference to Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore, 8.0.6",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.AddDatabaseDeveloperPageExceptionFilter();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "services.AddDatabaseDeveloperPageExceptionFilter();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter(Microsoft.Extensions.DependencyInjection.IServiceCollection)",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 34,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "389f7c5f-3ae2-4006-9dc1-f60a646a525b",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "src\\Infrastructure\\Infrastructure.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "if (configuration.GetValue\u003Cbool\u003E(\u0022UseInMemoryDatabase\u0022))\r\n        {\r\n            services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n            {\r\n                options.UseInMemoryDatabase(\u0022BlazorDashboardDb\u0022);\r\n                options.EnableSensitiveDataLogging();\r\n            });\r\n        }\r\n        else\r\n        {\r\n            services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E {\r\n                options.UseSqlServer(\r\n                    configuration.GetConnectionString(\u0022DefaultConnection\u0022),\r\n                    b =\u003E b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));\r\n                 options.EnableSensitiveDataLogging();\r\n            });\r\n            services.AddDatabaseDeveloperPageExceptionFilter();\r\n        }",
+              "protected": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)"
+            },
+            "kind": "File",
+            "path": "src\\Infrastructure\\DependencyInjection.cs",
+            "snippet": "if (configuration.GetValue\u003Cbool\u003E(\u0022UseInMemoryDatabase\u0022))\r\n        {\r\n            services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E\r\n            {\r\n                options.UseInMemoryDatabase(\u0022BlazorDashboardDb\u0022);\r\n                options.EnableSensitiveDataLogging();\r\n            });\r\n        }\r\n        else\r\n        {\r\n            services.AddDbContext\u003CApplicationDbContext\u003E(options =\u003E {\r\n                options.UseSqlServer(\r\n                    configuration.GetConnectionString(\u0022DefaultConnection\u0022),\r\n                    b =\u003E b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));\r\n                 options.EnableSensitiveDataLogging();\r\n            });\r\n            services.AddDatabaseDeveloperPageExceptionFilter();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)",
+            "label": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 8
+          }
+        }
+      ],
+      "features": [
+        {
+          "featureId": "IdentityModel",
+          "incidents": [
+            "af027566-497b-4703-a873-6b065fea00c3",
+            "2f29d10b-af47-4320-b43a-921c986b1d8f",
+            "d6b129b8-f93f-4cc9-bfb6-27a0b23f5cb1",
+            "6c37b983-a812-414f-a1e9-4353553d9018",
+            "11b24b1a-228e-4a34-a211-5d36bf9dda2d",
+            "8fa5e64e-8b5c-4d19-9b05-c61be7026e59",
+            "e75a32c6-0f2b-48c3-b57a-68e0fa9c2f02",
+            "8327408a-9b3a-4d14-9f99-62075a3ff471",
+            "7be204ec-c906-4fd7-bd70-dbb5cff83e92",
+            "f116828d-280c-42cd-a0c2-c4983e78c542",
+            "66dbdd5a-be60-41d0-9f9e-817c16ea2214"
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0004": {
+      "id": "NuGet.0004",
+      "isFeature": false,
+      "description": "NuGet package contains security vulnerabilities.\n\nPackage needs to be upgraded to a newer version that addresses known security vulnerabilities.",
+      "label": "NuGet package contains security vulnerability",
+      "severity": "Optional",
+      "effort": 1
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "isFeature": false,
+      "description": "NuGet package is deprecated.\n\nGo to its documentation and if there is a guidance for replacement of functionality provided by this package.",
+      "label": "NuGet package is deprecated",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "IdentityModel": {
+      "id": "IdentityModel",
+      "isFeature": false,
+      "description": "Windows Identity Foundation (WIF), SAML, and claims-based authentication APIs that have been replaced by modern identity libraries. WIF was the original identity framework for .NET Framework. Migrate to Microsoft.IdentityModel.* packages (modern identity stack).",
+      "label": "IdentityModel \u0026 Claims-based Security",
+      "severity": "Mandatory",
+      "effort": 4,
+      "links": [
+        {
+          "title": "Microsoft.IdentityModel packages",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2341614",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

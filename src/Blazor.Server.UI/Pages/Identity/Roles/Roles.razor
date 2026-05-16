@@ -236,9 +236,9 @@
         var model = new RoleFormModel();
         var parameters = new DialogParameters { ["model"] = model };
         var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_RoleFormDialog>(L["Create a new role"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_RoleFormDialog>(L["Create a new role"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             var applicationRole = new ApplicationRole()
                 {
@@ -269,9 +269,9 @@
             };
         var parameters = new DialogParameters { ["model"] = model };
         var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_RoleFormDialog>(L["Edit the role"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_RoleFormDialog>(L["Edit the role"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             if(name.ToLower()=="admin" || name.ToLower()=="basic")
             {
@@ -398,10 +398,10 @@
         {
             { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, SelectItems.Count) }
         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>(L["Delete"], parameters, options);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>(L["Delete"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             if(SelectItems.Any(x=>x.Name.ToLower()=="admin" || x.Name.ToLower()=="basic"))
             {

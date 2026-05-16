@@ -1,6 +1,4 @@
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 @inject IStringLocalizer<Visitors> L
 <MudCard  Style="width:215px">
     <MudCardMedia @bind-Image="@ImageUrl" />
@@ -44,14 +42,14 @@
         imgstream.Position = 0;
         using (var outStream = new MemoryStream())
         {
-            using (var image = Image.Load(imgstream))
+            using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
             {
                 var scale = 0m;
-                if (image.Width > 900)
+                if (bitmap.Width > 900)
                 {
                     scale = 0.3m;
                 }
-                else if(image.Width <=900 && image.Width>300)
+                else if(bitmap.Width <=900 && bitmap.Width>300)
                 {
                     scale = 0.5m;
                 }
@@ -59,9 +57,10 @@
                 {
                     scale = 1m;
                 }
-                image.Mutate(
-                   i => i.AutoOrient().Resize(Convert.ToInt32((image.Width*scale)), 0));
-                image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                int newWidth = Convert.ToInt32(bitmap.Width * scale);
+                int newHeight = Convert.ToInt32(bitmap.Height * scale);
+                using var resized = bitmap.Resize(new SKSizeI(newWidth, newHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
+                resized.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                 var filename = file.Name;
                 var fi = new FileInfo(filename);
                 var ext = fi.Extension;

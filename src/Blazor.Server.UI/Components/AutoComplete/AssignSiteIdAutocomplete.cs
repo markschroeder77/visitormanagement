@@ -33,7 +33,7 @@ public class AssignSiteIdAutocomplete : MudAutocomplete<int?>
         }
     }
     
-    private Task<IEnumerable<int?>> Search(string value)
+    private Task<IEnumerable<int?>> Search(string? value, CancellationToken token)
     {
         if (string.IsNullOrEmpty(value))
         {
@@ -41,7 +41,7 @@ public class AssignSiteIdAutocomplete : MudAutocomplete<int?>
         }
         else
         {
-            var result = _sites.Where(x => x.Name.StartsWith(value)).Select(x => new int?(x.Id)).ToList();
+            var result = _sites.Where(x => x.Name!.StartsWith(value ?? string.Empty)).Select(x => new int?(x.Id)).ToList();
             return Task.FromResult(result.AsEnumerable());
         }
     }
@@ -54,7 +54,7 @@ public class AssignSiteIdAutocomplete : MudAutocomplete<int?>
         }
         else
         {
-              return _sites.Find(b => b.Id == id)?.Name;
+              return _sites.Find(b => b.Id == id)?.Name ?? string.Empty;
         }
     }
 }

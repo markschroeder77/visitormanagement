@@ -14,7 +14,7 @@ public partial class UserMenu
     [EditorRequired] [Parameter] public UserModel User { get; set; } = default!;
     [Parameter] public EventCallback<MouseEventArgs> OnSettingClick { get; set; }
     [Inject] private IdentityAuthenticationService _authenticationService { get; set; } = default!;
-    [Inject] private IJSRuntime JS { get; set; }
+    [Inject] private IJSRuntime JS { get; set; } = null!;
     private async Task OnLogout()
     {
         var parameters = new DialogParameters
@@ -25,9 +25,9 @@ public partial class UserMenu
             };
 
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
-        var dialog = DialogService.Show<LogoutConfirmation>(L["Logout"], parameters, options);
+        var dialog = await DialogService.ShowAsync<LogoutConfirmation>(L["Logout"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Canceled)
+        if (result?.Canceled != true)
         {
             await _authenticationService.Logout();
             await JS.InvokeVoidAsync("externalLogout");

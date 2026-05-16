@@ -57,7 +57,7 @@
      RequiredError="@L["password is required!"]"
      OnAdornmentClick="TogglePasswordVisibility" Class="mt-4" />
 
-<MudCheckBox For="@(() => model.AgreeToTerms)" @bind-Checked="@model.AgreeToTerms" Label="@L["I agree to the terms and privacy"]" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>
+<MudCheckBox For="@(() => model.AgreeToTerms)" @bind-checked="@model.AgreeToTerms" Label="@L["I agree to the terms and privacy"]" Color="Color.Primary" Class="ml-n1 my-3"></MudCheckBox>
 
 <MudButton Variant="Variant.Filled" 
      Color="Color.Primary" 
@@ -69,7 +69,7 @@
 @code {
     [Inject] private NavigationManager _navigation { get; set; } = default!;
     [Inject] private UserManager<ApplicationUser> _userManager { get; set; }= default!;
-    MudForm form;
+    MudForm form = default!;
     RegisterFormModel model = new ();
     RegisterFormModelFluentValidator registerValidator = new ();
    
@@ -95,7 +95,7 @@
     }
     private async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
 
         if (form.IsValid)
         {
@@ -104,7 +104,7 @@
                     UserName=model.UserName,
                     Email=model.Email
                 };
-            var result = await _userManager.CreateAsync(user,model.Password);
+            var result = await _userManager.CreateAsync(user,model.Password!);
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, RoleConstants.BasicRole);

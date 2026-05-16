@@ -15,7 +15,7 @@
 <ErrorBoundary>
     <ChildContent>
         <Blazor.Server.UI.Pages.SystemManagement.Components.LogsLineCharts @ref="chartcomponent" Data="_data"></Blazor.Server.UI.Pages.SystemManagement.Components.LogsLineCharts>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<LogDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<LogDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Virtualize="true"
@@ -70,25 +70,25 @@
                     @switch (context.Level)
                     {
                         case "Trace":
-                            <MudChip Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Label="true">@context.Level</MudChip>
                             break;
                         case "Debug":
-                            <MudChip Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Label="true">@context.Level</MudChip>
                             break;
                         case "Information":
-                            <MudChip Color="Color.Info" Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Color="Color.Info" Label="true">@context.Level</MudChip>
                             break;
                         case "Warning":
-                            <MudChip Color="Color.Warning" Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Color="Color.Warning" Label="true">@context.Level</MudChip>
                             break;
                         case "Error":
-                            <MudChip Color="Color.Error" Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Color="Color.Error" Label="true">@context.Level</MudChip>
                             break;
                         case "Critical":
-                            <MudChip Color="Color.Error" Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Color="Color.Error" Label="true">@context.Level</MudChip>
                             break;
                         default:
-                            <MudChip Label="true">@context.Level</MudChip>
+                            <MudChip T="string" Label="true">@context.Level</MudChip>
                             break;
                     }
 
@@ -168,7 +168,7 @@
         }
     }
 
-    private async Task<TableData<LogDto>> ServerReload(TableState state)
+    private async Task<TableData<LogDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {

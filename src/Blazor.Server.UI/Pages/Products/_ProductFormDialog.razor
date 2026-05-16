@@ -1,9 +1,7 @@
 @using CleanArchitecture.Blazor.Application.Features.KeyValues.DTOs
 @using CleanArchitecture.Blazor.Application.Features.KeyValues.Queries.ByName
 @using CleanArchitecture.Blazor.Application.Features.Products.Commands.AddEdit
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 @inherits MudComponentBase
 @inject IStringLocalizer<Products> L
 <MudDialog>
@@ -75,7 +73,7 @@
 @code {
     MudForm form = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     [Inject] private IUploadService _uploadService { get; set; } = default!;
     AddEditProductCommandValidator modelValidator = new AddEditProductCommandValidator();
     [EditorRequired] [Parameter] public AddEditProductCommand model { get; set; } = default!;
@@ -92,11 +90,23 @@
             imgstream.Position = 0;
             using (var outStream = new MemoryStream())
             {
-                using (var image = Image.Load(imgstream))
+                using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
                 {
-                    image.Mutate(
-                       i => i.Resize(new ResizeOptions() { Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop, Size = new SixLabors.ImageSharp.Size(640, 320) }));
-                    image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                    // Cover crop to 640x320
+                    float scaleX = 640f / bitmap.Width;
+                    float scaleY = 320f / bitmap.Height;
+                    float scale = Math.Max(scaleX, scaleY);
+                    int newWidth = (int)(bitmap.Width * scale);
+                    int newHeight = (int)(bitmap.Height * scale);
+                    using var resized = bitmap.Resize(new SKSizeI(newWidth, newHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
+                    var cropRect = new SKRectI(
+                        (newWidth - 640) / 2,
+                        (newHeight - 320) / 2,
+                        (newWidth - 640) / 2 + 640,
+                        (newHeight - 320) / 2 + 320);
+                    using var cropped = new SKBitmap(640, 320);
+                    resized.ExtractSubset(cropped, cropRect);
+                    cropped.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                     var filename = file.Name;
                     var fi = new FileInfo(filename);
                     var ext = fi.Extension;
@@ -116,7 +126,7 @@
     }
     async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

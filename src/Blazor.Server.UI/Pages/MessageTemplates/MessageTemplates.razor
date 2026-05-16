@@ -19,7 +19,7 @@
 </style>
 <ErrorBoundary>
     <ChildContent>
-        <MudTable ServerData="@(new Func<TableState, Task<TableData<MessageTemplateDto>>>(ServerReload))"
+        <MudTable ServerData="@(new Func<TableState, CancellationToken, Task<TableData<MessageTemplateDto>>>(ServerReload))"
                   FixedHeader="true"
                   FixedFooter="true"
                   Height="calc(100vh - 265px)"
@@ -177,7 +177,7 @@
         _canExport = false;
     
     }
-    private async Task<TableData<MessageTemplateDto>> ServerReload(TableState state)
+    private async Task<TableData<MessageTemplateDto>> ServerReload(TableState state, CancellationToken cancellationToken)
     {
         try
         {
@@ -217,10 +217,10 @@
         { nameof(_MessageTemplateFormDialog.model),command },
             };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_MessageTemplateFormDialog>
+        var dialog = await DialogService.ShowAsync<_MessageTemplateFormDialog>
         (L["Create a new tempalte"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -245,10 +245,10 @@
             { nameof(_MessageTemplateFormDialog.model),command },
                 };
         var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_MessageTemplateFormDialog>
+        var dialog = await DialogService.ShowAsync<_MessageTemplateFormDialog>
         (L["Edit the template"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var result = await _mediator.Send(command);
             await _table.ReloadServerData();
@@ -263,11 +263,11 @@
                     {
                 { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, dto.SiteName) }
                     };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteMessageTemplateCommand(new int[] { dto.Id });
             var result = await _mediator.Send(command);
@@ -283,11 +283,11 @@
                         {
                     { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent,_selectedItems.Count) }
                         };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>
         (L["Delete"], parameters, options);
         var state = await dialog.Result;
-        if (!state.Cancelled)
+        if (!state.Canceled)
         {
             var command = new DeleteMessageTemplateCommand(_selectedItems.Select(x => x.Id).ToArray());
             var result = await _mediator.Send(command);

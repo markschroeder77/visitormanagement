@@ -1,6 +1,4 @@
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
+@using SkiaSharp
 @inject IStringLocalizer<Visitors> L
 <MudCard Style="width:215px">
     <MudCardMedia @bind-Image="@ImageUrl" Height="200" />
@@ -47,14 +45,14 @@
         imgstream.Position = 0;
         using (var outStream = new MemoryStream())
         {
-            using (var image = Image.Load(imgstream))
+            using (var bitmap = SKBitmap.Decode(imgstream.ToArray()))
             {
                 var scale = 0m;
-                if (image.Width > 1000)
+                if (bitmap.Width > 1000)
                 {
                     scale = 0.3m;
                 }
-                else if(image.Width <=1000 && image.Width>500)
+                else if(bitmap.Width <=1000 && bitmap.Width>500)
                 {
                     scale = 0.5m;
                 }
@@ -62,10 +60,22 @@
                 {
                     scale = 1m;
                 }
-                image.Mutate(i => i.AutoOrient()
-                                   .Resize(Convert.ToInt32((image.Width*scale)), 0)
-                                   .Resize(new ResizeOptions() { Mode = SixLabors.ImageSharp.Processing.ResizeMode.Crop, Size = new SixLabors.ImageSharp.Size(350, 350) }));
-                image.Save(outStream, new SixLabors.ImageSharp.Formats.Jpeg.JpegEncoder());
+                int intermediateWidth = Convert.ToInt32(bitmap.Width * scale);
+                int intermediateHeight = Convert.ToInt32(bitmap.Height * scale);
+                using var resized = bitmap.Resize(new SKSizeI(intermediateWidth, intermediateHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
+                // Center crop to 350x350
+                var cropRect = new SKRectI(
+                    Math.Max(0, (resized.Width - 350) / 2),
+                    Math.Max(0, (resized.Height - 350) / 2),
+                    Math.Max(350, Math.Min(350, resized.Width)),
+                    Math.Max(350, Math.Min(350, resized.Height))
+                );
+                cropRect = new SKRectI(cropRect.Left, cropRect.Top, cropRect.Left + 350, cropRect.Top + 350);
+                if (cropRect.Right > resized.Width) cropRect = new SKRectI(resized.Width - 350, cropRect.Top, resized.Width, cropRect.Top + 350);
+                if (cropRect.Bottom > resized.Height) cropRect = new SKRectI(cropRect.Left, resized.Height - 350, cropRect.Left + 350, resized.Height);
+                using var cropped = new SKBitmap(350, 350);
+                resized.ExtractSubset(cropped, cropRect);
+                cropped.Encode(outStream, SKEncodedImageFormat.Jpeg, 100);
                 var filename = file.Name;
                 var fi = new FileInfo(filename);
                 var ext = fi.Extension;

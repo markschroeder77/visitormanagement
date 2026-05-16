@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Blazor.Server.UI",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-blazor-server-ui",
+            "program": "${workspaceFolder}/src/Blazor.Server.UI/bin/Debug/net10.0/Blazor.Server.UI.dll",
+            "cwd": "${workspaceFolder}/src/Blazor.Server.UI",
+            "launchSettingsProfile": "Blazor.Server.UI"
+        },
+        {
+            "name": "Blazor.Server.UI (IIS Express)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-blazor-server-ui",
+            "program": "${workspaceFolder}/src/Blazor.Server.UI/bin/Debug/net10.0/Blazor.Server.UI.dll",
+            "cwd": "${workspaceFolder}/src/Blazor.Server.UI",
+            "launchSettingsProfile": "IIS Express"
+        },
+        {
+            "name": "Blazor.Server.UI (Attach)",
+            "type": "coreclr",
+            "request": "attach",
+            "processName": "Blazor.Server.UI"
+        }
+    ]
+}

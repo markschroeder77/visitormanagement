@@ -40,7 +40,7 @@ public class EmployeeAutocomplete : MudAutocomplete<int?>
         }
     }
 
-    private  Task<IEnumerable<int?>> Search(string value)
+    private  Task<IEnumerable<int?>> Search(string? value, CancellationToken token)
     {
         var list = new List<int?>();
         if (string.IsNullOrEmpty(value))
@@ -53,7 +53,7 @@ public class EmployeeAutocomplete : MudAutocomplete<int?>
         }
         else
         {
-            var result = _employees.Where(x => value.Contains(x.Name)).Select(x => x.Id);
+            var result = _employees.Where(x => x.Name.Contains(value ?? string.Empty)).Select(x => x.Id);
             foreach (var i in result)
             {
                 list.Add(i);

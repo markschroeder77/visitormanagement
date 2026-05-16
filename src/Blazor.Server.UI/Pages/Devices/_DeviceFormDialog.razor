@@ -1,7 +1,4 @@
 @using CleanArchitecture.Blazor.Application.Features.Devices.Commands.AddEdit
-@using SixLabors.ImageSharp
-@using SixLabors.ImageSharp.Formats
-@using SixLabors.ImageSharp.Processing
 @inherits MudComponentBase
 @inject IStringLocalizer<Devices> L
 <MudDialog>
@@ -49,13 +46,13 @@
 @code {
     MudForm form = default!;
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; } = default!;
+    IMudDialogInstance MudDialog { get; set; } = default!;
     AddEditDeviceCommandValidator modelValidator = new AddEditDeviceCommandValidator();
     [EditorRequired] [Parameter] public AddEditDeviceCommand model { get; set; } = default!;
 
     async Task Submit()
     {
-        await form.Validate();
+        await form.ValidateAsync();
         if (form.IsValid)
         {
             MudDialog.Close(DialogResult.Ok(true));

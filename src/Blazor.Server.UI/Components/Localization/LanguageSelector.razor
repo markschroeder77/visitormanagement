@@ -29,7 +29,7 @@
 
     protected override Task OnInitializedAsync()
     {
-        SupportedLanguages = localizationOptions.Value.SupportedCultures.ToList();
+        SupportedLanguages = localizationOptions.Value.SupportedCultures!.ToList();
         CurrentLanguage = CultureInfo.CurrentCulture.Name;
         return Task.CompletedTask;
     }

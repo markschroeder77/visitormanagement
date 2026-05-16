@@ -179,7 +179,7 @@
                 <MudTd DataLabel="@L["Email"]">@context.Email</MudTd>
                 <MudTd HideSmall="true" DataLabel="@L["Phone Number"]">@context.PhoneNumber</MudTd>
                 <MudTd HideSmall="true" DataLabel="@L["Is Active"]">
-                    <MudCheckBox Checked="@context.IsActive" ReadOnly Color="Color.Secondary"></MudCheckBox>
+                    <MudCheckBox T="bool" Checked="@context.IsActive" ReadOnly Color="Color.Secondary"></MudCheckBox>
                 </MudTd>
                 <MudTd HideSmall="true" DataLabel="@L["Lock Status"]">@context.LockoutEnd</MudTd>
             </RowTemplate>
@@ -309,9 +309,9 @@
         var model = new UserFormModel() { AssignRoles = new string[] { RoleConstants.BasicRole } };
         var parameters = new DialogParameters { ["model"] = model };
         var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_UserFormDialog>(L["Create a new user"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_UserFormDialog>(L["Create a new user"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             var applicationUser = new ApplicationUser()
                 {
@@ -385,9 +385,9 @@
             };
         var parameters = new DialogParameters { ["model"] = model };
         var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.Small, FullWidth = true };
-        var dialog = DialogService.Show<_UserFormDialog>(L["Edit the user"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_UserFormDialog>(L["Edit the user"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             if(userName.ToLower()=="administrator" || userName.ToLower()=="demo")
             {
@@ -441,10 +441,10 @@
     {
         string deleteContent = L["You're sure you want to delete selected items:{0}?"];
         var parameters = new DialogParameters { { nameof(DeleteConfirmation.ContentText), string.Format(deleteContent, SelectItems.Count) } };
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true, DisableBackdropClick = true };
-        var dialog = DialogService.Show<DeleteConfirmation>(L["Delete"], parameters, options);
+        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.ExtraSmall, FullWidth = true };
+        var dialog = await DialogService.ShowAsync<DeleteConfirmation>(L["Delete"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             
             var deleteId = SelectItems.Select(x => x.UserId).ToArray();
@@ -489,9 +489,9 @@
             { Id = item.UserId, DisplayName = item.DisplayName, UserName = item.UserName, ProfilePictureDataUrl = item.Avatar };
         var parameters = new DialogParameters { ["model"] = model };
         var options = new DialogOptions { CloseOnEscapeKey = true, MaxWidth = MaxWidth.ExtraSmall };
-        var dialog = DialogService.Show<_ResetPasswordDialog>(L["Set Password"], parameters, options);
+        var dialog = await DialogService.ShowAsync<_ResetPasswordDialog>(L["Set Password"], parameters, options);
         var result = await dialog.Result;
-        if (!result.Cancelled)
+        if (!result.Canceled)
         {
             if(item.UserName.ToLower()=="administrator" || item.UserName.ToLower()=="demo")
             {

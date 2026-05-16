@@ -22,10 +22,10 @@ public class PicklistAutocomplete : MudAutocomplete<string>
        InvokeAsync(() =>StateHasChanged());
     }
 
-    protected override void Dispose(bool disposing)
+    public new async ValueTask DisposeAsync()
     {
         _picklistService.OnChange -= _picklistService_OnChange;
-        base.Dispose(disposing);
+        await Task.CompletedTask;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -44,15 +44,15 @@ public class PicklistAutocomplete : MudAutocomplete<string>
         ResetValueOnEmptyText = true;
         return base.SetParametersAsync(parameters);
     }
-    private Task<IEnumerable<string>> SearchKeyValues(string value)
+    private Task<IEnumerable<string>> SearchKeyValues(string? value, CancellationToken token)
     {
         // if text is null or empty, show complete list
         if (string.IsNullOrEmpty(value))
         {
             return Task.FromResult(_picklistService.DataSource.Where(x => x.Name == Picklist.ToString()).Select(x => x.Value ?? String.Empty));
         }
-        return Task.FromResult(_picklistService.DataSource.Where(x => x.Name == Picklist.ToString() && ( x.Value.Contains(value, StringComparison.InvariantCultureIgnoreCase)
-                                                                            || x.Text.Contains(value, StringComparison.InvariantCultureIgnoreCase))
+        return Task.FromResult(_picklistService.DataSource.Where(x => x.Name == Picklist.ToString() && ( (x.Value ?? string.Empty).Contains(value, StringComparison.InvariantCultureIgnoreCase)
+                                                                            || (x.Text ?? string.Empty).Contains(value, StringComparison.InvariantCultureIgnoreCase))
                                                  )
                                          .Select(x=>x.Value??String.Empty));
     }
