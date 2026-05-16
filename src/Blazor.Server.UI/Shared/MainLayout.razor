@@ -1,7 +1,7 @@
 @inherits LayoutComponentBase
 
 @inject IStringLocalizer<SharedResource> L
-<MudRTLProvider RightToLeft="@LayoutService.IsRTL">
+
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudPopoverProvider />
@@ -25,8 +25,6 @@
                      OpenCommandPalette="OpenCommandPalette"
                      IsDarkMode="@LayoutService.IsDarkMode"
                      ToggleSideMenuDrawer="ToggleSideMenuDrawer"
-                     RightToLeft="@LayoutService.IsRTL"
-                     RightToLeftToggle ="LayoutService.ToggleRightToLeft"
                      OnSettingClick="@(() => _themingDrawerOpen = true)"
                      User="@_profileService.Profile" />
 
@@ -48,4 +46,4 @@
         </Authorized>
     </AuthorizeView>
 </MudLayout>
-</MudRTLProvider>
+

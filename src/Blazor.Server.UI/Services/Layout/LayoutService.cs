@@ -7,7 +7,6 @@ public class LayoutService
     private readonly IUserPreferencesService _userPreferencesService;
     private UserPreferences _userPreferences=new();
 
-    public bool IsRTL { get; private set; } = false;
     public bool IsDarkMode { get; private set; } = false;
     public string PrimaryColor { get; set; } = "#2d4275";
     public string SecondaryColor { get; set; } = "#ff4081ff";
@@ -31,8 +30,7 @@ public class LayoutService
         _userPreferences = await _userPreferencesService.LoadUserPreferences();
         if (_userPreferences != null)
         {
-            IsDarkMode = _userPreferences.IsDarkMode;
-            IsRTL = _userPreferences.RightToLeft;
+            IsDarkMode = _userPreferences.IsDarkMode;            
             PrimaryColor = _userPreferences.PrimaryColor;
             SecondaryColor = _userPreferences.SecondaryColor;
             BorderRadius = _userPreferences.BorderRadius;
@@ -61,15 +59,6 @@ public class LayoutService
         _userPreferences.IsDarkMode = IsDarkMode;
         await _userPreferencesService.SaveUserPreferences(_userPreferences);
         OnMajorUpdateOccured();
-    }
-
-    public async Task ToggleRightToLeft()
-    {
-        IsRTL = !IsRTL;
-        _userPreferences.RightToLeft = IsRTL;
-        await _userPreferencesService.SaveUserPreferences(_userPreferences);
-        OnMajorUpdateOccured();
-
     }
 
     public void SetBaseTheme(MudTheme theme)
@@ -108,8 +97,7 @@ public class LayoutService
     public async Task UpdateUserPreferences(UserPreferences preferences)
     {
         _userPreferences = preferences;
-        IsDarkMode = _userPreferences.IsDarkMode;
-        IsRTL = _userPreferences.RightToLeft;
+        IsDarkMode = _userPreferences.IsDarkMode;        
         PrimaryColor = _userPreferences.PrimaryColor;
         SecondaryColor = _userPreferences.SecondaryColor;
         BorderRadius = _userPreferences.BorderRadius;
