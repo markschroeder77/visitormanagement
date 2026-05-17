@@ -210,7 +210,8 @@
                 var result = await VisitorService.SubmitVisitorRequestAsync(
                     model.PassCode, model.Name, model.PhoneNumber, model.Email,
                     model.IdentificationNo, model.Purpose, model.CompanyName,
-                    model.Gender, model.LicensePlateNumber, model.SiteId);
+                    model.Gender, model.LicensePlateNumber, model.SiteId,
+                    model.EmployeeId, model.ExpectedDate, model.ExpectedTime);
                 model.Id = result.Data;
                 Snackbar.Add(L["Submit successfully"], MudBlazor.Severity.Info);
                 _navigationManager.NavigateTo("/visitor/visitors");

@@ -492,9 +492,6 @@
   <data name="Take photos and upload attachments" xml:space="preserve">
     <value>Take photos and upload attachments</value>
   </data>
-  <data name="Temperature" xml:space="preserve">
-    <value>Temperature</value>
-  </data>
   <data name="Thank you for your valuable feedback." xml:space="preserve">
     <value>Thank you for your valuable feedback.</value>
   </data>
@@ -575,9 +572,6 @@
   </data>
   <data name="Visitor's Phone Number" xml:space="preserve">
     <value>Visitor's Phone Number</value>
-  </data>
-  <data name="Visitor's Temperature" xml:space="preserve">
-    <value>Visitor's Temperature</value>
   </data>
   <data name="Visitors" xml:space="preserve">
     <value>Visitors</value>

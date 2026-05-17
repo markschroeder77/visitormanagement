@@ -842,9 +842,6 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
                     b.Property<string>("Stage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Temperature")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime?>("TransitDateTime")
                         .HasColumnType("datetime2");
 

@@ -35,7 +35,6 @@ public class VisitorHistoryDto : IMapFrom<VisitorHistory>
     public string? Comment { get; set; }
     public string? LicensePlateNumber { get; set; }
     public DateTime? TransitDateTime { get; set; } = DateTime.Now;
-    public decimal? Temperature { get; set; }
     public string? Photo { get; set; }
     public string[]? Attachments { get; set; }
     public List<CompanionDto> Companions { get; set; } = new();

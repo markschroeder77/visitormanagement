@@ -51,7 +51,6 @@ public class VisitorDto : IMapFrom<Visitor>
                Comment = x.Comment,
                Attachments = x.Attachments,
                Stage = x.Stage,
-               Temperature = x.Temperature,
                TransitDateTime = x.TransitDateTime,
                VisitorId = x.VisitorId
            }).ToList()))

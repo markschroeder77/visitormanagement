@@ -6,7 +6,6 @@
         <tr>
             <td>@L["Checkin Point"]</td>
             <td>@L["State / Comment"]</td>
-            <td>@L["Temperature"]</td>
             <td>@L["Attchments"]</td>
             <td>@L["Transit Date Time"]</td>
         </tr>
@@ -22,9 +21,6 @@
                 <td>
                     <MudText Typo="Typo.body2">@item.Stage</MudText>
                     <MudText Typo="Typo.body2">@item.Comment</MudText>
-                </td>
-                <td>
-                    <MudText Typo="Typo.body2">@item.Temperature</MudText>
                 </td>
                 <td>
                    <AttachmentsComponent Attachments="@item.Attachments"></AttachmentsComponent>

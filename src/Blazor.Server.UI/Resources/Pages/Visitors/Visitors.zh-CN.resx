@@ -432,9 +432,6 @@
   <data name="Visit Employee" xml:space="preserve">
     <value>受访人名称</value>
   </data>
-  <data name="Visitor's Temperature" xml:space="preserve">
-    <value>体温</value>
-  </data>
   <data name="Check-in Histories" xml:space="preserve">
     <value>历史记录</value>
   </data>
@@ -548,9 +545,6 @@
   </data>
   <data name="State / Comment" xml:space="preserve">
     <value>操作 / 备注</value>
-  </data>
-  <data name="Temperature" xml:space="preserve">
-    <value>体温</value>
   </data>
   <data name="Transit Date Time" xml:space="preserve">
     <value>提交时间</value>

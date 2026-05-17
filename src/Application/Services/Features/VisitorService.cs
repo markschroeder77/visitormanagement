@@ -175,7 +175,7 @@ public class VisitorService : IVisitorService
     public async Task<Result> UpdateVisitorSurveyResponseAsync(int visitorId, int? responseValue, CancellationToken ct = default)
         => await _mediator.Send(new UpdateVisitorSurveyResponseCommand(visitorId, responseValue), ct);
 
-    public async Task<Result<int>> SubmitVisitorRequestAsync(string passCode, string? name, string? phoneNumber, string? email, string? identificationNo, string? purpose, string? companyName, string? gender, string? licensePlateNumber, int? siteId, CancellationToken ct = default)
+    public async Task<Result<int>> SubmitVisitorRequestAsync(string passCode, string? name, string? phoneNumber, string? email, string? identificationNo, string? purpose, string? companyName, string? gender, string? licensePlateNumber, int? siteId, int? employeeId, DateTime? expectedDate, TimeSpan? expectedTime, CancellationToken ct = default)
     {
         var command = new VisitorRequestCommand
         {
@@ -189,6 +189,9 @@ public class VisitorService : IVisitorService
             Gender = gender,
             LicensePlateNumber = licensePlateNumber,
             SiteId = siteId,
+            EmployeeId = employeeId,
+            ExpectedDate = expectedDate,
+            ExpectedTime = expectedTime,
             PrivacyPolicy = true,
             Promise = true
         };

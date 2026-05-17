@@ -20,6 +20,10 @@
             <MudTextField For="@(() => TRequest.CompanyName)" Value="@TRequest.CompanyName" Label="@L["Company Name"]" ReadOnly="true" />
             @if (string.IsNullOrEmpty(TRequest.LicensePlateNumber))
             {
+                <MudTextField For="@(() => TRequest.LicensePlateNumber)" @bind-Value="TRequest.LicensePlateNumber" Label="@L["License Plate Number"]" />
+            }
+            else
+            {
                 <MudTextField For="@(() => TRequest.LicensePlateNumber)" Value="@TRequest.LicensePlateNumber" Label="@L["License Plate Number"]" ReadOnly="true" />
             }
             <MudTextField For="@(() => TRequest.VisitEmployee)" Value="@TRequest.VisitEmployee" Label="@L["Visit Employee"]" ReadOnly="true" />
@@ -55,7 +59,6 @@
                                                                      SiteId="@TRequest.SiteId"
                                                                      Required="true"
                                                                      RequiredError="@L["check-in point is required!"]"></Blazor.Server.UI.Pages.CheckinPoints.CheckinPointWithSiteIdAutocomplete>
-            <MudTextField For="@(() => TRequest.Temperature)" @bind-Value="@TRequest.Temperature" Label="@L["Visitor's Temperature"]" Required="true" RequiredError="temperature is required!" />
             <div class="d-flex gap-2">
                 <InputFile id="uploadAttachmentsInput1" OnChange="UploadFiles" hidden multiple />
                 <MudIconButton HtmlTag="label"

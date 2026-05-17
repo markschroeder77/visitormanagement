@@ -61,7 +61,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("ApprovalHistories");
+                    b.ToTable("ApprovalHistories", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Audit.AuditTrail", b =>
@@ -100,7 +100,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditTrails");
+                    b.ToTable("AuditTrails", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.CheckinPoint", b =>
@@ -136,7 +136,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("CheckinPoints");
+                    b.ToTable("CheckinPoints", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Companion", b =>
@@ -193,7 +193,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("Companions");
+                    b.ToTable("Companions", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Department", b =>
@@ -224,7 +224,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Designation", b =>
@@ -255,7 +255,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Designations");
+                    b.ToTable("Designations", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Device", b =>
@@ -297,7 +297,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("CheckinPointId");
 
-                    b.ToTable("Devices");
+                    b.ToTable("Devices", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Document", b =>
@@ -339,7 +339,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("DocumentTypeId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.DocumentType", b =>
@@ -370,7 +370,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DocumentTypes");
+                    b.ToTable("DocumentTypes", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Employee", b =>
@@ -431,7 +431,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.KeyValue", b =>
@@ -468,7 +468,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("KeyValues");
+                    b.ToTable("KeyValues", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Log.Logger", b =>
@@ -512,7 +512,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Loggers");
+                    b.ToTable("Loggers", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.MessageTemplate", b =>
@@ -558,7 +558,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("MessageTemplates");
+                    b.ToTable("MessageTemplates", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Product", b =>
@@ -601,7 +601,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Site", b =>
@@ -635,7 +635,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sites");
+                    b.ToTable("Sites", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.SiteConfiguration", b =>
@@ -680,7 +680,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("SiteConfigurations");
+                    b.ToTable("SiteConfigurations", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.Visitor", b =>
@@ -801,7 +801,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("Visitors");
+                    b.ToTable("Visitors", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Domain.Entities.VisitorHistory", b =>
@@ -839,9 +839,6 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
                     b.Property<string>("Stage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("Temperature")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime?>("TransitDateTime")
                         .HasColumnType("datetime2");
 
@@ -854,7 +851,7 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("VisitorId");
 
-                    b.ToTable("VisitorHistories");
+                    b.ToTable("VisitorHistories", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchitecture.Blazor.Infrastructure.Identity.ApplicationRole", b =>

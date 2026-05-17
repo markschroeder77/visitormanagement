@@ -103,15 +103,17 @@ public static class DependencyInjection
         });
         // configure your sender and template choices with dependency injection.
 
-        services.AddFluentEmail(mailSettings.From)
-                .AddRazorRenderer()
-        .AddSmtpSender(new System.Net.Mail.SmtpClient()
-        {
-            Host = mailSettings.Host,
-            Port = mailSettings.Port,
-            EnableSsl = mailSettings.UseSsl,
-            Credentials = new System.Net.NetworkCredential(mailSettings.UserName, mailSettings.Password)
-        });
+        services
+            .AddFluentEmail(mailSettings.From)
+            .AddRazorRenderer()
+            .AddSmtpSender(new System.Net.Mail.SmtpClient()
+            {
+                Host = mailSettings.Host,
+                Port = mailSettings.Port,
+                EnableSsl = mailSettings.UseSsl,
+                Credentials = new System.Net.NetworkCredential(mailSettings.UserName, mailSettings.Password)
+            });
+
         //.AddMailKitSender(new FluentEmail.MailKitSmtp.SmtpClientOptions()
         //{
         //    RequiresAuthentication = !string.IsNullOrEmpty(mailSettings.UserName),

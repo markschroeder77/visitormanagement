@@ -12,7 +12,6 @@ public class CreateVisitorHistoryCommandValidator : AbstractValidator<CreateVisi
         RuleFor(v => v.VisitorId).NotNull();
         RuleFor(v => v.Visitor).NotEmpty().NotNull();
         RuleFor(v => v.CheckinPointId).NotNull();
-        RuleFor(v => v.Temperature).NotNull().When(x => x.Stage == CheckStage.Checkin);
     }
     public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>
  {

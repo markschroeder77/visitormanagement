@@ -45,6 +45,10 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(128)",
                 oldMaxLength: 128);
+
+            migrationBuilder.DropColumn(
+                name: "Temperature",
+                table: "VisitorHistories");
         }
 
         /// <inheritdoc />
@@ -85,6 +89,12 @@ namespace CleanArchitecture.Blazor.Infrastructure.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(450)");
+
+            migrationBuilder.AddColumn<decimal>(
+                name: "Temperature",
+                table: "VisitorHistories",
+                type: "decimal(18,2)",
+                nullable: true);
         }
     }
 }

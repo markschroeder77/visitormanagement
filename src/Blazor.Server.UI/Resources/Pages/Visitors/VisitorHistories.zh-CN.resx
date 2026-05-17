@@ -150,9 +150,6 @@
   <data name="Sort By" xml:space="preserve">
     <value>排序</value>
   </data>
-  <data name="Temperature" xml:space="preserve">
-    <value>体温</value>
-  </data>
   <data name="Visitor Histories" xml:space="preserve">
     <value>访客历史记录</value>
   </data>

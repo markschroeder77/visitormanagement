@@ -15,7 +15,6 @@ public class VisitorHistory: AuditableEntity
     public string? Stage { get; set; }
     public string? Comment { get; set; }
     public DateTime? TransitDateTime { get; set; }
-    public decimal? Temperature { get; set; }
     public string? Photo { get; set; }
     public string[]? Attachments { get; set; }
 

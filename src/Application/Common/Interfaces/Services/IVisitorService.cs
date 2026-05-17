@@ -31,7 +31,7 @@ public interface IVisitorService
     Task<Result> CompleteVisitorInfoAsync(VisitorDto dto, CancellationToken cancellationToken = default);
     Task<Result<int>> CreateVisitorHistoryAsync(CreateVisitorHistoryCommand command, CancellationToken cancellationToken = default);
     Task<Result> UpdateVisitorSurveyResponseAsync(int visitorId, int? responseValue, CancellationToken cancellationToken = default);
-    Task<Result<int>> SubmitVisitorRequestAsync(string passCode, string? name, string? phoneNumber, string? email, string? identificationNo, string? purpose, string? companyName, string? gender, string? licensePlateNumber, int? siteId, CancellationToken cancellationToken = default);
+    Task<Result<int>> SubmitVisitorRequestAsync(string passCode, string? name, string? phoneNumber, string? email, string? identificationNo, string? purpose, string? companyName, string? gender, string? licensePlateNumber, int? siteId, int? employeeId, DateTime? expectedDate, TimeSpan? expectedTime, CancellationToken cancellationToken = default);
     Task<List<VisitorStatusSumarryDto>> GetKanbanDataAsync(CancellationToken cancellationToken = default);
     Task<Tuple<int, int, int>> GetDashboardDataAsync(CancellationToken cancellationToken = default);
     Task<List<VisitorCountedMonth>> GetCountedMonthlyDataAsync(CancellationToken cancellationToken = default);

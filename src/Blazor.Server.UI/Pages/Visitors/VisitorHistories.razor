@@ -65,7 +65,6 @@
                 <MudTh><MudTableSortLabel SortLabel="VisitorId" T="VisitorHistoryDto">@L["Visitor's Name"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="CheckinPointId" T="VisitorHistoryDto">@L["Check-in Point"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="TransitDateTime" T="VisitorHistoryDto">@L["Check-in Date"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortLabel="Temperature" T="VisitorHistoryDto">@L["Temperature"]</MudTableSortLabel></MudTh>
                 <MudTh>@L["Attachments"]</MudTh>
                 <MudTh><MudTableSortLabel SortLabel="Comment" T="VisitorHistoryDto">@L["Comment"]</MudTableSortLabel></MudTh>
             </HeaderContent>
@@ -82,7 +81,6 @@
                 <MudTd DataLabel="@L["Check-in Date"]">
                     <MudText>@context.TransitDateTime</MudText>
                 </MudTd>
-                <MudTd DataLabel="@L["Temperature"]">@context.Temperature</MudTd>
                 <MudTd DataLabel="@L["Attachments"]">
                   <Blazor.Server.UI.Pages.Visitors.ViewComponent.AttachmentsComponent Attachments="@context.Attachments"></Blazor.Server.UI.Pages.Visitors.ViewComponent.AttachmentsComponent>
                 </MudTd>
