@@ -603,4 +603,25 @@
   <data name="You must upload nucleic acid test report" xml:space="preserve">
     <value>你必须上传有效的核酸报告</value>
   </data>
+  <data name="OR" xml:space="preserve">
+    <value>或者</value>
+  </data>
+  <data name="Manual Entry" xml:space="preserve">
+    <value>手动输入</value>
+  </data>
+  <data name="Enter Pass Code" xml:space="preserve">
+    <value>输入通行码</value>
+  </data>
+  <data name="Scan or type the pass code" xml:space="preserve">
+    <value>扫描或输入通行码</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>搜索中</value>
+  </data>
+  <data name="Please enter a pass code" xml:space="preserve">
+    <value>请输入通行码</value>
+  </data>
 </root>

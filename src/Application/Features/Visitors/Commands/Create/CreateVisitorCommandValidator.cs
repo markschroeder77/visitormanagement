@@ -15,8 +15,8 @@ namespace CleanArchitecture.Blazor.Application.Features.Visitors.Commands.Create
                       .Matches(new Regex(@"^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$"))
                       .When(x => !string.IsNullOrEmpty(x.LicensePlateNumber));
         RuleFor(v => v.Email).MaximumLength(256).EmailAddress().When(x => !string.IsNullOrEmpty(x.Email));
-        RuleFor(v => v.IdentificationNo).MaximumLength(256).NotEmpty()
-                      .Matches(new Regex(@"(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}$)"))
+        RuleFor(v => v.IdentificationNo).MaximumLength(13).NotEmpty()
+                      .Matches(new Regex(@"^\d{13}$"))
                       .When(x => !string.IsNullOrEmpty(x.IdentificationNo));
         RuleFor(v => v.PhoneNumber).NotEmpty().NotNull()
                       .MinimumLength(8)

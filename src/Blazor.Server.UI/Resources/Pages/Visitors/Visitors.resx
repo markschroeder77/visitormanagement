@@ -606,4 +606,25 @@
   <data name="You're sure you want to delete the Visitor:{0}?" xml:space="preserve">
     <value>You're sure you want to delete the Visitor:{0}?</value>
   </data>
+  <data name="OR" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="Manual Entry" xml:space="preserve">
+    <value>Manual Entry</value>
+  </data>
+  <data name="Enter Pass Code" xml:space="preserve">
+    <value>Enter Pass Code</value>
+  </data>
+  <data name="Scan or type the pass code" xml:space="preserve">
+    <value>Scan or type the pass code</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Searching" xml:space="preserve">
+    <value>Searching</value>
+  </data>
+  <data name="Please enter a pass code" xml:space="preserve">
+    <value>Please enter a pass code</value>
+  </data>
 </root>
