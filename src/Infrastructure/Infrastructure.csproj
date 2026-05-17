@@ -32,11 +32,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
     <PackageReference Include="MimeKit" />
     <PackageReference Include="Net.Codecrete.QrCodeGenerator" />
-    <PackageReference Include="Duende.IdentityServer" />
-    <PackageReference Include="Duende.IdentityServer.AspNetIdentity" />
-    <PackageReference Include="Duende.IdentityServer.EntityFramework" />
-    <PackageReference Include="Duende.IdentityServer.EntityFramework.Storage" />
-    <PackageReference Include="Duende.IdentityServer.Storage" />
+
     <PackageReference Include="System.IO.Packaging" />
   </ItemGroup>
 

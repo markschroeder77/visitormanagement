@@ -4,7 +4,6 @@ using Blazor.Server.UI.Components.Dialogs;
 using CleanArchitecture.Blazor.Application.Common.Models;
 using CleanArchitecture.Blazor.Infrastructure.Services.Authentication;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 using Color = MudBlazor.Color;
 
 namespace Blazor.Server.UI.Components.Shared;
@@ -14,7 +13,6 @@ public partial class UserMenu
     [EditorRequired] [Parameter] public UserModel User { get; set; } = default!;
     [Parameter] public EventCallback<MouseEventArgs> OnSettingClick { get; set; }
     [Inject] private IdentityAuthenticationService _authenticationService { get; set; } = default!;
-    [Inject] private IJSRuntime JS { get; set; } = null!;
     private async Task OnLogout()
     {
         var parameters = new DialogParameters
@@ -30,7 +28,6 @@ public partial class UserMenu
         if (result?.Canceled != true)
         {
             await _authenticationService.Logout();
-            await JS.InvokeVoidAsync("externalLogout");
         }
     } 
 }

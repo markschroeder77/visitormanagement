@@ -16,14 +16,7 @@
     <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="10.0.8" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
   </ItemGroup>
-  <!-- Duende IdentityServer -->
-  <ItemGroup>
-    <PackageVersion Include="Duende.IdentityServer" Version="8.0.0-alpha.1" />
-    <PackageVersion Include="Duende.IdentityServer.AspNetIdentity" Version="8.0.0-alpha.1" />
-    <PackageVersion Include="Duende.IdentityServer.EntityFramework" Version="8.0.0-alpha.1" />
-    <PackageVersion Include="Duende.IdentityServer.EntityFramework.Storage" Version="8.0.0-alpha.1" />
-    <PackageVersion Include="Duende.IdentityServer.Storage" Version="8.0.0-alpha.1" />
-  </ItemGroup>
+
   <!-- AutoMapper -->
   <ItemGroup>
     <PackageVersion Include="AutoMapper" Version="16.1.1" />

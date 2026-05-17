@@ -161,66 +161,6 @@ public class IdentityAuthenticationService : AuthenticationStateProvider, IAuthe
             _semaphore.Release();
         }
     }
-    public async Task<bool> ExternalLogin(string provider, string userName, string name, string accessToken)
-    {
-        await _semaphore.WaitAsync();
-        try
-        {
-            var user = await _userManager.FindByNameAsync(userName);
-            if (user is null)
-            {
-                user = new ApplicationUser
-                {
-                    EmailConfirmed = true,
-                    IsActive = true,
-                    IsLive = true,
-                    UserName = userName,
-                    Email = userName.Any(x => x == '@') ? userName : $"{userName}@{provider}.com",
-                    Site = provider,
-                    DisplayName = name,
-                };
-                var result = await _userManager.CreateAsync(user);
-                if (!result.Succeeded)
-                {
-                    return false;
-                }
-                if (user.Email.ToLower().Contains("voith.com"))
-                {
-                    await _userManager.AddToRoleAsync(user, RoleConstants.UserRole);
-                }
-                else
-                {
-                    await _userManager.AddToRoleAsync(user, RoleConstants.GuestRole);
-                }
-                
-            }
-            var identity = await createIdentityFromApplicationUser(user);
-            using (var memoryStream = new MemoryStream())
-            using (var binaryWriter = new BinaryWriter(memoryStream, Encoding.UTF8, true))
-            {
-                identity.WriteTo(binaryWriter);
-                var base64 = Convert.ToBase64String(memoryStream.ToArray());
-                await _protectedLocalStorage.SetAsync(LocalStorage.CLAIMSIDENTITY, base64);
-            }
-            await _protectedLocalStorage.SetAsync(LocalStorage.USERID, user.Id);
-            await _protectedLocalStorage.SetAsync(LocalStorage.USERNAME, user.UserName);
-            if (user.Site is not null)
-            {
-                await _protectedLocalStorage.SetAsync(LocalStorage.SITE, user.Site);
-            }
-            if (user.SiteId is not null)
-            {
-                await _protectedLocalStorage.SetAsync(LocalStorage.SITEID, user.SiteId);
-            }
-            var principal = new ClaimsPrincipal(identity);
-            NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(principal)));
-            return true;
-        }
-        finally
-        {
-            _semaphore.Release();
-        }
-    }
     public async Task Logout()
     {
         await _protectedLocalStorage.DeleteAsync(LocalStorage.CLAIMSIDENTITY);
